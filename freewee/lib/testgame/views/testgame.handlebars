@@ -1,0 +1,150 @@
+<head>
+<style>
+
+
+        #canvas {
+            width: 500px;
+            height: 500px;
+
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+        }
+
+        #middle {
+            position: relative;
+            width: 4px;
+            height: 4px;
+            left: 230px;
+            top: 230px;
+            font-size: 40px;
+        }
+
+        .ball {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            top: 240px;
+
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+        }
+        #ball1 {
+            background-color: magenta;
+            left: 240px;
+
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+        }
+        #ball2 {
+            background-color: black;
+            left: 180px;
+
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+        }
+
+    </style>
+
+    </head>
+
+
+
+
+
+
+<div class="row">
+    <h2>ROOM ID: <span  class="roomid"></span></h2>
+</div>
+
+<script type="text/javascript"> 
+//this is super fucking gross
+var socket = io();
+
+var n = synchronizer.init('host', socket);
+
+var players = {};
+
+var numPlayers = 0;
+
+n.onJoin(function(data){
+
+// if player is not already in room
+if (!players[data.username]){
+  numPlayers+=1;
+  players[data.username] = numPlayers; // players["mary"] = 0;
+  $('.users').append("<br>" + data.username + "");
+  var newBall = document.createElement("div");
+  newBall.setAttribute("id", "ball" + numPlayers);
+  newBall.setAttribute("class", "ball");
+  var canvas = document.getElementById("canvas");
+  document.body.insertBefore(newBall, canvas);
+
+}
+
+n.receive(function(data){
+  if (players[data.username]){
+    data.id = players[data.username];
+    if (data.buttons.indexOf("UP") > -1) {
+        console.log("UPUPUPUPUP");
+        handleOrientation(1, data.id);
+    } else if (data.buttons.indexOf("DOWN") > -1) {
+        console.log("downdownDOWN");
+        handleOrientation(-1, data.id);
+    }
+  }
+})
+});
+
+$(document).ready(function(){
+
+$('.roomid').text(n.roomId)
+});
+
+
+
+
+
+
+
+
+
+
+
+
+    function handleOrientation(instruction, id) {
+
+        if (id == 1) {
+            var ball = $('#ball1');
+        } else if (id == 2) {
+            var ball = $('#ball2');
+        }
+        var initialYStr = ball.css( "top" );
+        var initialY = initialYStr.substr(0, initialYStr.lastIndexOf("p"));
+        if (initialY < 501 && initialY > -2) {
+            ball.css("top", initialY - (instruction*10) + 'px');
+        }
+    
+    }
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<div class="users">users in this room: </div>
+
+<div id="canvas" width="500" height="500">
+    <div id="middle">&#x1F645</div>
+    {{!-- <div id="ball"></div> --}}
+</div>

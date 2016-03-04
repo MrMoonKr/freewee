@@ -1,0 +1,52 @@
+{
+  "name": "freewee",
+  "version": "0.1.0",
+  "description": "WII FOR FREE",
+  "author": "The Magical Programming Machine",
+  "devDependencies": {
+    "after": "^0.8.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.1.0",
+    "chai": "^3.5.0",
+    "should": "^8.2.2",
+    "jshint": "^2.5.x",
+    "nock": "^7.2.2",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0"
+  },
+  "private": true,
+  "license": "UNLICENSE",
+  "main": "./server.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=0.8.8"
+  },
+  "dependencies": {
+    "app-module-path": "^1.0.4",
+    "body-parser": "^1.14.1",
+    "config": "*",
+    "consolidate": "^0.14.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.11.0",
+    "glob": "^7.0.0",
+    "hbs": "^4.0",
+    "lodash": "^4.3.0",
+    "metalogger": "*",
+    "nodebootstrap-htmlapp": "*",
+    "nodebootstrap-server": "*",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.4.5",
+    "yaml": "*"
+  },
+  "scripts": {
+    "start": "npm install forever -g && ./bin/start.sh",    "dev": "npm install supervisor -g && ./bin/dev_start.sh",
+    "test": "mocha --bail test/ test/acceptance/",
+    "pretest": "jshint lib test",
+    "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
+  }
+}

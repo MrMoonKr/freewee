@@ -1,0 +1,82 @@
+
+<script type="text/javascript">
+
+var socket = io();
+
+var n = synchronizer.init('player', socket);
+
+n.onJoin(function(data, err){
+  if (!err){
+    fadeIn('controller');
+    fadeOut('join');
+    $('.displayusername').text("user connected: " + n.username)
+  } else {
+    alert(err.msg)
+  }
+});
+
+function fadeOut(id){
+  $('#' + id)
+      .removeClass('animate fadeIn')
+      .addClass('animate fadeOut')
+      .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $(this)
+            .css('display', 'none')
+            .removeClass('animate fadeOut');
+        });
+}
+
+function join(){
+  n.join($('#username').val(), $('#roomId').val());
+}
+
+function fadeIn(id){
+  $('#' + id)
+      .addClass('animate fadeIn')
+      .css('display', 'block');
+}
+
+</script>
+
+
+
+    <button class="big connect" onclick="fadeIn('join')">
+      CONNECT
+    </button>
+
+    <section id="join">
+      <div class="content">
+
+        <button class="close" onclick="fadeOut('join')"></button>
+
+        <input type="text" id="username" placeholder="Username">
+        <br>
+        <input type="tel" id="roomId" placeholder="Room Id">
+        <br>
+        <button class="outline" onclick="join()">JOIN</button>
+        <br>
+        <button class="outline" onclick="fadeOut('join')">CANCEL</button>
+
+      </div>
+    </section>
+
+
+
+    <section id="controller">
+
+      <div class="content">
+
+        <button class="close" onclick="fadeOut('controller')"></button>
+
+        <h2 class="displayusername"></h2>
+
+        <button class="synchronizer-button up" style="height: 150px; width:150px" id="UP">UP</button>
+        <button class="synchronizer-button down"  style="height: 150px; width:150px" id="DOWN">DOWN</button>
+
+      </div>
+
+    </section>
+
+      </div>
+
+    </section>
