@@ -1,10 +1,11 @@
 Stage(function(stage) {
 
   //declaring viewbox of the stage 
-  stage.viewbox(1000, 1000);
+  stage.viewbox(screen.availHeight, screen.availWidth);
 
   //appending the sumo animation to the stage
   var animate = Stage.anim('sumo').appendTo(stage).pin('handle',0);
+  var stillSumo = Stage.image('s1').appendTo(stage).offset(190,0);
   
   //count variable to store number of mouse clicks and also is
   //decremented at a fixed time interval 
@@ -19,73 +20,57 @@ Stage(function(stage) {
     speed=10*count;
     distance=speed+distance;
 
-    //tween will move the animation by an offset of distance in 1000ms
+    //tween will move the animation smoothly by an offset of distance in 1000ms
     animate.tween(1000).pin({
         offsetY: distance
     })
-    console.log("click registered! "+count);
-    
+
     animate.fps(count).play();
 
-
+    console.log("click registered! "+count);
     
-    //this.tween(3000).ease('bounce');
+    
   });
 
-//recursve code to decrement count at a fixed interval of 1 second 
+//recursive code to decrement count at a fixed interval of 1 second 
 (function decrement() {
-    // your code
+    
     if (count>1){
-      count--;
+      count=count-0.1;
       console.log("decrementing now " +count);
       animate.fps(count).play();
-      // speed=10*count;
-      // distance=speed+distance;
-      // console.log("distance is "+ distance);
-      // animate.tween().pin({
-      //   offsetY: distance
-      // })
     }
     
-    setTimeout( decrement, 3000 );
+    //if sumo reaches finishing line
+    if (distance>=screen.availHeight){
+      stage.off('click');
+      console.log("you win!");
+      stage.pause();
+     
+    }
+    
+    setTimeout(decrement, 500 );
 })();
 
   
 });
 
 Stage({
-  name : 'sumosprite',  //pinwheel.png image refrenced as pinwheel
+  name : 'sumosprite',  
   image : {
     src: 'sumo_sprite2.png'
   },
   textures : {
-    s1: {
-      x: 0,
-      y: 0,
-      width: 188,
-      height: 221
-    },
-    s2: {
-      x: 190,
-      y: 0,
-      width: 188,
-      height:221 
-    },
-    s3: {
-      x: 378,
-      y: 0,
-      width: 188,
-      height:221
-    },
-    s4: {
-      x: 564,
-      y: 0,
-      width: 188,
-      height:221
-    },
+    
+    s1: { x: 0,   y: 0, width: 188, height: 221},
+    s2: { x: 190, y: 0, width: 188, height: 221},
+    s3: { x: 378, y: 0, width: 188, height: 221},
+    s4: { x: 564, y: 0, width: 188, height: 221},
+    
     sumo: ['s1','s2','s3','s4']
 
   }
+
 });
 
 
