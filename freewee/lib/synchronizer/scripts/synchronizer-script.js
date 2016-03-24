@@ -44,9 +44,7 @@
         synchronizer.send();
       }
       if (!data.success){
-        err = {
-          msg: data.msg
-        }
+        err = { msg: data.msg }
       }
       callback(data, err);
     });

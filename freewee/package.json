@@ -19,7 +19,7 @@
   "main": "./server.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "github.com/christabella/freewee"
   },
   "engines": {
     "node": ">=0.8.8"
@@ -38,12 +38,14 @@
     "nodebootstrap-htmlapp": "*",
     "nodebootstrap-server": "*",
     "path": "^0.12.7",
+    "phaser": "^2.4.6",
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.4.5",
     "yaml": "*"
   },
   "scripts": {
-    "start": "npm install forever -g && ./bin/start.sh",    "dev": "./bin/dev_start.sh",
+    "start": "npm install forever -g && ./bin/start.sh",
+    "dev": "./bin/dev_start.sh",
     "test": "mocha --bail test/ test/acceptance/",
     "pretest": "jshint lib test",
     "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",

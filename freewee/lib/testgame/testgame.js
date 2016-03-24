@@ -7,9 +7,6 @@
 var router = require('express').Router({ mergeParams: true });
 module.exports = router;
 
-// Don't just use, but also export in case another module needs to use these as well.
-// router.callbacks    = require('./controllers/hello');
-router.models       = require('./models');
 
 //-- For increased module encapsulation, you could also serve templates with module-local
 //-- paths, but using shared layouts and partials may become tricky / impossible
