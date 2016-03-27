@@ -1,4 +1,4 @@
-// server.js requires this function
+// server.js (or rather, appConfig.js) requires this function in:
 //    require('synchronizer')(socketio);
 
 var rooms = {};

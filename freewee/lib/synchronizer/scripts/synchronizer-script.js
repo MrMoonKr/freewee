@@ -1,3 +1,5 @@
+// client-side script
+
 (function(window, document){
   'use strict';
 
@@ -21,7 +23,7 @@
   function Synchronizer(options){
     _instance = this;
     // this.id = Math.floor(Math.random()*9000) + 1000; // generate random code
-    this.id = generateWord();
+    this.id = RandomWord();
     this.username = "";
     this.roomId = this.id;
     this.type = options.type;
@@ -153,11 +155,26 @@
 
 }(window, document));
 
+function RandomWord() {
+    var requestStr = "http://randomword.setgetgo.com/get.php?len=4";
+
+    $.ajax({
+        type: "GET",
+        url: requestStr,
+        dataType: "jsonp",
+        jsonpCallback: 'RandomWordComplete'
+    });
+}
+
+function RandomWordComplete(data) {
+    alert(data.Word);
+}
+
 function generateWord(){
   var vowels = ['a', 'e', 'i', 'o', 'u'];
   var consts =  ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'qu', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z', 'tt', 'ch', 'sh'];
 
-  var len = 5;
+  var len = 4;
 
   var word = '';
 
