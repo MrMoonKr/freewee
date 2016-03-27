@@ -1,0 +1,24 @@
+RONGYING {
+
+	Phaser Good Tutorial!
+
+	https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_breakout_game_Phaser
+
+
+	requires a local server? or something?? sorry I dont know how to explain why I need to do it >< 
+	Like I need to 
+
+	python -m SimpleHTTPServer 
+
+	and my index.html will run on my localhost:8000! 
+}
+
+
+NIGEL {	
+
+	I hosted my version of the sumoPhaser with accelerometer support on a free webhost (freewee.comli.com/sumoPhaser/) because I couldn't get npm run dev --> /.ngrok to work T___T 
+
+	I packaged my version in a different folder but also in the assets folder so that it doesn't screw up rongying's work.
+}
+
+	
