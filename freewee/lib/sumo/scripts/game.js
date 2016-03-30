@@ -22,7 +22,7 @@ n.onJoin(function(data){
       $('.users').append(" " + data.username + "");
       
       /*** TODO: instantiate and render new SUMO ***/
-      
+      createSumo(numPlayers)
 
     }
 
@@ -98,22 +98,6 @@ function preload() {
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
-    //adding track spirte to the game 
-    track = game.add.sprite(game.world.width*0.25, 0,'track');
-    track.anchor.set(0.5,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
-    track.scale.setTo(0.5,(game.world.height/track.height)); //to scale the track 
-
-    //adding sumo sprite to the game 
-    sumo = game.add.sprite(game.world.width*0.25,0,'sumoSprite');
-    sumo.anchor.set(0.5,0);
-    sumo.scale.setTo(0.5,0.5);
-
-
-    game.physics.enable(sumo,Phaser.Physics.ARCADE); // to enable sumo as a body in phaser.physics.p2
-    sumo.body.collideWorldBounds=true;
-    //sumo.body.bounce.set(0.5);
-
-
 
     // cursors = game.input.keyboard.createCursorKeys(); //up down left right of keyboard 
     game.input.onDown.addOnce(startDecrement); //startDecrement called only once when mouse is clicked  
@@ -194,6 +178,26 @@ function update() {
     }
 }
 
+function createSumo(playerNum){
+ 
+    //adding track spirte to the game 
+    track = game.add.sprite(game.world.width*0.25, 0,'track');
+    track.anchor.set(0.5*playerNum,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
+    track.scale.setTo(0.5,(game.world.height/track.height)); //to scale the track 
+
+
+
+    //adding sumo sprite to the game 
+    sumo = game.add.sprite(game.world.width*0.25,0,'sumoSprite');
+    sumo.anchor.set(0.5*playerNum,0);
+    sumo.scale.setTo(0.5,0.5);
+
+
+    game.physics.enable(sumo,Phaser.Physics.ARCADE); // to enable sumo as a body in phaser.physics.p2
+    sumo.body.collideWorldBounds=true;
+    //sumo.body.bounce.set(0.5);
+
+}
 
 function increaseSpeed(sumoPlayer){
     //count is the framerate 
