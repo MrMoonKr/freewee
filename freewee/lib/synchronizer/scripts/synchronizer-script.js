@@ -22,13 +22,14 @@
    */
   function Synchronizer(options){
     _instance = this;
-    // this.id = Math.floor(Math.random()*9000) + 1000; // generate random code
-    this.id = RandomWord();
+    this.id = Math.floor(Math.random()*9000) + 1000; // generate random code
+    // this.id = generateWord();
     this.username = "";
     this.roomId = this.id;
     this.type = options.type;
     this.socket = options.socket;
-    this.prevData = null;
+    this.prevOrientation = null;
+    this.prevMotion = null;
     this.buttons = [];
 
     if (this.type == 'host'){
@@ -69,26 +70,30 @@
             alphaThreshold: 5,
             betaThreshold: 5,
             gammaThreshold: 5,
-            radians: false
+            yThreshold: 7
           };
 
-      _instance.prevData = {
+      _instance.prevOrientation = {
         alpha: 0,
         beta: 0,
         gamma: 0
       };
 
+      _instance.prevMotion = {
+        y: 0,
+      };
+
       window.addEventListener('deviceorientation', function (eventData) {
 
-        var data = {
-          alpha: options.radians ? eventData.alpha * Math.PI / 180.0 : eventData.alpha,
-          beta: options.radians ? eventData.beta * Math.PI / 180.0 : eventData.beta,
-          gamma: options.radians ? eventData.gamma * Math.PI / 180.0 : eventData.gamma
+        var orientation = {
+          alpha: eventData.alpha,
+          beta: eventData.beta,
+          gamma: eventData.gamma
         };
 
-        if(Math.abs(data.alpha - _instance.prevData.alpha) >= options.alphaThreshold ||
-            Math.abs(data.beta - _instance.prevData.beta) >= options.betaThreshold ||
-            Math.abs(data.gamma - _instance.prevData.gamma) >= options.gammaThreshold
+        if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
+            Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
+            Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
             ) {
 
           _instance.socket.emit('synchronizer-data',
@@ -96,50 +101,74 @@
               username: _instance.username,
               roomId: _instance.roomId,
               buttons: _instance.buttons,
-              orientation: data,
+              orientation: orientation,
+              motion: _instance.prevMotion,
               timestamp: Date.now()
             });
-          _instance.prevData = data;
+          _instance.prevOrientation = orientation;
+        }
+      })
+
+      window.addEventListener('devicemotion', function (eventData) {
+
+        var motion = {
+          y: eventData.accelerationIncludingGravity.y.toFixed(3)
+        };
+
+        if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
+
+          _instance.socket.emit('synchronizer-data',
+            {
+              username: _instance.username,
+              roomId: _instance.roomId,
+              buttons: _instance.buttons,
+              orientation: _instance.prevOrientation,
+              motion: motion,
+              timestamp: Date.now()
+            });
+          _instance.prevMotion = data;
         }
       })
     }
 
-    // Add button listeners
-    var buttons = document.getElementsByClassName('synchronizer-button');
+    // // Add button listeners
+    // var buttons = document.getElementsByClassName('synchronizer-button');
 
-    for(var i = 0; i < buttons.length; i++){
-      buttons[i].addEventListener('touchstart', function(e){
-        if (_instance.buttons.indexOf(this.id) < 0){
-          _instance.buttons.push(this.id);
-        }
-        _instance.socket.emit('synchronizer-data',
-          {
-            username: _instance.username,
-            roomId: _instance.roomId,
-            buttons: _instance.buttons,
-            orientation: _instance.prevData,
-            timestamp: Date.now()
-          });
-      });
+    // for(var i = 0; i < buttons.length; i++){
+    //   buttons[i].addEventListener('touchstart', function(e){
+    //     if (_instance.buttons.indexOf(this.id) < 0){
+    //       _instance.buttons.push(this.id);
+    //     }
+    //     _instance.socket.emit('synchronizer-data',
+    //       {
+    //         username: _instance.username,
+    //         roomId: _instance.roomId,
+    //         buttons: _instance.buttons,
+    //         orientation: _instance.prevOrientation,
+    //         motion: _instance.prevMotion,
+    //         timestamp: Date.now()
+    //       });
+    //   });
 
-      buttons[i].addEventListener('touchmove', function(e){
-        e.preventDefault()
-      });
+    //   buttons[i].addEventListener('touchmove', function(e){
+    //     e.preventDefault()
+    //   });
 
-      buttons[i].addEventListener('touchend', function(e){
-        if (_instance.buttons.indexOf(this.id) > -1){
-          _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1)
-        }
-        _instance.socket.emit('synchronizer-data',
-          {
-            username: _instance.username,
-            roomId: _instance.roomId,
-            buttons: _instance.buttons,
-            orientation: _instance.prevData,
-            timestamp: Date.now()
-          });
-      });
-    }
+    //   buttons[i].addEventListener('touchend', function(e){
+    //     if (_instance.buttons.indexOf(this.id) > -1){
+    //       _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1)
+    //     }
+    //     _instance.socket.emit('synchronizer-data',
+    //       {
+    //         username: _instance.username,
+    //         roomId: _instance.roomId,
+    //         buttons: _instance.buttons,
+    //         orientation: _instance.prevOrientation,
+    //         motion: _instance.prevMotion,
+    //         timestamp: Date.now()
+    //       });
+    //   });
+    // }
 
 
   };
@@ -164,10 +193,6 @@ function RandomWord() {
         dataType: "jsonp",
         jsonpCallback: 'RandomWordComplete'
     });
-}
-
-function RandomWordComplete(data) {
-    alert(data.Word);
 }
 
 function generateWord(){
