@@ -70,7 +70,7 @@
             alphaThreshold: 5,
             betaThreshold: 5,
             gammaThreshold: 5,
-            yThreshold: 7
+            yThreshold: 0
           };
 
       _instance.prevOrientation = {

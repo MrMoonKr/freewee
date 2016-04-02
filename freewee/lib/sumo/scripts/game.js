@@ -9,8 +9,9 @@ var players = {};
 
 var numPlayers = 0;
 
-var globalY = 0;
-var globalGamma = 0;
+var globalY = [0,0,0,0,0];
+//var globalGamma[data.id] = 0;
+var globalGamma=[0,0,0,0,0];
 var gotUpdate = false;
 
 n.onJoin(function(data){
@@ -29,8 +30,8 @@ n.onJoin(function(data){
     n.receive(function(data){
       if (players[data.username]){
         data.id = players[data.username];
-        globalGamma = data.orientation.gamma;
-        globalY = data.motion.y;
+        globalGamma[data.id] = data.orientation.gamma;
+        globalY[data.id] = data.motion.y;
         $('.yval').text(globalY);
         $('.gammaval').text(globalGamma);
       }
@@ -60,19 +61,20 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, null, {
 });
 
 var sumo;
+var sumos=[0,0,0,0,0];
 var track;
 
 // var cursors;
 
-var count=0; //framerate
-var speed=10;
+var count=[0,0,0,0,0]; //framerate
+var speed=[10,10,10,10,10];
 
 var circle1;
 var circleSprite;
 
 // for storing tilts
-var Y = null;
-var lastY = null;
+var Y = [0,0,0,0,0];
+var lastY = [0,0,0,0,0];
 
 
 function preload() {
@@ -97,6 +99,24 @@ function preload() {
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
+
+
+    /*//adding track spirte to the game 
+    track = game.add.sprite(game.world.width*0.25, 0,'track');
+    track.anchor.set(0.5,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
+    track.scale.setTo(0.5,(game.world.height/track.height)); //to scale the track 
+
+
+
+    //adding sumo sprite to the game 
+    sumo = game.add.sprite(game.world.width*0.25,0,'sumoSprite');
+    sumo.anchor.set(0.5,0);
+    sumo.scale.setTo(0.5,0.5);
+
+
+    game.physics.enable(sumo,Phaser.Physics.ARCADE); // to enable sumo as a body in phaser.physics.p2
+    sumo.body.collideWorldBounds=true;
+    //sumo.body.bounce.set(0.5);*/
     
 
     // cursors = game.input.keyboard.createCursorKeys(); //up down left right of keyboard 
@@ -107,44 +127,50 @@ function create() {
 
 
 function update() {
+    for (var i=1;i<numPlayers+1;i++) {
+      //console.log(sumos[i].id+" turn now");
+
     //TODO: interpolation?
     //increaseSpeed function called everytime mouse click is registered
     $('.update').text(gotUpdate);
     // using gyro.js <-- helper thingy to make it easier to use devicemotion
     if (gotUpdate) {
-      Y = globalY;
+      Y[i]= globalY[sumos[i].id];
       
       // TODO: increase velocities of all sumos, not just one global sumo
 
       // turn left or right by tilting phone sideways
-       if (globalGamma > 0.008){
-        sumo.body.velocity.x += 0.008;
+       if (globalGamma[sumos[i].id] > 0.05){
+        sumos[i].body.velocity.x += 0.05;
+        //console.log(sumos[i].id+ " moving right");
        } 
-       else if (globalGamma < -0.008){
-        sumo.body.velocity.x += -0.008;
+       else if (globalGamma[sumos[i].id] < -0.05){
+        sumos[i].body.velocity.x += -0.05;
+        //console.log(sumos[i].id+ " moving left");
        }
        else {
-        sumo.body.velocity.x += globalGamma;
+        sumos[i].body.velocity.x += globalGamma[sumos[i].id];
+        //console.log(sumos[i].id+ " moving");
        } 
 
       // running speed by tilting phone forwards and backwards
       // current Y value from accelerometer - old Y value, if more than threshold, increaseSpeed
       //console.log("Y is: " + Y);
       //console.log("lastY is: " + lastY);
-      if (Math.abs(Y - lastY) > 7){
-        console.log("INCREASING SPEEEEED");
-        count++; 
+      if (Math.abs(Y[i] - lastY[i]) > 7){
+        console.log(sumos[i].id+ " INCREASING speed");
+        count[i]++; 
 
        // i dont know why calling the function doesn't work so i copied the increaseSpeed function here
-        sumo.animations.add('sumoMove',[0,1,2,3],count,true); //animation added to the sprite
-        sumo.animations.play('sumoMove'); // animation called 'sumoMove' is played 
-        sumo.body.velocity.y=speed*count; //changes distance of sumo. somehow doesnt work  
-        console.log('incrementing '+sumo.body.velocity.y);
+        sumos[i].animations.add('sumoSprite',[0,1,2,3],count[i],true); //animation added to the sprite
+        sumos[i].animations.play('sumoSprite'); // animation called 'sumoMove' is played 
+        sumos[i].body.velocity.y = speed[i]*count[i]; //changes distance of sumo. somehow doesnt work  
+        //console.log('incrementing '+sumos[i].body.velocity.y);
       }
       // save the Y value for use later    
-      lastY = Y;   
+      lastY[i] = Y[i];   
 
-      gotUpdate = false;
+      //gotUpdate = false;
     }
 
     // on click, increaseSpeed
@@ -153,6 +179,7 @@ function update() {
     // TODO: set collision event listener on all sumos against all sumos :
      //collision event listener 
     // game.physics.arcade.collide(sumo,circleSprite,collisionDetected);
+    //  game.physics.arcade.collide(sumos[1],sumos[2],collisionDetected);
 
      //cursor movements 
     /*if (cursors.left.isDown){
@@ -172,29 +199,37 @@ function update() {
 
     //to detect if reach the finishing line 
     //console.log(sumo.body.y);
-    if (sumo.body.y>=490.5){ //it seems like an arbitrary number i took...
-        alert('you won!');
-        location.reload();
+    if (sumos[i].body.y>=490.5){ //it seems like an arbitrary number i took...
+        for (var key in players){
+          if (players[key]=== sumos[i].id){
+            alert( key + ' you won!');
+            location.reload();
+          }
+        }
+        
     }
+  }
 }
 
 function createSumo(playerNum){
- 
+    console.log("CREATED SUMO");
     //adding track spirte to the game 
-    track = game.add.sprite(game.world.width*0.25, 0,'track');
-    track.anchor.set(0.5*playerNum,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
+    track = game.add.sprite(game.world.width*0.25*playerNum, 0,'track');
+    track.anchor.set(0.5,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
     track.scale.setTo(0.5,(game.world.height/track.height)); //to scale the track 
 
 
 
     //adding sumo sprite to the game 
-    sumo = game.add.sprite(game.world.width*0.25,0,'sumoSprite');
-    sumo.anchor.set(0.5*playerNum,0);
+    sumo = game.add.sprite(game.world.width*0.25*playerNum,0,'sumoSprite');
+    sumo.anchor.set(0.5,0);
     sumo.scale.setTo(0.5,0.5);
 
 
     game.physics.enable(sumo,Phaser.Physics.ARCADE); // to enable sumo as a body in phaser.physics.p2
     sumo.body.collideWorldBounds=true;
+    sumos[playerNum]=sumo;
+    sumo.id=playerNum;
     //sumo.body.bounce.set(0.5);
 
 }
@@ -225,9 +260,9 @@ function startDecrement(sumoPlayer){
 }
 
 //TODO: generalize collision detected for any sumo against any sumo
-// function collisionDetected(sumo,circleSprite){
-//     //if sumo collides with the sprite, sumo will decrease the speed of the sprite such that the speed of sprite can even go negative (go backwards)
-//     circleSprite.body.velocity.y-=1;
-//     console.log("collided! Decrease speeed! "+circleSprite.body.velocity.y);
-// }
+/*function collisionDetected(sumos[1],sumos[2]){
+     //if sumo collides with the sprite, sumo will decrease the speed of the sprite such that the speed of sprite can even go negative (go backwards)
+    sumos[2].body.velocity.y-=1;
+    // console.log("collided! Decrease speeed! "+circleSprite.body.velocity.y);
+}*/
 
