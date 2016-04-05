@@ -9,17 +9,17 @@ module.exports = function(io) {
     console.log('A user connected');
 
     var type, _id;
-    /* if trying to create */
+    /* Create a room for new game screen */
     socket.on('synchronizer-create', function(id){
       socket.join(id);
       console.log("Room ID: " + id + "created");
       rooms[id] = true;
-      type = 'host';
+      type = 'game-screen';
       _id = id;
       console.log(rooms);
     });
 
-    /* if trying to join */
+    /* Accept controller */
     socket.on('synchronizer-join', function(msg){
 
       var response = {
@@ -29,21 +29,17 @@ module.exports = function(io) {
         msg: "Unknown Error"
       };
 
-      if (type !== 'host' && rooms[msg.id]){ // not a host, and room already exists
+      if (type == 'controller' && rooms[msg.id]){ // not a game-screen, and room already exists
 
         socket.join(msg.id);
         console.log("User " + msg.username + " joined room " + msg.id);
-        type = 'player';
+        type = 'controller';
 
         response.success = true;
         response.msg = "Successfully joined room.";
 
         io.to(msg.id).emit('synchronizer-join', response);
         return
-      }
-
-      if (type === 'host'){
-        response.msg = "Hosts cannot join rooms."
       }
 
       if (!rooms[msg.id]){
@@ -55,14 +51,14 @@ module.exports = function(io) {
     });
 
     socket.on('synchronizer-data', function(data){
-      if (type === 'player'){
+      if (type === 'controller'){
         io.to(data.roomId).emit('synchronizer-data', data)
       }
     });
 
 
     socket.on('disconnect', function(){
-      if (type === 'host' && _id){
+      if (type === 'game-screen' && _id){
         delete rooms[_id]
       }
     });

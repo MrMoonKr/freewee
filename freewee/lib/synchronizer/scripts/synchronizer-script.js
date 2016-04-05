@@ -32,7 +32,7 @@
     this.prevMotion = null;
     this.buttons = [];
 
-    if (this.type == 'host'){
+    if (this.type == 'game-screen'){
       this.socket.emit('synchronizer-create', this.id);
       console.log(this.id);
     }
@@ -43,7 +43,7 @@
     this.socket.on('synchronizer-join', function(data){
       var err;
       synchronizer.roomId = data.id;
-      if (synchronizer.type === 'player'){
+      if (synchronizer.type === 'controller'){
         synchronizer.send();
       }
       if (!data.success){
@@ -54,7 +54,7 @@
   };
 
   Synchronizer.prototype.join = function(username, id){
-    if (this.type == 'player'){
+    if (this.type == 'controller'){
       this.socket.emit('synchronizer-join', {
         id: id,
         username: username

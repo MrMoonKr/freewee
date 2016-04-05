@@ -3,7 +3,7 @@
 /******************************************************************************/
 var socket = io();
 
-var n = synchronizer.init('host', socket);
+var n = synchronizer.init('game-screen', socket);
 
 var players = {};
 

@@ -3,7 +3,7 @@
 /******************************************************************************/
 
 var socket = io();
-var n = synchronizer.init('player', socket);
+var n = synchronizer.init('controller', socket);
 
 
 n.onJoin(function(data, err){
