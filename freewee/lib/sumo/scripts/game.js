@@ -56,7 +56,7 @@ $(document).ready(function(){
 //preload takes care of preloading assets
 //create executed once everything loaded and ready
 //update executed on every frame                   
-var game = new Phaser.Game(800, 600, Phaser.AUTO, null, {
+var game = new Phaser.Game(screen.availWidth,screen.availHeight, Phaser.AUTO, null, {
   preload: preload, create: create, update: update
 });
 
@@ -64,13 +64,11 @@ var sumo;
 var sumos=[0,0,0,0,0];
 var track;
 
-// var cursors;
-
 var count=[0,0,0,0,0]; //framerate
-var speed=[10,10,10,10,10];
-
-var circle1;
-var circleSprite;
+var speed=2;
+var placing=0;
+var winnerPositions=[];
+var trackposition,trackGroup,collisionGroup,timer,loop;;
 
 // for storing tilts
 var Y = [0,0,0,0,0];
@@ -92,6 +90,7 @@ function preload() {
     game.stage.backgroundColor = '#D7E4BD'; //green background colour
 
     //load the sumo and the track 
+    game.load.spritesheet('sumoSS','./img/sumoRunSpriteSheet.png',773,914);
     game.load.spritesheet('sumoSprite','/sumo/img/sumo_sprite2.png',188,219);
     game.load.image('track','/sumo/img/track.png');       
 }
@@ -99,36 +98,34 @@ function preload() {
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    trackposition={
+            1:0.5,
+            2:0.34,
+            3:0.27,
+            4:0.2 
+    }
 
+    //bottomost layer, group for all tracks  
+    trackGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
+    collisionGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
+        
 
-    /*//adding track spirte to the game 
-    track = game.add.sprite(game.world.width*0.25, 0,'track');
-    track.anchor.set(0.5,0); //default is 0,0 (top left), anchor point is where to take x y coordinates references from
-    track.scale.setTo(0.5,(game.world.height/track.height)); //to scale the track 
-
-
-
-    //adding sumo sprite to the game 
-    sumo = game.add.sprite(game.world.width*0.25,0,'sumoSprite');
-    sumo.anchor.set(0.5,0);
-    sumo.scale.setTo(0.5,0.5);
-
-
-    game.physics.enable(sumo,Phaser.Physics.ARCADE); // to enable sumo as a body in phaser.physics.p2
-    sumo.body.collideWorldBounds=true;
-    //sumo.body.bounce.set(0.5);*/
-    
-
-    // cursors = game.input.keyboard.createCursorKeys(); //up down left right of keyboard 
     game.input.onDown.addOnce(startDecrement); //startDecrement called only once when mouse is clicked  
-    
+    game.physics.arcade.checkCollision.down=false; 
+
+    //on loop
+    // timer=game.time.events;
+    // loop=timer.loop(1000,this.startDecrement,this);
 
 }
 
 
 function update() {
-    for (var i=1;i<numPlayers+1;i++) {
-      //console.log(sumos[i].id+" turn now");
+  // TODO: set collision event listener on all sumos against all sumos :
+  //game.physics.arcade.collide(collisionGroup,collisionGroup,this.slowDown,null,this);
+      
+  for (var i=1;i<numPlayers+1;i++) {
+    //console.log(sumos[i].id+" turn now");
 
     //TODO: interpolation?
     //increaseSpeed function called everytime mouse click is registered
@@ -140,18 +137,18 @@ function update() {
       // TODO: increase velocities of all sumos, not just one global sumo
 
       // turn left or right by tilting phone sideways
-       if (globalGamma[sumos[i].id] > 0.05){
+      if (globalGamma[sumos[i].id] > 0.05){
         sumos[i].body.velocity.x += 0.05;
         //console.log(sumos[i].id+ " moving right");
-       } 
-       else if (globalGamma[sumos[i].id] < -0.05){
+      } 
+      else if (globalGamma[sumos[i].id] < -0.05){
         sumos[i].body.velocity.x += -0.05;
         //console.log(sumos[i].id+ " moving left");
-       }
-       else {
+      }
+      else {
         sumos[i].body.velocity.x += globalGamma[sumos[i].id];
         //console.log(sumos[i].id+ " moving");
-       } 
+      } 
 
       // running speed by tilting phone forwards and backwards
       // current Y value from accelerometer - old Y value, if more than threshold, increaseSpeed
@@ -164,7 +161,7 @@ function update() {
        // i dont know why calling the function doesn't work so i copied the increaseSpeed function here
         sumos[i].animations.add('sumoSprite',[0,1,2,3],count[i],true); //animation added to the sprite
         sumos[i].animations.play('sumoSprite'); // animation called 'sumoMove' is played 
-        sumos[i].body.velocity.y = speed[i]*count[i]; //changes distance of sumo. somehow doesnt work  
+        sumos[i].body.velocity.y = speed*count[i]; //changes distance of sumo. somehow doesnt work  
         //console.log('incrementing '+sumos[i].body.velocity.y);
       }
       // save the Y value for use later    
@@ -173,30 +170,9 @@ function update() {
       //gotUpdate = false;
     }
 
-    // on click, increaseSpeed
-    //game.input.onDown.add(increaseSpeed);
-
-    // TODO: set collision event listener on all sumos against all sumos :
-     //collision event listener 
-    // game.physics.arcade.collide(sumo,circleSprite,collisionDetected);
-    //  game.physics.arcade.collide(sumos[1],sumos[2],collisionDetected);
-
-     //cursor movements 
-    /*if (cursors.left.isDown){
-        //sumo.body.moveLeft(10);
-        //sumo.body.velocity.x+=-10;  <- nigel's suggestion
-        sumo.body.velocity.x=-10;
-        
-        console.log('left');
-    }
-    else if (cursors.right.isDown){
-    //sumo.body.moveRight(10);
-    //sumo.body.velocity.x+=10;  <- nigel's suggestion
-        sumo.body.velocity.x=-10;
-        ;
-        console.log('right');
-    }*/
-
+    
+    
+     
     //to detect if reach the finishing line 
     //console.log(sumo.body.y);
     if (sumos[i].body.y>=490.5){ //it seems like an arbitrary number i took...
@@ -208,6 +184,8 @@ function update() {
         }
         
     }
+
+    
   }
 }
 
@@ -259,10 +237,24 @@ function startDecrement(sumoPlayer){
     setTimeout(startDecrement,500); 
 }
 
-//TODO: generalize collision detected for any sumo against any sumo
-/*function collisionDetected(sumos[1],sumos[2]){
-     //if sumo collides with the sprite, sumo will decrease the speed of the sprite such that the speed of sprite can even go negative (go backwards)
-    sumos[2].body.velocity.y-=1;
-    // console.log("collided! Decrease speeed! "+circleSprite.body.velocity.y);
-}*/
+//YET TO TRY
+// function startDecrement(){
+//   for (var i=1;i<numPlayers+1;i++){
+//     if (count[i]>1){
+//         count[i]=count[i]-1;
+//         collisionGroup.children[i-1].animations.add('sumoSlow',[4,5,6,7],count,true);
+//         collisionGroup.children[i-1].animations.play('sumoSlow');
+//         collisionGroup.children[i-1].body.velocity.y=speed*count[i];
+//         //console.log('decrementing'+ collisionGroup.children[1].body.velocity.y); 
+
+//     }
+//   }
+    
+// }
+
+// slowDown:function (s1,s2){
+//     s2.body.velocity.y-=1;
+//     console.log("collided! Decrease speeed! "+s2.body.velocity.y);
+
+// }
 
