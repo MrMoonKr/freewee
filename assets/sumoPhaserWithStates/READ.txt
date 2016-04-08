@@ -1,0 +1,11 @@
+Phaser Good Tutorial!
+
+https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_breakout_game_Phaser
+
+
+requires a local server? or something?? sorry I dont know how to explain why I need to do it >< 
+Like I need to 
+
+python -m SimpleHTTPServer 
+
+and my index.html will run on my localhost:8000! 
