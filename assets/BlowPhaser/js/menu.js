@@ -1,4 +1,4 @@
-var s;
+
 var Menu = {
 
     preload : function() {
@@ -19,39 +19,38 @@ var Menu = {
     create: function () {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        game.add.tileSprite(0,0,game.world.width,game.world.height,'menu');
+        // background is the button . clicking on background will start game 
         this.add.button(0, 0, 'menu', this.startGame, this);
+
+        // words 'sumos can charm snakes too '
         var w = game.add.sprite(80,40,'wordSS');
         w.scale.setTo(0.5);
         w.animations.add('blinking',[0,1,2,3,4,5],4,true);
         w.animations.play('blinking');
 
-        s = game.add.sprite(game.world.width*0.6+80,game.world.height+300,'snakeSS');
+        //adding snake 
+        var s = game.add.sprite(game.world.width*0.6+80,game.world.height+300,'snakeSS');
         s.anchor.set(0,1);
         s.scale.setTo(0.4);
         s.animations.add('slithering',[0,2,3,0,4,5],4,true);
         s.animations.play('slithering');
         
-
         //adding basket 
         var b = game.add.sprite(game.world.width*0.6,game.world.height,'basketSS');
         b.frame=3;
         b.anchor.set(0,1);
         b.scale.setTo(0.4);
 
+        //tweening for snake 
         game.add.tween(s).to({y:800},8000,Phaser.Easing.Linear.None,true);
         
         
     },
 
-    // update: function() {
-    //     s.y-=10;
-    // },
-
     
     startGame: function () {
-        console.log(screen.availWidth);
-        console.log(screen.availHeight);
+        // console.log(screen.availWidth);
+        // console.log(screen.availHeight);
         // Change the state to the actual game.
         this.state.start('Game');
 

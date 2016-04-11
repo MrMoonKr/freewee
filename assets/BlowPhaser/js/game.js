@@ -2,12 +2,14 @@ var button0,button1,button2,history=[0,0,0],count;
 
 var me;
 var master;
-var points;  
+var points, xposition;  
 
 var loop,timer;
 var snakeGroup, basketGroup, sumoGroup,pointTextGroup; 
 var masterSeqGroup=[];
 var numPlayers=4;
+
+var hissingSound;
 
 var Game = {
 
@@ -22,11 +24,14 @@ var Game = {
         game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
         game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
         game.load.spritesheet('circle','./img/circle.png',60,60);  
+        game.load.audio('hiss','./sound/snake_hissing.mp3');
+        
     },
 
     create : function() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        hissingSound=game.add.audio('hiss');
         points=[0,0,0,0];
 
         //buttons for user to click. [to be removed for real game, will be replaced by inputs from phone]
@@ -39,7 +44,7 @@ var Game = {
         button2.id=2;
    
         //to determine where to put graphics
-        var xposition={
+        xposition={
             1: 0.5,
             2: 0.33,
             3: 0.2,
@@ -53,8 +58,6 @@ var Game = {
         basketGroup=game.add.group();
         pointTextGroup=game.add.group();
         
-        var temp=[];
-
         for (var i=0;i<numPlayers;i++){
 
             //adding sumo
@@ -82,6 +85,7 @@ var Game = {
             pointTextGroup.add(pointText);
 
             //adding sequence generator 
+            var temp=[];
             var c = game.add.sprite(game.world.width*xposition[numPlayers]+300*i+100,100,'buttonSS');
             c.anchor.set(0.5,0.5);
             c.scale.setTo(0.3);
@@ -94,7 +98,7 @@ var Game = {
             temp=[c,c2,c3];
 
             masterSeqGroup[i]=temp;
-            temp=[];
+            
 
         }
 
@@ -156,8 +160,11 @@ var Game = {
     },
 
     startBlink: function () {
-        //console.log("blink slow");
-        master = Math.floor(Math.random()*3); //generate random no. from 0 to 2 
+         //generate random no. from 0 to 2 
+        //master will be 0,1 or 2 
+        master = Math.floor(Math.random()*3);
+
+        //change tint colour for each of the players
         for (var j=0;j<numPlayers;j++){
             masterSeqGroup[j][master].tint= 0x99ff00;
         }
@@ -167,7 +174,8 @@ var Game = {
         // count++;
         // history[count%3]=i; 
 
-        if (points[0]>5 && points[0]<10){ //blinking increases 
+        //once reach certain points, blinking increases
+        if (points[0]>5 && points[0]<10){  
             console.log("getting faster");
             loop.delay-=10;
         }
@@ -182,6 +190,7 @@ var Game = {
         
     },
 
+    //TO IMPLEMENT THE DEVICE INPUTS HERE 
     actionOnClick:function (sprite){ //once user clicks on button 
         //play sumo animation 
         sumoGroup.children[0].animations.play('blowing');
@@ -196,6 +205,7 @@ var Game = {
                 game.add.tween(snakeGroup.children[0]).to({y:snakeGroup.children[0].y-10},200,Phaser.Easing.Linear.None,true);
             }
             snakeGroup.children[0].animations.play('slithering');
+            hissingSound.play("",0,0.2); //param - marker, position, volume
 
         } else { //means press wrong sequence 
             sprite.tint = 0xff0000; //red 
