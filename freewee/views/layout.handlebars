@@ -8,25 +8,16 @@
   <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="all" rel="stylesheet" />
   <link href="/css/app.css" media="all" rel="stylesheet" />
   <link href="/css/animate.css" media="all" rel="stylesheet" />
-  <script src="/js/p2.js"></script>
-  <script src="/js/stage.web.js"></script>
-  <script src="/js/stage-p2.js"></script>
+  <script src='/socket.io/socket.io.js'></script>
   
   <script src="/synchronizer/synchronizer-script.js"></script>
 
-  <script src='/socket.io/socket.io.js'></script>
   <script src="/bower_components/jquery/jquery.min.js"></script>
   {{{_sections.head}}}
 </head>
 
 <body lang="en">
-
-  <div id="canvas" class="container">
-        {{{body}}}
-  </div>
-  
-
-
+  {{{body}}}
 </body>
 
 <script src="/js/ios-orientationchange-fix.js"></script>

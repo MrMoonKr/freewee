@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+
 
 # A generic script that can be customized using various environmental variables (@see: README.md)
 # Defaults in this script are suitable for production use.
@@ -50,7 +50,7 @@ if [ ! $NODE_ENV ]; then
 fi
 
 if [ ! $NODE_CLUSTERED ]; then
-  export NODE_CLUSTERED=1
+  export NODE_CLUSTERED=0
 fi
 
 if [ ! $NODE_SERVE_STATIC ]; then
@@ -58,7 +58,7 @@ if [ ! $NODE_SERVE_STATIC ]; then
 fi
 
 if [ ! $NODE_HOT_RELOAD ]; then
-  export NODE_HOT_RELOAD=0
+  export NODE_HOT_RELOAD=1
 fi
 
 if [ !  $NODE_CONFIG_DIR ]; then

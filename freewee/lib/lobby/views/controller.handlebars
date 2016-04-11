@@ -1,0 +1,51 @@
+{{#section 'head'}}
+    <style>* { padding: 0; margin: 0; }</style>
+    // <script src="/sumo/phaser/phaser.min.js"></script>
+    // <script src="/sumo/scripts/gyro.min.js"></script>
+    <script src="/sumo/scripts/controller.js"></script>
+{{/section}}
+
+
+
+    <button class="big connect" onclick="fadeIn('join')">
+      CONNECT
+    </button>
+
+    <section id="join">
+      <div class="content">
+
+        <button class="close" onclick="fadeOut('join')"></button>
+
+        <input type="text" id="username" placeholder="Username">
+        <br>
+        <input type="tel" id="roomId" placeholder="Room Id">
+        <br>
+        <button class="outline" onclick="join()">JOIN</button>
+        <br>
+        <button class="outline" onclick="fadeOut('join')">CANCEL</button>
+
+      </div>
+    </section>
+
+    <section id="sumo">
+      <img src="">
+    </section>
+
+    <section id="controller">
+
+      <div class="content">
+
+        <button class="close" onclick="fadeOut('controller')"></button>
+
+        <h2 class="displayusername"></h2>
+
+        <button class="synchronizer-button btn btn-default btn-lg btn-info" id="UP">UP</button>
+        <button class="synchronizer-button btn btn-default btn-lg btn-info"  id="DOWN">DOWN</button>
+
+      </div>
+
+    </section>
+
+      </div>
+
+    </section>

@@ -1,5 +1,6 @@
-// server.js (or rather, appConfig.js) requires this function in:
-//    require('synchronizer')(socketio);
+/* server.js (or rather, appConfig.js) requires this exported function in:
+ *    require('synchronizer')(socketio);
+ */
 
 var rooms = {};
 
@@ -7,9 +8,10 @@ module.exports = function(io) {
   /* every time a user connects */
   io.on('connection', function(socket){
     console.log('A user connected');
-
     var type, _id;
-    /* Create a room for new game screen */
+    console.log('type: ' + type);
+
+    /* CREATE A ROOM */
     socket.on('synchronizer-create', function(id){
       socket.join(id);
       console.log("Room ID: " + id + "created");
@@ -17,21 +19,28 @@ module.exports = function(io) {
       type = 'game-screen';
       _id = id;
       console.log(rooms);
+
     });
 
-    /* Accept controller */
+    /* ACCEPT NEW CONTROLLER */
     socket.on('synchronizer-join', function(msg){
-
+      console.log("player trying to join");
+      // console.log(io.sockets.manager.rooms);
+      console.log("type: " + type);
       var response = {
         username: msg.username,
         id: msg.id,
         success: false,
-        msg: "Unknown Error"
+        msg: "Unknown Error in Join"
       };
 
-      if (type == 'controller' && rooms[msg.id]){ // not a game-screen, and room already exists
+      if (type !== 'game-screen') {console.log("is controller")}
+        if (rooms[msg.id]) {console.log("room exists")}
 
+      if (type !== 'game-screen' && rooms[msg.id]){ // not a game-screen, and room already exists
+        console.log("player joining room of id " + msg.id);
         socket.join(msg.id);
+        console.log("player joined room " + msg.id);
         console.log("User " + msg.username + " joined room " + msg.id);
         type = 'controller';
 
@@ -49,6 +58,23 @@ module.exports = function(io) {
       socket.emit('synchronizer-join', response);
 
     });
+
+    /* ALL PLAYERS READY; START GAME */
+    // socket.on('synchronizer-ready', function(msg){
+    //   console.log("why am i in here?");
+    //   var response = {
+    //     success: false,
+    //     msg: "Unknown Error in Ready"
+    //   };
+
+    //   console.log("User " + msg.username + " joined room " + msg.id);
+
+    //   response.success = true;
+    //   response.msg = "Successfully joined room.";
+
+    //   return
+
+    // });
 
     socket.on('synchronizer-data', function(data){
       if (type === 'controller'){

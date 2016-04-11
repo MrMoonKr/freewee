@@ -36,7 +36,7 @@
     "lodash": "^4.3.0",
     "metalogger": "*",
     "nodebootstrap-htmlapp": "*",
-    "nodebootstrap-server": "*",
+    "nodebootstrap-server": "https://github.com/christabella/nodebootstrap-server/tarball/master",
     "path": "^0.12.7",
     "phaser": "^2.4.6",
     "serve-favicon": "^2.3.0",
@@ -44,7 +44,7 @@
     "yaml": "*"
   },
   "scripts": {
-    "start": "npm install forever -g && ./bin/start.sh",
+    "start": "npm install supervisor -g && ./bin/heroku_start.sh",
     "dev": "./bin/dev_start.sh",
     "test": "mocha --bail test/ test/acceptance/",
     "pretest": "jshint lib test",

@@ -1,49 +1,35 @@
 {{#section 'head'}}
     <style>* { padding: 0; margin: 0; }</style>
-    <script src="/sumo/phaser/phaser.min.js"></script>
-    <script src="/sumo/scripts/gyro.min.js"></script>
     <script src="/sumo/scripts/controller.js"></script>
 {{/section}}
 
+<div class="container">
 
-
-    <button class="big connect" onclick="fadeIn('join')">
-      CONNECT
-    </button>
 
     <section id="join">
-      <div class="content">
-
-        <button class="close" onclick="fadeOut('join')"></button>
-
-        <input type="text" id="username" placeholder="Username">
-        <br>
-        <input type="tel" id="roomId" placeholder="Room Id">
-        <br>
-        <button class="outline" onclick="join()">JOIN</button>
-        <br>
-        <button class="outline" onclick="fadeOut('join')">CANCEL</button>
-
-      </div>
-    </section>
-
-
-
-    <section id="controller">
-
-      <div class="content">
-
-        <button class="close" onclick="fadeOut('controller')"></button>
-
-        <h2 class="displayusername"></h2>
-
-        <button class="synchronizer-button btn btn-default btn-lg btn-info" id="UP">UP</button>
-        <button class="synchronizer-button btn btn-default btn-lg btn-info"  id="DOWN">DOWN</button>
-
-      </div>
+      <input type="text" class="form-control" id="username" placeholder="Username">
+      <br>
+      <input type="tel" class="form-control" id="roomId" placeholder="Room Id">
+      <br>
+      <button class="btn btn-default btn-lg btn-primary" onclick="join()">JOIN</button>
 
     </section>
 
-      </div>
+    <section id="controller" style="display:none">
 
+      <div class="row">
+          <div class="col-xs-6 center-block">
+          <button class="synchronizer-button btn btn-default btn-xl btn-info center-block" id="&nbsp;UP&nbsp;">UP</button>
+        </div>
+        <div class="col-xs-6 center-block">
+          <button class="synchronizer-button btn btn-default btn-xl btn-info center-block" id="DOWN">DOWN</button>
+        </div>
+      </div>
+      
+      <div class="row">
+          <button class="leave btn btn-default btn-md btn-danger center-block" onclick="fadeOut('controller')">LEAVE</button>
+      </div>
     </section>
+
+  </div>
+</div>

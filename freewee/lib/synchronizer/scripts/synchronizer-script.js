@@ -65,7 +65,7 @@
 
   Synchronizer.prototype.send = function() {
 
-    if (window.DeviceOrientationEvent) {
+    if (window.DeviceOrientationEvent && window.DeviceMotionEvent) {
       var options = {
             alphaThreshold: 5,
             betaThreshold: 5,
@@ -126,7 +126,7 @@
               motion: motion,
               timestamp: Date.now()
             });
-          _instance.prevMotion = data;
+          _instance.prevMotion = motion;
         }
       })
     }

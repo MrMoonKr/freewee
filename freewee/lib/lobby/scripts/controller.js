@@ -8,12 +8,9 @@ var n = synchronizer.init('controller', socket);
 
 n.onJoin(function(data, err){
   if (!err){
+    fadeIn('controller');
     fadeOut('join');
-    setTimeout(function(){
-      fadeIn('controller')
-    }, 1500);
-    
-    $('.displayusername').text(n.username)
+    $('.displayusername').text("user connected: " + n.username)
   } else {
     alert(err.msg)
   }
@@ -25,11 +22,12 @@ n.onJoin(function(data, err){
 
 function fadeOut(id){
   $('#' + id)
-      .addClass('animated fadeOut')
+      .removeClass('animate fadeIn')
+      .addClass('animate fadeOut')
       .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
         $(this)
             .css('display', 'none')
-            .removeClass('animated fadeOut');
+            .removeClass('animate fadeOut');
         });
 }
 
@@ -39,8 +37,6 @@ function join(){
 
 function fadeIn(id){
   $('#' + id)
-      .css('display', 'block')
-      .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this)
-        });
+      .addClass('animate fadeIn')
+      .css('display', 'block');
 }
