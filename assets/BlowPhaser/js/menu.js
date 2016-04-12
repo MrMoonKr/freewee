@@ -11,7 +11,7 @@ var Menu = {
 
         game.load.spritesheet('basketSS','./img/basketspritesheet.png',990,578);
         game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
-        game.load.spritesheet('wordSS','./img/menutextspritesheet.png',1175,1241);
+        game.load.spritesheet('wordSS','./img/menutextspritesheet2.png',798,1633);
         game.load.image('menu','./img/bg.jpg');
         
     },
@@ -23,8 +23,8 @@ var Menu = {
         this.add.button(0, 0, 'menu', this.startGame, this);
 
         // words 'sumos can charm snakes too '
-        var w = game.add.sprite(80,40,'wordSS');
-        w.scale.setTo(0.5);
+        var w = game.add.sprite(280,20,'wordSS');
+        w.scale.setTo(0.4);
         w.animations.add('blinking',[0,1,2,3,4,5],4,true);
         w.animations.play('blinking');
 
