@@ -11,6 +11,8 @@ var numPlayers=4;
 
 var hissingSound;
 
+var micOut;
+
 var Game = {
 
     preload : function() {
@@ -29,6 +31,20 @@ var Game = {
     },
 
     create : function() {
+
+        // get permission to use microphone
+        navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia;
+        navigator.getUserMedia(
+            {audio: true  
+            }, 
+            this.micStream
+            ,
+            function(err) {
+            console.log("The following error occured: " + err.name)
+        });
+        
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         hissingSound=game.add.audio('hiss');
@@ -118,10 +134,48 @@ var Game = {
     }, 
 
     update:function() {
+
+        // set the mic threshold for detecting a player blowing into the mic
+        if (micOut > 40){
+            console.log("BLOW DETECTED!");
+        }
+             
         if(me.timeElapsed >= me.totalTime){
             game.state.start('Game_Over');//Do what you need to do
         }
 
+    },
+
+    // returns to var micOut the value of the microphone sound levels
+    micStream: function(stream){
+            
+            audioContext = new AudioContext();
+            analyser = audioContext.createAnalyser();
+              microphone = audioContext.createMediaStreamSource(stream);
+              javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+              analyser.smoothingTimeConstant = 0.8;
+              analyser.fftSize = 1024;
+
+              microphone.connect(analyser);
+              analyser.connect(javascriptNode);
+              javascriptNode.connect(audioContext.destination);
+
+              //canvasContext = $("#canvas")[0].getContext("2d");
+
+              javascriptNode.onaudioprocess = function() {
+                  var array = new Uint8Array(analyser.frequencyBinCount);
+                  analyser.getByteFrequencyData(array);
+                  var values = 0;
+
+                  var length = array.length;
+                  for (var i = 0; i < length; i++) {
+                    values += (array[i]);
+                  }
+
+                  micOut = values / length;
+
+            }         
     },
 
     createTimer: function(){
