@@ -10,7 +10,7 @@ var Game_Over = {
         
         // Create button to start game like in Menu.
         this.add.button(0, 0, 'menu', this.startGame, this);
-        var text = game.add.text(350,348,points,{font:'bold 20px Arial',fill:'#0000000'});
+        //var text = game.add.text(350,348,points,{font:'bold 20px Arial',fill:'#0000000'});
 
     },
 

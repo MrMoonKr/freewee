@@ -65,9 +65,9 @@ var Game = {
         }
 
         //adding health bar
-        healthbarfull = game.add.sprite(game.world.width*0.25,40,'healthSS');
+        healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.2,'healthSS');
         healthbarfull.scale.setTo(0.5);
-        health=game.add.sprite(game.world.width*0.25,40,'healthSS');
+        health=game.add.sprite(game.world.width*0.25,game.world.height*0.2,'healthSS');
         health.scale.setTo(0.5);
         health.frame=2;
 
@@ -84,25 +84,40 @@ var Game = {
         });
 
         //loop, to generate sequence 
-        timer=game.time.events;
+        timer=this.time.events;
         loop=timer.loop(1000,this.increaseHP,this); 
+        
+        //stopExplosion=timer.add(23000,this.over,this);
+        
+
     }, 
 
     update:function() {
         if(me.timeElapsed >= me.totalTime){
             me.timeLabel.visible=false;
             meteor.visible=false;
+
             catGroup.children=false;
             healthbarfull.visible=false;
             health.visible=false;
+            timer.remove(loop);
             explode.visible=true;
             explode.animations.play('boom');
-            //game.state.start('Game_Over');//Do what you need to do
-        }
+            this.over();
+            
+        
+            }
 
         //decrease HP for every mouseclick. to be replaced with phone inputs. will get a count
         game.input.onDown.add(this.decreaseHP);
 
+    },
+
+    over:function(){
+        this.time.events.add(3000,function(){
+            game.state.start('Game_Over');
+        },this);
+        
     },
 
     createTimer: function(){
@@ -162,15 +177,18 @@ var Game = {
     decreaseHP:function(){
         //decreasing HP 
         catGroup.children[0].animations.play('lifting');
-        meteorHP--;
-        meteorLifeText.setText("Meteor HP: "+meteorHP);
-        damageDone++;
-        health.scale.setTo(0.5*meteorHP/50,0.5);
-        
-        if (meteorHP<25){
-            health.frame=1; //change to healthy HP (green)
-        }
+        if (meteorHP>0){
+            meteorHP--;
+            meteorLifeText.setText("Meteor HP: "+meteorHP);
+            damageDone++;
+            health.scale.setTo(0.5*meteorHP/50,0.5);
 
+            if (meteorHP<25){
+                health.frame=1; //change to healthy HP (green)
+            }
+
+        }
+        
         if (damageDone==10){
             meteor.frame+=1; //add crack 
             damageDone=0;
