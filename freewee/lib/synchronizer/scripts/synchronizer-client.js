@@ -33,6 +33,7 @@
     this.buttons = [];
 
     if (this.type == 'game-screen'){
+      // tell server to create a room of this.id
       this.socket.emit('synchronizer-create', this.id);
       console.log(this.id);
     }
@@ -40,6 +41,7 @@
 
   Synchronizer.prototype.onJoin = function(callback){
     synchronizer = this;
+    // received 'synchronizer-join' event from server
     this.socket.on('synchronizer-join', function(data){
       var err;
       synchronizer.roomId = data.id;

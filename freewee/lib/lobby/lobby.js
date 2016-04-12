@@ -5,7 +5,6 @@ module.exports = router;
 //serve static files
 router.use('/scripts', express.static(__dirname + '/scripts'));
 router.use('/img', express.static(__dirname + '/img'));
-router.use('/phaser', express.static(__dirname + '/../../node_modules/phaser/dist'));
 
 
 function isController(req) {
@@ -28,9 +27,9 @@ router.use(function(req, res, next){
 
 // Module's Routes. Please note this is actually under /sumo, because module is attached under /sumo
 router.get('/', function(req, res) {
-    var template = __dirname + '/views/game';
+    var template = __dirname + '/views/lobby';
     var context = {
-        siteTitle : "RUN SUMO RUN"
+        siteTitle : "Game Lobby"
 
     };
     res.render(template, context);

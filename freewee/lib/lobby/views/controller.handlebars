@@ -1,51 +1,39 @@
 {{#section 'head'}}
     <style>* { padding: 0; margin: 0; }</style>
-    // <script src="/sumo/phaser/phaser.min.js"></script>
-    // <script src="/sumo/scripts/gyro.min.js"></script>
     <script src="/sumo/scripts/controller.js"></script>
 {{/section}}
 
+<div class="container">
 
-
-    <button class="big connect" onclick="fadeIn('join')">
-      CONNECT
-    </button>
 
     <section id="join">
-      <div class="content">
-
-        <button class="close" onclick="fadeOut('join')"></button>
-
-        <input type="text" id="username" placeholder="Username">
+      <h2 class="text-right"><em>Welcome!</em> <br>Check out this site on your computer to get your room code, and enter it below.</h2>
+      {{!-- <div class="input-group"> --}}
+        <input type="text" class="form-control input-lg text-right" id="username" placeholder="Username">
         <br>
-        <input type="tel" id="roomId" placeholder="Room Id">
+        <input type="tel" class="form-control input-lg text-right" id="roomId" placeholder="Room Code">
         <br>
-        <button class="outline" onclick="join()">JOIN</button>
-        <br>
-        <button class="outline" onclick="fadeOut('join')">CANCEL</button>
+      {{!-- </div> --}}
+      <button class="btn btn-default btn-lg btn-primary pull-right" onclick="join()">JOIN</button>
 
+    </section>
+
+    <section id="controller" style="display:none">
+      <h2 class="displayusername"></h2>
+
+      <div class="row">
+          <div class="col-xs-6 center-block">
+          <button class="synchronizer-button btn btn-default btn-xl btn-info center-block" id="UP">UP</button>
+        </div>
+        <div class="col-xs-6 center-block">
+          <button class="synchronizer-button btn btn-default btn-xl btn-info center-block" id="DOWN">DOWN</button>
+        </div>
+      </div>
+      
+      <div class="row">
+          <button class="leave btn btn-default btn-md btn-danger center-block" onclick="fadeOut('controller');setTimeout(function(){fadeIn('join')}, 800);">LEAVE</button>
       </div>
     </section>
 
-    <section id="sumo">
-      <img src="">
-    </section>
-
-    <section id="controller">
-
-      <div class="content">
-
-        <button class="close" onclick="fadeOut('controller')"></button>
-
-        <h2 class="displayusername"></h2>
-
-        <button class="synchronizer-button btn btn-default btn-lg btn-info" id="UP">UP</button>
-        <button class="synchronizer-button btn btn-default btn-lg btn-info"  id="DOWN">DOWN</button>
-
-      </div>
-
-    </section>
-
-      </div>
-
-    </section>
+  </div>
+</div>

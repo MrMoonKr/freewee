@@ -11,7 +11,7 @@ n.onJoin(function(data, err){
     fadeOut('join');
     setTimeout(function(){
       fadeIn('controller')
-    }, 1500);
+    }, 1000);
     
     $('.displayusername').text(n.username)
   } else {

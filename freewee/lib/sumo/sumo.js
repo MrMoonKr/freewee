@@ -5,8 +5,9 @@ module.exports = router;
 //serve static files
 router.use('/scripts', express.static(__dirname + '/scripts'));
 router.use('/img', express.static(__dirname + '/img'));
-router.use('/phaser', express.static(__dirname + '/../../node_modules/phaser/dist'));
-
+router.use('/sound', express.static(__dirname + '/sound'));
+// router.use('/phaser', express.static(__dirname + '/../../node_modules/phaser/dist'));
+// ^ if using <script src="/sumo/phaser/phaser.min.js"></script> in game.handlebars {{head}}
 
 function isController(req) {
   var ua = req.headers['user-agent'].toLowerCase(),
