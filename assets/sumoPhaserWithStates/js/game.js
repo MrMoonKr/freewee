@@ -1,14 +1,14 @@
-    var numPlayers=4; 
-    var winnerPositions=[];
+var numPlayers=4; 
+var winnerPositions,trackposition;
 
-    var trackposition;
+var trackGroup,collisionGroup,cursors;
+var count,speed,placing;
 
-    var trackGroup,collisionGroup,cursors;
-    var count=0; //framerate
-    var speed=2;
-    var placing=0;
+var breathingSound,cheeringSound,countDown;
 
-    var timer,loop;
+var timer,loop;
+
+var sounds;
 
 var Game = {
 
@@ -31,12 +31,27 @@ var Game = {
         game.load.spritesheet('sumoSS','./img/sumoRunSpriteSheet.png',773,914);
         
         game.load.image('track','img/track.png');
-        
+        game.load.audio('breathing','./sound/breath_sound.mp3');
+        game.load.audio('cheering','./sound/cheer_sound.mp3');
+        game.load.audio('countdown','./sound/countdown.mp3');
+
 
     },
 
     create : function() {
+
+        //loading sounds
+        cheeringSound = this.add.audio('cheering');
+        countDown = this.add.audio('countdown');
+
         game.physics.startSystem(Phaser.Physics.ARCADE);
+       
+
+        winnerPositions=[];
+        count=0;
+        speed=2;
+        placing=0;
+        sounds=[];
 
         //just to keep track of what coordinates to shift to, according to number of players
         trackposition={
@@ -49,17 +64,15 @@ var Game = {
         //bottomost layer, group for all tracks  
         trackGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
         
+        collisionGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
+        
         for (var i =0;i<numPlayers;i++){
             //add track sprite to trackGroup 
             var track = trackGroup.create(game.world.width*trackposition[numPlayers]+220*i,0,'track');
             track.anchor.set(0,0);
             track.scale.setTo(1,(game.world.height/track.height));
             track.name=i;
-        }
         
-        //group for all sumos 
-        collisionGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
-        for (var i =0;i<numPlayers;i++){
             //creating the sumo
             var s = collisionGroup.create(game.world.width*trackposition[numPlayers]+50+200*i,0,'sumoSS');
             s.frame=4*i; //different frame for diff sumo 
@@ -68,12 +81,16 @@ var Game = {
             s.anchor.set(0,0);
             s.scale.setTo(0.2,0.2);
             if (i!=1){
-                s.body.velocity.set(0,40);
+                s.body.velocity.set(0,80);
             }
             s.body.collideWorldBounds=true;
             s.body.bounce.x=1;
             s.body.bounce.y=1;
             game.physics.enable(s,Phaser.Physics.ARCADE);
+
+            sounds[i]=this.add.audio('breathing');
+            
+        
                        
         }
         //disable sumo's collision with bottom edge of screen,  ball will fall off)
@@ -109,15 +126,20 @@ var Game = {
         //iterates through all the sumos 
         collisionGroup.forEach(function(member){
             if (member.y>=720 && !member.reached){
+                sounds[member.name].mute=true;
+                //cheeringSound.totalDuration=2;
+                cheeringSound.play("",0,1,false);
                 winnerPositions[placing]=member.name; //save member name into winner list
                 placing++;
+                trackGroup.children[member.name].tint=0x99ffff; //change colour of track to signify reached
+                var text=game.add.text(game.world.width*trackposition[numPlayers]+220*member.name+70,300,placing,{font:'bold 100px Arial',fill:'#ffffff'});
+                
+                
                 member.body.velocity=0; 
                 member.animations.stop('sumoMove',true);
                 member.animations.stop('sumoSlow',true);
                 member.reached=true;
-                trackGroup.children[member.name].tint=0x99ffff; //change colour of track to signify reached
-                var text=game.add.text(game.world.width*trackposition[numPlayers]+220*member.name+70,300,placing,{font:'bold 100px Arial',fill:'#ffffff'});
-            
+                cheeringSound.stop();
             }
             if (winnerPositions.length==4){
                 console.log(winnerPositions);
@@ -133,7 +155,7 @@ var Game = {
 
     increaseSpeed:function (){
         //count is the framerate 
-        
+        sounds[1].play();
         count++; 
         collisionGroup.children[1].animations.add('sumoMove',[4,5,6,7],count,true); //animation added to the sprite
         

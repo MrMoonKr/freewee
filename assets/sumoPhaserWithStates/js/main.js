@@ -1,4 +1,4 @@
-var game;
+var game,music;
 
 game = new Phaser.Game(screen.availWidth,screen.availHeight, Phaser.AUTO, null);
 

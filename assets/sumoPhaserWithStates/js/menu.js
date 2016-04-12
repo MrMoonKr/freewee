@@ -1,21 +1,25 @@
 var sumo,runtext;
+var bgmusic;
 var Menu = {
 
     preload : function() {
         // Loading images is required so that later on we can create sprites based on the them.
         // The first argument is how our image will be refered to, 
         // the second one is the path to our file.
-        //game.load.spritesheet('sumoMove','./img/sumo_sprite2.png',188,219);
-        game.load.image('menu', './img/grassfield.jpg');
-
+        game.load.image('menu', './img/grassfield2.png');
         game.load.image('runtext','./img/RunSumoRun.png');
-
         game.load.spritesheet('sumos','./img/sumoRunSpriteSheet.png',771,914);
-        //game.load.spritesheet('runtext','./img/runSumoTextSpriteSheet.png',1205,356);
-
+        game.load.audio('startMusic','./sound/SumoRun BGM before starting race.mp3');
+    
     },
 
     create: function () {
+        bgmusic=game.add.audio('startMusic');
+        bgmusic.play();
+
+        
+
+
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         //background image
@@ -24,6 +28,7 @@ var Menu = {
         // Add menu screen.
         // It will act as a button to start the game.
         this.add.button(0, 0, 'menu', this.startGame, this);
+
 
         //adding of sumo sprite 
         sumo = game.add.sprite(0,game.world.height*0.4,'sumos');
@@ -52,7 +57,7 @@ var Menu = {
 
     },
 
-    
+  
     startGame: function () {
 
         // Change the state to the actual game.
