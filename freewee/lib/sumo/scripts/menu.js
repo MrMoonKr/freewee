@@ -15,7 +15,7 @@ var Menu = {
 
     create: function () {
         bgmusic=game.add.audio('startMusic');
-        bgmusic.play();
+        bgmusic.loopFull(1); // use loopFull(volume) to loop the sound
 
         
 
