@@ -2,15 +2,21 @@ var s;
 var Menu = {
 
     preload : function() {
-        // Loading images is required so that later on we can create sprites based on the them.
-        // The first argument is how our image will be refered to, 
-        // the second one is the path to our file.
-        //game.stage.backgroundColor = '#f2784b'; //green background colour
-
-        
-        //game.load.spritesheet('wordSS','./img/menutextspritesheet.png',1175,1241);
+        game.load.image('gameovermenu','./img/bg.jpg');
         game.load.image('menu','./img/menupage.jpg');
-        game.load.spritesheet('catSS','./img/catsprite.png',568,758);
+
+        //game.load.spritesheet('catSS','./img/catsprite.png',568,758);
+        //game.load.spritesheet('catspr','./img/catsprite.png',586,758);
+        game.load.spritesheet('sumoSS','./img/sumospritesheet.png',704,912);
+        game.load.spritesheet('meteorSS','./img/meteorspritesheet.png',2381,1407);
+        game.load.spritesheet('explosionSS','./img/explosionspritesheet.png',1921,1850);
+        game.load.spritesheet('healthSS','./img/healthspritesheet.png',1166,107);
+        game.load.spritesheet('sumoWLSS','./img/sumolosewinspritesheet.png',969,914);
+        
+        game.load.audio('BPunch','./sound/Batman_Punch.mp3');
+        game.load.audio('RPunch','./sound/Realistic_Punch.mp3');
+        game.load.audio('SPunch','./sound/Strong_Punch.mp3');
+        game.load.audio('explodeSound','./sound/explosion.mp3');
         
     },
 
@@ -18,7 +24,7 @@ var Menu = {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.add.button(0, 0, 'menu', this.startGame, this);
         for (var i=0;i<4;i++){
-            var cat = this.add.sprite(this.world.randomX, this.world.randomY, 'catSS');
+            var cat = this.add.sprite(this.world.randomX, this.world.randomY, 'sumoSS');
             cat.scale.setTo(0.15);
             this.physics.enable(cat,Phaser.Physics.ARCADE);
 

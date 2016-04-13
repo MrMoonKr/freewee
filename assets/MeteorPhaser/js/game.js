@@ -4,7 +4,8 @@ var meteor,explode,health,healthbarfull,    meteorLifeText;
 var meteorHP=50;
 var damageDone=0;
 
-var numPlayers=2; 
+var numPlayers=4; 
+var BPunchSound,RPunchSound,SPunchSound,explosionSound;
 
 var Game = {
 
@@ -15,21 +16,28 @@ var Game = {
 
         game.stage.backgroundColor = '#eee'; //green background colour
 
-        game.load.spritesheet('catspr','./img/catsprite.png',586,758);
-        game.load.spritesheet('meteorSS','./img/meteorspritesheet.png',2381,1407);
-        game.load.spritesheet('explosionSS','./img/explosionspritesheet.png',1921,1850);
-        game.load.spritesheet('healthSS','./img/healthspritesheet.png',1166,107);
-        //game.load.image('bg','./img/nebulaSky.jpg');
+        // game.load.spritesheet('catspr','./img/catsprite.png',586,758);
+        // game.load.spritesheet('meteorSS','./img/meteorspritesheet.png',2381,1407);
+        // game.load.spritesheet('explosionSS','./img/explosionspritesheet.png',1921,1850);
+        // game.load.spritesheet('healthSS','./img/healthspritesheet.png',1166,107);
+        // //game.load.image('bg','./img/nebulaSky.jpg');
 
     },
 
     create : function() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        //loading sounds
+        BPunchSound=this.add.audio('BPunch');
+        RPunchSound=this.add.audio('RPunch');
+        SPunchSound=this.add.audio('SPunch');
+        explosionSound=this.add.audio('explodeSound');
+
+
         //bgtile = game.add.tileSprite(0,0,game.world.width,game.world.height,'bg');
         
         //ading meteor 
-        meteor=game.add.sprite(game.world.centerX,20,'meteorSS');
+        meteor=game.add.sprite(game.world.centerX,game.world.height*0.01,'meteorSS');
         meteor.frame=0;
         meteor.anchor.set(0.5,0);
         meteor.scale.setTo(0.45,0.4);
@@ -53,21 +61,22 @@ var Game = {
             1: 0.5,
             2: 0.38,
             3: 0.3,
-            4: 0.25
+            4: 0.2
         }
         catGroup = game.add.group();
         for (var i=0;i<numPlayers;i++){
-            var cat = catGroup.create(game.world.width*xposition[numPlayers]+200*i,game.world.height,'catspr');
+            var cat = catGroup.create(game.world.width*xposition[numPlayers]+200*i,game.world.height,'sumoSS');
+            cat.frame=i*4;
             cat.anchor.set(0,1);
             cat.scale.setTo(0.2);
-            cat.animations.add('lifting',[0,1,2],1,true);
+            cat.animations.add('lifting',[i*4,i*4+1,i*4+2,i*4+3],3,true);
 
         }
 
         //adding health bar
-        healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.2,'healthSS');
+        healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         healthbarfull.scale.setTo(0.5);
-        health=game.add.sprite(game.world.width*0.25,game.world.height*0.2,'healthSS');
+        health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         health.scale.setTo(0.5);
         health.frame=2;
 
@@ -103,6 +112,7 @@ var Game = {
             timer.remove(loop);
             explode.visible=true;
             explode.animations.play('boom');
+            explosionSound.play();
             this.over();
             
         
@@ -183,6 +193,7 @@ var Game = {
             damageDone++;
             health.scale.setTo(0.5*meteorHP/50,0.5);
 
+
             if (meteorHP<25){
                 health.frame=1; //change to healthy HP (green)
             }
@@ -192,6 +203,8 @@ var Game = {
         if (damageDone==10){
             meteor.frame+=1; //add crack 
             damageDone=0;
+            SPunchSound.play();
+
         }
     }
         
