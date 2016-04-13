@@ -4,11 +4,11 @@ var winnerPositions,trackposition;
 var trackGroup,collisionGroup,cursors;
 var count,speed,placing;
 
-var breathingSound,cheeringSound,countDown;
-
+var breathingSound,cheeringSound,countDown,collisionSound;
+var playersSoundGroup;
 var timer,loop;
 
-var sounds;
+
 
 var Game = {
 
@@ -28,12 +28,12 @@ var Game = {
 
         //load the sumo and the track 
         //game.load.spritesheet('sumoMove','./img/sumo_sprite2.png',188,219);
-        game.load.spritesheet('sumoSS','./img/sumoRunSpriteSheet.png',773,914);
+        // game.load.spritesheet('sumoSS','./img/sumoRunSpriteSheet.png',773,914);
         
-        game.load.image('track','img/track.png');
-        game.load.audio('breathing','./sound/breath_sound.mp3');
-        game.load.audio('cheering','./sound/cheer_sound.mp3');
-        game.load.audio('countdown','./sound/countdown.mp3');
+        // game.load.image('track','img/track.png');
+        // game.load.audio('breathing','./sound/breath_sound.mp3');
+        // game.load.audio('cheering','./sound/cheer_sound.mp3');
+        // game.load.audio('countdown','./sound/countdown.mp3');
 
 
     },
@@ -43,6 +43,7 @@ var Game = {
         //loading sounds
         cheeringSound = this.add.audio('cheering');
         countDown = this.add.audio('countdown');
+        collisionSound=this.add.audio('collisionSound');
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
        
@@ -51,7 +52,7 @@ var Game = {
         count=0;
         speed=2;
         placing=0;
-        sounds=[];
+        playersSoundGroup=[];
 
         //just to keep track of what coordinates to shift to, according to number of players
         trackposition={
@@ -81,14 +82,14 @@ var Game = {
             s.anchor.set(0,0);
             s.scale.setTo(0.2,0.2);
             if (i!=1){
-                s.body.velocity.set(0,80);
+                s.body.velocity.set(0,30);
             }
             s.body.collideWorldBounds=true;
             s.body.bounce.x=1;
             s.body.bounce.y=1;
             game.physics.enable(s,Phaser.Physics.ARCADE);
 
-            sounds[i]=this.add.audio('breathing');
+           playersSoundGroup[i]=this.add.audio('breathing');
             
         
                        
@@ -126,9 +127,9 @@ var Game = {
         //iterates through all the sumos 
         collisionGroup.forEach(function(member){
             if (member.y>=720 && !member.reached){
-                sounds[member.name].mute=true;
+                playersSoundGroup[member.name].mute=true;
                 //cheeringSound.totalDuration=2;
-                cheeringSound.play("",0,1,false);
+                cheeringSound.play();
                 winnerPositions[placing]=member.name; //save member name into winner list
                 placing++;
                 trackGroup.children[member.name].tint=0x99ffff; //change colour of track to signify reached
@@ -139,7 +140,7 @@ var Game = {
                 member.animations.stop('sumoMove',true);
                 member.animations.stop('sumoSlow',true);
                 member.reached=true;
-                cheeringSound.stop();
+                //cheeringSound.stop();
             }
             if (winnerPositions.length==4){
                 console.log(winnerPositions);
@@ -155,7 +156,7 @@ var Game = {
 
     increaseSpeed:function (){
         //count is the framerate 
-        sounds[1].play();
+        playersSoundGroup[1].play();
         count++; 
         collisionGroup.children[1].animations.add('sumoMove',[4,5,6,7],count,true); //animation added to the sprite
         
@@ -180,6 +181,7 @@ var Game = {
 
     slowDown:function (s1,s2){
         s2.body.velocity.y-=1;
+        collisionSound.play();
         console.log("collided! Decrease speeed! "+s2.body.velocity.y);
 
     }

@@ -8,9 +8,17 @@ var Menu = {
         // the second one is the path to our file.
         game.load.image('menu', './img/grassfield2.png');
         game.load.image('runtext','./img/RunSumoRun.png');
-        game.load.spritesheet('sumos','./img/sumoRunSpriteSheet.png',771,914);
         game.load.audio('startMusic','./sound/SumoRun BGM before starting race.mp3');
-    
+        game.load.image('gameover', './img/grassfield3.png');
+
+        game.load.spritesheet('sumoWLSS','./img/sumolosewinspritesheet.png',969,914);
+        game.load.spritesheet('sumoSS','./img/sumoRunSpriteSheet.png',773,914);
+        
+        game.load.image('track','img/track.png');
+        game.load.audio('breathing','./sound/breath_short.mp3');
+        game.load.audio('cheering','./sound/cheer_sound_short.mp3');
+        game.load.audio('countdown','./sound/countdown.mp3');
+        game.load.audio('collisionSound','./sound/collision.mp3');
     },
 
     create: function () {
@@ -33,7 +41,7 @@ var Menu = {
 
 
         //adding of sumo sprite 
-        sumo = game.add.sprite(0,game.world.height*0.4,'sumos');
+        sumo = game.add.sprite(0,game.world.height*0.4,'sumoSS');
         sumo.frame=16;
         sumo.scale.setTo(0.15);
         sumo.animations.add('running',[16,17],4,true);
