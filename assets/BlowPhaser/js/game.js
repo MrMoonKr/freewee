@@ -258,7 +258,7 @@ var Game = {
         sumoGroup.children[0].animations.play('blowing');
 
         //if what was pressed is at the same index of the sequence and mic is being blown into
-        if (sprite.id == master & micOut = 35) {
+        if (sprite.id == master && micOut > 35) {
             playersSoundGroup[0][master].play();
             sprite.tint = 0xffff00;//button to turn green to show correct 
             points[0]++;// increase points 
