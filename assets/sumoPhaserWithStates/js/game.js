@@ -88,7 +88,7 @@ var Game = {
             s.body.bounce.x=1;
             s.body.bounce.y=1;
             game.physics.enable(s,Phaser.Physics.ARCADE);
-            s.visible=false;
+            //s.visible=false;
 
            playersSoundGroup[i]=this.add.audio('breathing');
             
@@ -103,6 +103,8 @@ var Game = {
         //on loop
         timer=game.time.events;
         loop=timer.loop(1000,this.startDecrement,this);
+
+        //this.startFunction();
 
     }, 
 
@@ -153,6 +155,20 @@ var Game = {
         
 
     },
+
+    // startFunction:function(){
+    //     countDown.play();
+        
+    //     text.setText("SET");
+    //     text.setText("GO");
+
+    //     game.time.events.add(3000,function(){
+    //         var text = game.add.text(235, 350, "READY", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center"});
+    //         text.alpha=0;
+    //         game.add.tween(text).to({alpha:1},1000,Phaser.Easing.Linear.None,true,0,1000,true);
+                    
+    //     });
+    // },
 
 
     increaseSpeed:function (){

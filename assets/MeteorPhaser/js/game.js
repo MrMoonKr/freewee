@@ -63,6 +63,8 @@ var Game = {
             4: 0.2
         }
 
+        
+
         catGroup = game.add.group();
         for (var i=0;i<numPlayers;i++){
             var cat = catGroup.create(game.world.width*xposition[numPlayers]+200*i,game.world.height,'sumoSS');
