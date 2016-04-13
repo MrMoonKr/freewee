@@ -1,0 +1,25 @@
+{{#section 'head'}}
+    <style>* { padding: 0; margin: 0; }</style>
+    <script src="//cdn.jsdelivr.net/phaser/2.4.6/phaser.min.js"></script>
+    {{!-- sumo scripts --}}
+    <script src="/scripts/sumo/menu.js"></script>
+    <script src="/scripts/sumo/game.js"></script>
+    <script src="/scripts/sumo/gameover.js"></script>
+    {{!-- snake scripts --}}
+
+    {{!-- planet scripts --}}
+
+    {{!-- overall game scripts --}}
+    <script src="/scripts/lobby.js"></script>
+    <script src="/scripts/main.js"></script>
+{{/section}}
+
+<section id="welcome">
+  <div class="row">
+    <h3 class="text-center">Welcome to room</h3> 
+    <h1 class="text-center"><span class="roomid"></span></h1>
+    <h3 class="text-center">Users in the room:</h3> 
+    <h1 class="text-center"><span class="users">&nbsp;</span></h1>
+    <button class="btn btn-default btn-lg btn-primary center-block ready">ALL PLAYERS READY</button>
+  </div>
+</section>

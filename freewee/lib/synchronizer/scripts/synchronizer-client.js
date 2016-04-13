@@ -65,6 +65,53 @@
     }
   };
 
+  var orientationListener = function (eventData) {
+
+    var orientation = {
+      alpha: eventData.alpha,
+      beta: eventData.beta,
+      gamma: eventData.gamma
+    };
+
+    if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
+        Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
+        Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
+        ) {
+
+      _instance.socket.emit('synchronizer-data',
+        {
+          username: _instance.username,
+          roomId: _instance.roomId,
+          buttons: _instance.buttons,
+          orientation: orientation,
+          motion: _instance.prevMotion,
+          timestamp: Date.now()
+        });
+      _instance.prevOrientation = orientation;
+    }
+  }
+
+  var motionListener = function (eventData) {
+
+    var motion = {
+      y: eventData.accelerationIncludingGravity.y.toFixed(3)
+    };
+
+    if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
+
+      _instance.socket.emit('synchronizer-data',
+        {
+          username: _instance.username,
+          roomId: _instance.roomId,
+          buttons: _instance.buttons,
+          orientation: _instance.prevOrientation,
+          motion: motion,
+          timestamp: Date.now()
+        });
+      _instance.prevMotion = motion;
+    }
+  }
+
   Synchronizer.prototype.send = function() {
 
     if (window.DeviceOrientationEvent && window.DeviceMotionEvent) {
@@ -85,52 +132,12 @@
         y: 0,
       };
 
-      window.addEventListener('deviceorientation', function (eventData) {
+      window.addEventListener('deviceorientation', orientationListener)
 
-        var orientation = {
-          alpha: eventData.alpha,
-          beta: eventData.beta,
-          gamma: eventData.gamma
-        };
+      window.addEventListener('devicemotion', motionListener)
 
-        if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
-            Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
-            Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
-            ) {
+      // window.removeEventListener('scroll', listener, false);
 
-          _instance.socket.emit('synchronizer-data',
-            {
-              username: _instance.username,
-              roomId: _instance.roomId,
-              buttons: _instance.buttons,
-              orientation: orientation,
-              motion: _instance.prevMotion,
-              timestamp: Date.now()
-            });
-          _instance.prevOrientation = orientation;
-        }
-      })
-
-      window.addEventListener('devicemotion', function (eventData) {
-
-        var motion = {
-          y: eventData.accelerationIncludingGravity.y.toFixed(3)
-        };
-
-        if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
-
-          _instance.socket.emit('synchronizer-data',
-            {
-              username: _instance.username,
-              roomId: _instance.roomId,
-              buttons: _instance.buttons,
-              orientation: _instance.prevOrientation,
-              motion: motion,
-              timestamp: Date.now()
-            });
-          _instance.prevMotion = motion;
-        }
-      })
     }
 
     // // Add button listeners
