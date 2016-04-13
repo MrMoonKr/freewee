@@ -4,7 +4,7 @@ var Game_Over = {
         // Load the needed image for this game screen.
         game.load.image('gameover', '/sumo/img/grassfield3.png');
 
-        game.load.spritesheet('sumoSS','/sumo/img/sumolosewinspritesheet.png',969,914);
+        game.load.spritesheet('sumoWLSS','/sumo/img/sumolosewinspritesheet.png',969,914);
         //game.load.image('gameover', './assets/images/gameover.png');
     },
 
@@ -23,7 +23,7 @@ var Game_Over = {
 
         for (var i =0;i<numPlayers;i++){
             
-            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoSS');
+            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoWLSS');
             if (i==winnerPositions[0]){
                 s.frame=4+i;
             } else {

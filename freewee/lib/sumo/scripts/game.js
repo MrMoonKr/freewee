@@ -43,10 +43,10 @@ $(document).ready(function(){
 var numPlayers=4; 
 var winnerPositions,trackposition;
 
-var trackGroup,collisionGroup,cursors;
+var trackGroup,collisionGroup;
 var count,speed,placing;
 
-var breathingSound,cheeringSound,countDown;
+var breathingSound,cheeringSound,countDown,collisionSound;
 
 var timer,loop;
 
@@ -78,6 +78,8 @@ var Game = {
         game.load.audio('breathing','/sumo/sound/breathShort.mp3');
         game.load.audio('cheering','/sumo/sound/cheerSoundShort.mp3');
         game.load.audio('countdown','/sumo/sound/countdown.mp3');
+        game.load.audio('collisionSound','/sumo/sound/collision.mp3');
+        
 
 
     },
@@ -87,6 +89,7 @@ var Game = {
         //loading sounds
         cheeringSound = this.add.audio('cheering');
         countDown = this.add.audio('countdown');
+        collisionSound=this.add.audio('collisionSound');
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
        
@@ -182,19 +185,16 @@ var Game = {
 
             if (member.y>=720 && !member.reached){
                 sounds[i].mute=true;
-                //cheeringSound.totalDuration=2;
-                cheeringSound.play("",0,1,false);
+                cheeringSound.play();
                 winnerPositions[placing]=i; //save member name into winner list
                 placing++;
                 trackGroup.children[i].tint=0x99ffff; //change colour of track to signify reached
                 var text=game.add.text(game.world.width*trackposition[numPlayers]+220*i+70,300,placing,{font:'bold 100px Arial',fill:'#ffffff'});
-                
-                
                 member.body.velocity=0; 
                 member.animations.stop('sumoMove',true);
                 member.animations.stop('sumoSlow',true);
                 member.reached=true;
-                cheeringSound.stop();
+                
             }
             if (winnerPositions.length==4){
                 console.log(winnerPositions);
@@ -223,6 +223,7 @@ var Game = {
     },
 
     slowDown:function (s1,s2){
+        collisionSound.play();
         s2.body.velocity.y-=1;
         console.log("collided! Decrease speeed! "+s2.body.velocity.y);
 

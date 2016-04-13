@@ -88,6 +88,7 @@ var Game = {
             s.body.bounce.x=1;
             s.body.bounce.y=1;
             game.physics.enable(s,Phaser.Physics.ARCADE);
+            s.visible=false;
 
            playersSoundGroup[i]=this.add.audio('breathing');
             
