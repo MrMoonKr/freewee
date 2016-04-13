@@ -3,8 +3,8 @@ var Game_Over = {
     preload : function() {
         // Load the needed image for this game screen.
         
-        game.load.image('menu','./img/bg.jpg');
-        game.load.spritesheet('sumoSS','./img/sumolosewinspritesheet.png',969,914);
+        // game.load.image('menu','./img/bg.jpg');
+        // game.load.spritesheet('sumoSS','./img/sumolosewinspritesheet.png',969,914);
         
     },
 
@@ -20,7 +20,7 @@ var Game_Over = {
     
         //to display winning/losing sprites 
         for (var i =0;i<numPlayers;i++){
-            var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+200*i,450,'sumoSS');
+            var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+200*i,450,'sumoWLSS');
             
             //if the player index i has max points, show winner frame 
             //allows for multiple winners 

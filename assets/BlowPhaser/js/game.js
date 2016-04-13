@@ -1,4 +1,6 @@
-var button0,button1,button2,history=[0,0,0],count;
+var button0,button1,button2;
+
+//var history=[0,0,0],count;
 
 var me;
 var master;
@@ -9,7 +11,8 @@ var snakeGroup, basketGroup, sumoGroup,pointTextGroup;
 var masterSeqGroup=[];
 var numPlayers=4;
 
-var hissingSound;
+var hissingSound,flute0,flute1,flute2;
+var flutes;
 
 var micOut;
 
@@ -21,12 +24,12 @@ var Game = {
         game.scale.pageAlignVertically = true;
 
         game.stage.backgroundColor = '#eee'; //green background colour
-        game.load.spritesheet('basketSS','./img/basketspritesheet.png',989,578);
-        game.load.spritesheet('sumoSS','./img/sumoblowspritesheet.png',694,913);
-        game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
-        game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
-        game.load.spritesheet('circle','./img/circle.png',60,60);  
-        game.load.audio('hiss','./sound/snake_hissing.mp3');
+        // game.load.spritesheet('basketSS','./img/basketspritesheet.png',989,578);
+        // game.load.spritesheet('sumoSS','./img/sumoblowspritesheet.png',694,913);
+        // game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
+        // game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
+        // game.load.spritesheet('circle','./img/circle.png',60,60);  
+        // game.load.audio('hiss','./sound/snake_hissing.mp3');
         
     },
 
@@ -47,7 +50,14 @@ var Game = {
         
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        hissingSound=game.add.audio('hiss');
+        //adding sounds
+        hissingSound=this.add.audio('hiss');
+        flute0=this.add.audio('flute0');
+        flute1=this.add.audio('flute1');
+        flute2=this.add.audio('flute2');
+        flutes=[flute0,flute1,flute2];
+
+        //to initialise to zero for every new game
         points=[0,0,0,0];
 
         //buttons for user to click. [to be removed for real game, will be replaced by inputs from phone]
@@ -221,6 +231,7 @@ var Game = {
         //change tint colour for each of the players
         for (var j=0;j<numPlayers;j++){
             masterSeqGroup[j][master].tint= 0x99ff00;
+
         }
        
         console.log(master);
@@ -251,6 +262,7 @@ var Game = {
 
         //if what was pressed is at the same index of the sequence 
         if (sprite.id == master) {
+            flutes[master].play();
             sprite.tint = 0xffff00;//button to turn green to show correct 
             points[0]++;// increase points 
             pointTextGroup.children[0].setText('Points: '+points[0]);

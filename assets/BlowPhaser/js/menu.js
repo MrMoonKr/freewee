@@ -8,11 +8,20 @@ var Menu = {
         //game.stage.backgroundColor = '#f2784b'; //green background colour
 
         //game.load.image('menu', './img/grassfield.jpg');
-
+        game.load.spritesheet('sumoWLSS','./img/sumolosewinspritesheet.png',969,914);
         game.load.spritesheet('basketSS','./img/basketspritesheet.png',990,578);
         game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
         game.load.spritesheet('wordSS','./img/menutextspritesheet2.png',798,1633);
+        game.load.spritesheet('sumoSS','./img/sumoblowspritesheet.png',694,913);
+        game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
+        game.load.spritesheet('circle','./img/circle.png',60,60);  
+
         game.load.image('menu','./img/bg.jpg');
+
+        game.load.audio('hiss','./sound/snake_hissing.mp3');
+        game.load.audio('flute0','./sound/flute_pitch1.mp3');
+        game.load.audio('flute1','./sound/flute_pitch2.mp3');
+        game.load.audio('flute2','./sound/flute_pitch3.mp3');
         
     },
 
