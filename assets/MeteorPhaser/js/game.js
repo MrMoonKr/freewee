@@ -1,8 +1,9 @@
 
 var bgtile;
 var meteor,explode,health,healthbarfull,    meteorLifeText;
-var meteorHP=50;
-var damageDone=0;
+var meteorHP;
+var damageDone;
+var playBoom;
 
 var numPlayers=4; 
 var BPunchSound,RPunchSound,SPunchSound,explosionSound;
@@ -81,11 +82,13 @@ var Game = {
         health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         health.scale.setTo(0.5);
         health.frame=2;
+        meteorHP=50;
+        damageDone = 0;
 
         //creating timer
         me=this;
         me.startTime=new Date();
-        me.totalTime=20; //time of entire game
+        me.totalTime=5; //time of entire game
         me.timeElapsed=0;
         me.createTimer();
         me.gameTimer=game.time.events.loop(100,function(){
@@ -95,7 +98,8 @@ var Game = {
         //loop, to generate sequence 
         timer=this.time.events;
         loop=timer.loop(1000,this.increaseHP,this); 
-    
+        playBoom = false;
+
         
     }, 
 
@@ -104,13 +108,20 @@ var Game = {
             me.timeLabel.visible=false;
             meteor.visible=false;
 
-            catGroup.children=false;
+            catGroup.forEach(function(member){
+            member.visible=false;
+            });
             healthbarfull.visible=false;
             health.visible=false;
             timer.remove(loop);
             explode.visible=true;
             explode.animations.play('boom');
-            explosionSound.play();
+             if (playBoom == false){
+                explosionSound.play();
+                playBoom = true;
+            }
+            
+            //game.state.start('Game_Over');
             this.over();
             
         
@@ -121,7 +132,7 @@ var Game = {
 
     },
 
-    over:function(){
+    over: function(){
         this.time.events.add(3000,function(){
             game.state.start('Game_Over');
         },this);
