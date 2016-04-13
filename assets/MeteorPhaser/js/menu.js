@@ -4,6 +4,7 @@ var Menu = {
     preload : function() {
         game.load.image('gameovermenu','./img/bg.jpg');
         game.load.image('menu','./img/menupage.jpg');
+        game.load.image('bg','./img/metro_skyline.png');
 
         //game.load.spritesheet('catSS','./img/catsprite.png',568,758);
         //game.load.spritesheet('catspr','./img/catsprite.png',586,758);
