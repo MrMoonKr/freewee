@@ -1,18 +1,11 @@
 var button0,button1,button2;
-
-//var history=[0,0,0],count;
-
-var me;
-var master;
+var me,master;
 var points, xposition;  
 
 var loop,timer;
-var snakeGroup, basketGroup, sumoGroup,pointTextGroup; 
+var snakeGroup, basketGroup,sumoGroup,pointTextGroup,playersSoundGroup; 
 var masterSeqGroup=[];
 var numPlayers=4;
-
-var hissingSound,flute0,flute1,flute2;
-var flutes;
 
 var micOut;
 
@@ -50,15 +43,11 @@ var Game = {
         
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        //adding sounds
-        hissingSound=this.add.audio('hiss');
-        flute0=this.add.audio('flute0');
-        flute1=this.add.audio('flute1');
-        flute2=this.add.audio('flute2');
-        flutes=[flute0,flute1,flute2];
+        
 
         //to initialise to zero for every new game
         points=[0,0,0,0];
+        playersSoundGroup=[];
 
         //buttons for user to click. [to be removed for real game, will be replaced by inputs from phone]
         //x y coord, name of asset, callback function when pressed, reference to this, frames for the over(hover), out(pointer moves out) and down(button pressed) events
@@ -122,9 +111,17 @@ var Game = {
             c3.anchor.set(0.5,0.5);
             c3.scale.setTo(0.3);
             temp=[c,c2,c3];
-
             masterSeqGroup[i]=temp;
             
+            //adding sounds
+            var sounds=[];
+            hissingSound=this.add.audio('hiss');
+            flute0=this.add.audio('flute0');
+            flute1=this.add.audio('flute1');
+            flute2=this.add.audio('flute2');
+            sounds=[flute0,flute1,flute2,hissingSound];
+            playersSoundGroup[i]=sounds;
+
 
         }
 
@@ -235,12 +232,10 @@ var Game = {
         }
        
         console.log(master);
-        
-        // count++;
-        // history[count%3]=i; 
 
         //once reach certain points, blinking increases
-        if (points[0]>5 && points[0]<10){  
+        if(me.timeElapsed >= me.totalTime/2){
+       // if (points[0]>5 && points[0]<10){  
             console.log("getting faster");
             loop.delay-=10;
         }
@@ -257,12 +252,14 @@ var Game = {
 
     //TO IMPLEMENT THE DEVICE INPUTS HERE 
     actionOnClick:function (sprite){ //once user clicks on button 
+        
+
         //play sumo animation 
         sumoGroup.children[0].animations.play('blowing');
 
         //if what was pressed is at the same index of the sequence 
         if (sprite.id == master) {
-            flutes[master].play();
+            playersSoundGroup[0][master].play();
             sprite.tint = 0xffff00;//button to turn green to show correct 
             points[0]++;// increase points 
             pointTextGroup.children[0].setText('Points: '+points[0]);
@@ -271,7 +268,7 @@ var Game = {
                 game.add.tween(snakeGroup.children[0]).to({y:snakeGroup.children[0].y-10},200,Phaser.Easing.Linear.None,true);
             }
             snakeGroup.children[0].animations.play('slithering');
-            hissingSound.play("",0,0.2); //param - marker, position, volume
+            playersSoundGroup[0][3].play("",0,0.2); //param - marker, position, volume
 
         } else { //means press wrong sequence 
             sprite.tint = 0xff0000; //red 
