@@ -13,6 +13,11 @@ var globalY = [0,0,0,0];
 var globalGamma=[0,0,0,0];
 var gotUpdate = false;
 
+/* Format of data:
+ *    {gameId: gameId, success: true}
+ * Format of err:
+ *    {msg: msg}
+ */
 sync.onJoin(function(data){
   if (!players[data.username]){
     numPlayers+=1;
@@ -22,13 +27,13 @@ sync.onJoin(function(data){
   sync.receive(function(data){
     if (players[data.username]){
       data.id = players[data.username];
+
+      /* Sumo game */
       globalGamma[data.id - 1] = data.orientation.gamma;
       globalY[data.id - 1] = data.motion.y;
       console.log(data.username);
       console.log(data.orientation.gamma);
       console.log(data.motion.y);
-      $('.yval').text(globalY);
-      $('.gammaval').text(globalGamma);
     }
     gotUpdate = true;
   })
@@ -78,6 +83,9 @@ $(function() { //equal to $(document).ready() {
     game.state.add('SumoMenu', SumoMenu);
     game.state.add('SumoGame', SumoGame);
     game.state.add('SumoGameOver', SumoGameOver);
+
+    
+    
     game.state.start('Lobby');
 
     game.state.add('SnakeMenu', SnakeMenu);

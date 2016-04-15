@@ -18,10 +18,15 @@ var PlanetMenu = {
         game.load.audio('RPunch','/sound/planet/Realistic_Punch.mp3');
         game.load.audio('SPunch','/sound/planet/Strong_Punch.mp3');
         game.load.audio('explodeSound','/sound/planet/explosion.mp3');
+        game.load.audio('startMusic','/sound/planet/planetBGM.mp3');
+
         
     },
 
     create: function () {
+        bgmusic=game.add.audio('startMusic');
+        bgmusic.loopFull(1); // use loopFull(volume) to loop the sound
+
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.add.button(0, 0, 'menu', this.startGame, this);
         for (var i=0;i<4;i++){
