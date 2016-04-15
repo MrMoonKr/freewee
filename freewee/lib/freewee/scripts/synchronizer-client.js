@@ -19,6 +19,7 @@
 
   /**
    * Synchronizer Constructor
+   * initializes
    */
   function Synchronizer(options){
     _instance = this;
@@ -39,22 +40,6 @@
     }
   }
 
-  Synchronizer.prototype.onJoin = function(callback){
-    synchronizer = this;
-    // received 'synchronizer-join' event from server
-    this.socket.on('synchronizer-join', function(data){
-      var err;
-      synchronizer.roomId = data.id;
-      if (synchronizer.type === 'controller'){
-        synchronizer.send();
-      }
-      if (!data.success){
-        err = { msg: data.msg }
-      }
-      callback(data, err);
-    });
-  };
-
   Synchronizer.prototype.join = function(username, id){
     if (this.type == 'controller'){
       this.socket.emit('synchronizer-join', {
@@ -65,56 +50,53 @@
     }
   };
 
-  var orientationListener = function (eventData) {
+  Synchronizer.prototype.onJoin = function(callback){
+    synchronizer = this;
+    // received 'synchronizer-join' event from server
+    this.socket.on('synchronizer-join', function(data){
+      var err;
+      synchronizer.roomId = data.id;
+      // if (synchronizer.type === 'controller'){
+      //   synchronizer.send();
+      // }
+      if (!data.success){
+        err = { msg: data.msg }
+      }
+      callback(data, err);
+    });
+  };
 
-    var orientation = {
-      alpha: eventData.alpha,
-      beta: eventData.beta,
-      gamma: eventData.gamma
-    };
-
-    if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
-        Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
-        Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
-        ) {
-
-      _instance.socket.emit('synchronizer-data',
-        {
-          username: _instance.username,
-          roomId: _instance.roomId,
-          buttons: _instance.buttons,
-          orientation: orientation,
-          motion: _instance.prevMotion,
-          timestamp: Date.now()
-        });
-      _instance.prevOrientation = orientation;
+  Synchronizer.prototype.startGame = function(gameId){
+    if (this.type == 'game-screen'){
+      this.socket.emit('synchronizer-game', {
+        roomId: _instance.roomId,
+        gameId: gameId
+      });
     }
-  }
+  };
 
-  var motionListener = function (eventData) {
+  Synchronizer.prototype.onStartGame = function(callback){
+    synchronizer = this;
+    // received 'synchronizer-game' event from server
+    this.socket.on('synchronizer-game', function(msg){
+      var err;
 
-    var motion = {
-      y: eventData.accelerationIncludingGravity.y.toFixed(3)
-    };
+      // TODO: add and remove event listeners
+      if (synchronizer.type === 'controller'){
+        synchronizer.send();
+      }
+      if (!msg.success){
+        err = { msg: "ERROR :(" }
+      }
+      callback(msg, err);
+    });
+  };
 
-    if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
-
-      _instance.socket.emit('synchronizer-data',
-        {
-          username: _instance.username,
-          roomId: _instance.roomId,
-          buttons: _instance.buttons,
-          orientation: _instance.prevOrientation,
-          motion: motion,
-          timestamp: Date.now()
-        });
-      _instance.prevMotion = motion;
-    }
-  }
 
   Synchronizer.prototype.send = function() {
-
+    console.log("synchronizer.send-ing")
     if (window.DeviceOrientationEvent && window.DeviceMotionEvent) {
+      console.log("synchronizer.send-ing")
       var options = {
             alphaThreshold: 5,
             betaThreshold: 5,
@@ -132,20 +114,67 @@
         y: 0,
       };
 
-      window.addEventListener('deviceorientation', orientationListener)
+      var orientationListener = function (eventData) {
+        console.log("in orientation event listener")
+        var orientation = {
+          alpha: eventData.alpha,
+          beta: eventData.beta,
+          gamma: eventData.gamma
+        };
 
-      window.addEventListener('devicemotion', motionListener)
+        if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
+            Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
+            Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
+            ) {
 
+          _instance.socket.emit('synchronizer-data',
+            {
+              username: _instance.username,
+              roomId: _instance.roomId,
+              buttons: _instance.buttons,
+              orientation: orientation,
+              motion: _instance.prevMotion,
+              timestamp: Date.now()
+            });
+          _instance.prevOrientation = orientation;
+        }
+      }
+
+      var motionListener = function (eventData) {
+
+        var motion = {
+          y: eventData.accelerationIncludingGravity.y.toFixed(3)
+        };
+
+        if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
+
+          _instance.socket.emit('synchronizer-data',
+            {
+              username: _instance.username,
+              roomId: _instance.roomId,
+              buttons: _instance.buttons,
+              orientation: _instance.prevOrientation,
+              motion: motion,
+              timestamp: Date.now()
+            });
+          _instance.prevMotion = motion;
+        }
+      }
+      window.addEventListener('deviceorientation', orientationListener);
+
+      window.addEventListener('devicemotion', motionListener);
         // window.removeEventListener('scroll', listener, false);
 
-    }
+
+    };
+  }
 
     // // Add button listeners
     // var buttons = document.getElementsByClassName('synchronizer-button');
 
     // for(var i = 0; i < buttons.length; i++){
     //   buttons[i].addEventListener('touchstart', function(e){
-    //     if (_instance.buttons.indexOf(this.id) < 0){
+    //     if (_instance.buttons.indexOf(this.id) < 0){ // if this room id is not in buttons
     //       _instance.buttons.push(this.id);
     //     }
     //     _instance.socket.emit('synchronizer-data',
@@ -180,7 +209,8 @@
     // }
 
 
-  };
+
+
 
   Synchronizer.prototype.receive = function(callback){
     this.socket.on('synchronizer-data', function(data){

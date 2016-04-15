@@ -1,17 +1,20 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'run', 'dev' ]
-2 info using npm@1.4.21
-3 info using node@v0.10.25
-4 error Error: ENOENT, open '/home/nigel/Desktop/freewee/package.json'
-5 error If you need help, you may report this *entire* log,
-5 error including the npm and node versions, at:
-5 error     <http://github.com/npm/npm/issues>
-6 error System Linux 4.2.0-16-generic
-7 error command "/usr/bin/nodejs" "/usr/bin/npm" "run" "dev"
-8 error cwd /home/nigel/Desktop/freewee
-9 error node -v v0.10.25
-10 error npm -v 1.4.21
-11 error path /home/nigel/Desktop/freewee/package.json
-12 error code ENOENT
-13 error errno 34
-14 verbose exit [ 34, true ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'dev' ]
+2 info using npm@3.7.2
+3 info using node@v4.2.4
+4 verbose stack Error: ENOENT: no such file or directory, open '/Users/bella/repos/freewee/package.json'
+4 verbose stack     at Error (native)
+5 verbose cwd /Users/bella/repos/freewee
+6 error Darwin 15.2.0
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "dev"
+8 error node v4.2.4
+9 error npm  v3.7.2
+10 error path /Users/bella/repos/freewee/package.json
+11 error code ENOENT
+12 error errno -2
+13 error syscall open
+14 error enoent ENOENT: no such file or directory, open '/Users/bella/repos/freewee/package.json'
+15 error enoent ENOENT: no such file or directory, open '/Users/bella/repos/freewee/package.json'
+15 error enoent This is most likely not a problem with npm itself
+15 error enoent and is related to npm not being able to find a file.
+16 verbose exit [ -2, true ]

@@ -59,26 +59,17 @@ module.exports = function(io) {
 
     });
 
-    /* ALL PLAYERS READY; START GAME */
-    // socket.on('synchronizer-ready', function(msg){
-    //   console.log("why am i in here?");
-    //   var response = {
-    //     success: false,
-    //     msg: "Unknown Error in Ready"
-    //   };
+    /* INFORM CONTROLLER CLIENTS WHICH GAME TO CHANGE TO (layout, event listeners) */
+    socket.on('synchronizer-game', function(msg){
+      if (type === 'game-screen'){
+        io.to(msg.roomId).emit('synchronizer-game', {gameId: msg.gameId, success: true});
+      }
+    });
 
-    //   console.log("User " + msg.username + " joined room " + msg.id);
-
-    //   response.success = true;
-    //   response.msg = "Successfully joined room.";
-
-    //   return
-
-    // });
-
+    /* SEND DATA TO GAME SCREEN CLIENT */
     socket.on('synchronizer-data', function(data){
       if (type === 'controller'){
-        io.to(data.roomId).emit('synchronizer-data', data)
+        io.to(data.roomId).emit('synchronizer-data', data);
       }
     });
 

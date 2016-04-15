@@ -3,7 +3,7 @@
 /******************************************************************************/
 var socket = io();
 
-var n = synchronizer.init('game-screen', socket);
+var sync = synchronizer.init('game-screen', socket);
 
 var players = {};
 
@@ -13,17 +13,20 @@ var globalY = [0,0,0,0];
 var globalGamma=[0,0,0,0];
 var gotUpdate = false;
 
-n.onJoin(function(data){
+sync.onJoin(function(data){
   if (!players[data.username]){
     numPlayers+=1;
     players[data.username] = numPlayers; // players["mary"] = 0;
-    $('.users').append("<br>" + data.username + "");
+    $('.users').append(data.username + "<br>");
   }
-  n.receive(function(data){
+  sync.receive(function(data){
     if (players[data.username]){
       data.id = players[data.username];
       globalGamma[data.id - 1] = data.orientation.gamma;
       globalY[data.id - 1] = data.motion.y;
+      console.log(data.username);
+      console.log(data.orientation.gamma);
+      console.log(data.motion.y);
       $('.yval').text(globalY);
       $('.gammaval').text(globalGamma);
     }
@@ -31,8 +34,11 @@ n.onJoin(function(data){
   })
 });
 
+
+
+
 $(document).ready(function(){
-    $('.roomid').append(n.roomId)
+    $('.roomid').append(sync.roomId)
 });
 
 

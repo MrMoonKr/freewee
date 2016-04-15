@@ -88,7 +88,6 @@ var SumoGame = {
             s.name=i;
             s.anchor.set(0,0);
             s.scale.setTo(0.2,0.2);
-            s.body.velocity.set(0,80);
             s.body.collideWorldBounds=true;
             s.body.bounce.x=1;
             s.body.bounce.y=1;
@@ -118,11 +117,14 @@ var SumoGame = {
         //iterates through all the sumos 
         collisionGroup.forEach(function(member){
             var i = member.name;
-            if (globalGamma[i] > 0.05){
-                member.body.velocity.x += 0.05;
+
+            Y[i] = globalY[i]; 
+
+            if (globalGamma[i] > 0.1){
+                member.body.velocity.x += 0.1;
             } 
-            else if (globalGamma[i] < -0.05){
-                member.body.velocity.x += -0.05;
+            else if (globalGamma[i] < -0.1){
+                member.body.velocity.x += -0.1;
             }
             else {
                 member.body.velocity.x += globalGamma[i];
@@ -132,11 +134,11 @@ var SumoGame = {
             if (Math.abs(Y[i] - lastY[i]) > 7){
                 sounds[i].play();
                 count[i]++; 
-                collisionGroup.children[i].animations.add('sumoMove',[i*4,i*4+1,i*4+2,i*4+3],count[i],true); //animation added to the sprite
+                member.animations.add('sumoMove',[i*4,i*4+1,i*4+2,i*4+3],count[i],true); //animation added to the sprite
                 
-                collisionGroup.children[i].animations.play('sumoMove'); // animation called 'sumoMove' is played 
-                collisionGroup.children[i].body.velocity.y=speed[i]*count[i];
-                console.log('incrementing '+collisionGroup.children[i].body.velocity.y);
+                member.animations.play('sumoMove'); // animation called 'sumoMove' is played 
+                member.body.velocity.y=speed[i]*count[i];
+                console.log('incrementing '+member.body.velocity.y);
            
             }
             
@@ -177,10 +179,10 @@ var SumoGame = {
             var i = member.name;
             if (count[i]>1){
                 count[i]=count[i]-1;
-                collisionGroup.children[i].animations.add('sumoSlow',[i*4,i*4+1,i*4+2,i*4+3],count[i],true);
-                collisionGroup.children[i].animations.play('sumoSlow');
-                collisionGroup.children[i].body.velocity.y=speed[i]*count[i];
-                console.log('decrementing'+ collisionGroup.children[i].body.velocity.y); 
+                member.animations.add('sumoSlow',[i*4,i*4+1,i*4+2,i*4+3],count[i],true);
+                member.animations.play('sumoSlow');
+                member.body.velocity.y=speed[i]*count[i];
+                console.log('decrementing'+ member.body.velocity.y); 
 
             }
         }, this, true);

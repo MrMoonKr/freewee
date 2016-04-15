@@ -3,21 +3,38 @@
 /******************************************************************************/
 
 var socket = io();
-var n = synchronizer.init('controller', socket);
+var sync = synchronizer.init('controller', socket);
+var currentGame = 0;
 
-
-n.onJoin(function(data, err){
+sync.onJoin(function(data, err){
   if (!err){
     fadeOut('join');
     setTimeout(function(){
-      fadeIn('controller')
+      fadeIn('controller0')
     }, 1000);
     
-    $('.displayusername').text(n.username)
+    $('.displayusername').text(sync.username)
   } else {
     alert(err.msg)
   }
 });
+
+sync.onStartGame(function(data, err){
+  if (!err){
+    fadeOut('controller' + currentGame);
+    setTimeout(function(){
+      fadeIn('controller' + data.gameId) // controller1, controller2 ...
+    }, 1000);
+    
+  } else {
+    alert(err.msg)
+  }
+});
+
+
+function join(){
+  sync.join($('#username').val(), $('#roomId').val());
+}
 
 /******************************************************************************/
 /**************************** CONTROLLER UTILITIES ****************************/
@@ -33,14 +50,13 @@ function fadeOut(id){
         });
 }
 
-function join(){
-  n.join($('#username').val(), $('#roomId').val());
-}
-
 function fadeIn(id){
   $('#' + id)
       .css('display', 'block')
+      .addClass('animated fadeIn')      
       .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
         $(this)
+        .css('display', 'block')
+        .removeClass('animated fadeIn')      
         });
 }

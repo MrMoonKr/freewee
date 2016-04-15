@@ -46,11 +46,10 @@ exports.setup = function(runningApp, callback) {
   //---- Mounting well-encapsulated application modules (so-called: "mini-apps")
   //---- See: http://expressjs.com/guide/routing.html and http://vimeo.com/56166857
   runningApp.use('/', require('freewee')); // attach to root route
-  runningApp.use('/sumo', require('sumo')); // attach to sub-route
 
 
-  // attach synchronizer scripts to scripts...???? actually i don't think i need to do this, just need inter-lib/module communications?!
-  runningApp.use('/synchronizer', express.static(__dirname + '/lib/synchronizer/scripts'));
+  // attach synchronizer scripts to /scripts
+  // runningApp.use('/synchronizer', express.static(__dirname + '/lib/synchronizer/scripts'));
   
   runningApp.use('/socket.io', express.static(__dirname + '/node_modules/socket.io-client'));
 

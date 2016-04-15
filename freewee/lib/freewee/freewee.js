@@ -36,10 +36,10 @@ router.get('/', function(req, res) {
     res.render(template, context);
 });
 
-router.get('/mobile', function(req, res) {
-    var template = __dirname + '/views/controller';
-    var context = {
-        siteTitle : "Freewee Player"
-    };
-    res.render(template, context);
-});
+// router.get('/mobile', function(req, res) {
+//     var template = __dirname + '/views/controller';
+//     var context = {
+//         siteTitle : "Freewee Player"
+//     };
+//     res.render(template, context);
+// });

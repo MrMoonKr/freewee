@@ -8,8 +8,7 @@ var Lobby =  {
         game.load.image('game2','/img/lobby/snake.png');
         game.load.image('game3','/img/lobby/planet.png');
         // game.load.audio('startMusic','/sound/sumo/SumoRunBgmBeforeRace.mp3');
-        game.load.audio('select','/sound/lobby/select.mp3');
-    
+        game.load.audio('select','/sound/lobby/select.mp3');    
     },
 
     create: function () {
@@ -41,7 +40,8 @@ var Lobby =  {
 
   
     startGame1: function () {
-
+        // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
+        sync.startGame(1);
         this.state.start('SumoMenu');
     }
 
