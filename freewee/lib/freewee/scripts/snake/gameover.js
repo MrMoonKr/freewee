@@ -1,4 +1,4 @@
-var Game_Over = {
+var SnakeGameOver = {
 
     preload : function() {
         // Load the needed image for this game screen.
@@ -51,7 +51,7 @@ var Game_Over = {
 
     startGame: function () {
         // Change the state back to Game.
-        this.state.start('Game');
+        this.state.start('SnakeGame');
 
     }
 

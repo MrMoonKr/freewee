@@ -8,7 +8,7 @@ var playBoom;
 var numPlayers=4; 
 var BPunchSound,RPunchSound,SPunchSound,explosionSound;
 
-var Game = {
+var PlanetGame = {
 
     preload : function() {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -134,7 +134,7 @@ var Game = {
 
     over: function(){
         this.time.events.add(3000,function(){
-            game.state.start('Game_Over');
+            game.state.start('PlanetGameOver');
         },this);
         
     },

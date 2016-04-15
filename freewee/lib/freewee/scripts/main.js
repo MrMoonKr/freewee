@@ -79,6 +79,14 @@ $(function() { //equal to $(document).ready() {
     game.state.add('SumoGame', SumoGame);
     game.state.add('SumoGameOver', SumoGameOver);
     game.state.start('Lobby');
+
+    game.state.add('SnakeMenu', SnakeMenu);
+    game.state.add('SnakeGame', SnakeGame);
+    game.state.add('SnakeGameOver', SnakeGameOver);
+
+    game.state.add('PlanetMenu', PlanetMenu);
+    game.state.add('PlanetGame', PlanetGame);
+    game.state.add('PlanetGameOver', PlanetGameOver);
     
   });
 });

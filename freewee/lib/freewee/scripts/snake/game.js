@@ -9,7 +9,7 @@ var numPlayers=4;
 
 var micOut;
 
-var Game = {
+var SnakeGame = {
 
     preload : function() {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

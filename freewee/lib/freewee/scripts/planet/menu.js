@@ -1,5 +1,5 @@
 var s;
-var Menu = {
+var PlanetMenu = {
 
     preload : function() {
         game.load.image('gameovermenu','/img/planet/bg.jpg');
@@ -49,7 +49,7 @@ var Menu = {
     startGame: function () {
        
         // Change the state to the actual game.
-        this.state.start('Game');
+        this.state.start('PlanetGame');
 
     }
 

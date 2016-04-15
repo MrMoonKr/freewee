@@ -1,5 +1,5 @@
 
-var Menu = {
+var SnakeMenu = {
 
     preload : function() {
         // Loading images is required so that later on we can create sprites based on the them.
@@ -62,7 +62,7 @@ var Menu = {
         // console.log(screen.availWidth);
         // console.log(screen.availHeight);
         // Change the state to the actual game.
-        this.state.start('Game');
+        this.state.start('SnakeGame');
 
     }
 

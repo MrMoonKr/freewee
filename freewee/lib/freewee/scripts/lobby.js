@@ -26,11 +26,11 @@ var Lobby =  {
         game1button.scale.setTo(0.3);
         game1button.anchor.set(0.5, 0.5);
         game1button.setOverSound(select);
-        game2button = game.add.button(screen.availWidth/2, screen.availHeight*0.55,'game2', this.startGame2);
+        game2button = game.add.button(screen.availWidth/2, screen.availHeight*0.55,'game2', this.startGame2,this,1,0,0);
         game2button.scale.setTo(0.3);
         game2button.anchor.set(0.5, 0.5);
         game2button.setOverSound(select);
-        game3button = game.add.button(screen.availWidth/2 + 400, screen.availHeight*0.55,'game3');
+        game3button = game.add.button(screen.availWidth/2 + 400, screen.availHeight*0.55,'game3',this.startGame3,this,1,0,0);
         game3button.scale.setTo(0.3);
         game3button.anchor.set(0.5, 0.5);
         game3button.setOverSound(select);
@@ -44,12 +44,18 @@ var Lobby =  {
         bgmusic.stop();
         sync.startGame(1);
         this.state.start('SumoMenu');
-    }  
+    },  
     startGame2: function () {
         // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
         bgmusic.stop();
         sync.startGame(2);
         this.state.start('SnakeMenu');
+    },
+    startGame3: function () {
+        // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
+        bgmusic.stop();
+        sync.startGame(3);
+        this.state.start('PlanetMenu');
     }
 
 };
