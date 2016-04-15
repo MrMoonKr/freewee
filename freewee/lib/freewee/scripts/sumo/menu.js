@@ -8,8 +8,20 @@ var SumoMenu = {
         // the second one is the path to our file.
         game.load.image('menu', '/img/sumo/grassfield2.png');
         game.load.image('runtext','/img/sumo/RunSumoRun.png');
-        game.load.spritesheet('sumos','/img/sumo/sumoRunSpriteSheet.png',771,914);
+        game.load.image('track','/img/sumo/track.png');
+        game.load.image('gameover', '/img/sumo/grassfield3.png');
+
+
+        game.load.spritesheet('sumoWLSS','/img/sumo/sumolosewinspritesheet.png',969,914);      
+        game.load.spritesheet('sumoSS','/img/sumo/sumoRunSpriteSheet.png',773,914);
+        
+
         game.load.audio('startMusic','/sound/sumo/SumoRunBgmBeforeRace.mp3');
+        game.load.audio('breathing','/sound/sumo/breathShort.mp3');
+        game.load.audio('cheering','/sound/sumo/cheerSoundShort.mp3');
+        game.load.audio('countdown','/sound/sumo/countdown.mp3');
+
+        
     
     },
 
@@ -31,7 +43,7 @@ var SumoMenu = {
 
 
         //adding of sumo sprite 
-        sumo = game.add.sprite(0,game.world.height*0.4,'sumos');
+        sumo = game.add.sprite(0,game.world.height*0.4,'sumoSS');
         sumo.frame=16;
         sumo.scale.setTo(0.15);
         sumo.animations.add('running',[16,17],4,true);

@@ -8,7 +8,7 @@ var Menu = {
         // the second one is the path to our file.
         game.load.image('menu', '/sumo/img/grassfield2.png');
         game.load.image('runtext','/sumo/img/RunSumoRun.png');
-        game.load.spritesheet('sumos','/sumo/img/sumoRunSpriteSheet.png',771,914);
+        game.load.spritesheet('sumoSS','/sumo/img/sumoRunSpriteSheet.png',771,914);
         game.load.audio('startMusic','/sumo/sound/SumoRunBgmBeforeRace.mp3');
     
     },

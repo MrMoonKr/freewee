@@ -2,10 +2,10 @@ var SumoGameOver = {
 
     preload : function() {
         // Load the needed image for this game screen.
-        game.load.image('gameover', '/img/sumo/grassfield3.png');
+        // game.load.image('gameover', '/img/sumo/grassfield3.png');
 
-        game.load.spritesheet('sumoSS','/img/sumo/sumolosewinspritesheet.png',969,914);
-        //game.load.image('gameover', './assets/images/gameover.png');
+        // game.load.spritesheet('sumoSS','/img/sumo/sumolosewinspritesheet.png',969,914);
+        // //game.load.image('gameover', './assets/images/gameover.png');
     },
 
     create : function() {
@@ -23,7 +23,7 @@ var SumoGameOver = {
 
         for (var i =0;i<numPlayers;i++){
             
-            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoSS');
+            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoWLSS');
             if (i==winnerPositions[0]){
                 s.frame=4+i;
             } else {

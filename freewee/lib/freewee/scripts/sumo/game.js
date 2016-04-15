@@ -36,12 +36,16 @@ var SumoGame = {
         game.stage.backgroundColor = '#D7E4BD'; //green background colour
 
         //load the sumo and the track 
-        game.load.spritesheet('sumoSS','/img/sumo/sumoRunSpriteSheet.png',773,914);
+        // game.load.spritesheet('sumoSS','/img/sumo/sumoRunSpriteSheet.png',773,914);
         
-        game.load.image('track','/img/sumo/track.png');
-        game.load.audio('breathing','/sound/sumo/breathShort.mp3');
-        game.load.audio('cheering','/sound/sumo/cheerSoundShort.mp3');
-        game.load.audio('countdown','/sound/sumo/countdown.mp3');
+        // game.load.image('track','/img/sumo/track.png');
+        // game.load.audio('breathing','/sound/sumo/breathShort.mp3');
+        // game.load.audio('cheering','/sound/sumo/cheerSoundShort.mp3');
+        // game.load.audio('countdown','/sound/sumo/countdown.mp3');
+        // game.load.image('gameover', '/img/sumo/grassfield3.png');
+
+        // game.load.spritesheet('sumoWLSS','/img/sumo/sumolosewinspritesheet.png',969,914);
+        
 
 
     },
