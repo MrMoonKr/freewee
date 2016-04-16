@@ -6,6 +6,14 @@ var socket = io();
 var sync = synchronizer.init('controller', socket);
 var currentGame = 0;
 
+
+/*    var response = {
+        username: msg.username,
+        id: msg.id,
+        success: false,
+        msg: "Unknown Error in Join"
+      };
+      */
 sync.onJoin(function(data, err){
   if (!err){
     fadeOut('join');
@@ -19,11 +27,18 @@ sync.onJoin(function(data, err){
   }
 });
 
+
+/* Format of data:
+ *    {gameId: gameId, success: true}
+ * Format of err:
+ *    {msg: msg}
+ */
 sync.onStartGame(function(data, err){
   if (!err){
     fadeOut('controller' + currentGame);
     setTimeout(function(){
-      fadeIn('controller' + data.gameId) // controller1, controller2 ...
+      fadeIn('controller' + data.gameId); // controller1, controller2 ...
+      currentGame = data.gameId;
     }, 1000);
     
   } else {
