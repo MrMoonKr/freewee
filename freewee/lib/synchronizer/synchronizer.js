@@ -9,7 +9,6 @@ module.exports = function(io) {
   io.on('connection', function(socket){
     console.log('A user connected');
     var type, _id;
-    console.log('type: ' + type);
 
     /* CREATE A ROOM */
     socket.on('synchronizer-create', function(id){
