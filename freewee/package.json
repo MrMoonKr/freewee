@@ -40,6 +40,7 @@
     "path": "^0.12.7",
     "phaser": "^2.4.6",
     "serve-favicon": "^2.3.0",
+    "should": "^8.3.1",
     "socket.io": "^1.4.5",
     "yaml": "*"
   },
@@ -47,7 +48,7 @@
     "start": "npm install supervisor -g && ./bin/heroku_start.sh",
     "dev": "./bin/dev_start.sh",
     "test": "mocha --bail test/ test/acceptance/",
-    "pretest": "jshint lib test",
+    "pretest-2": "jshint lib test",
     "test-cov": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot test/ test/acceptance/",
     "test-travis": "istanbul cover _mocha --report lcovonly -- test/ test/acceptance/"
   }
