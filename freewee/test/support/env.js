@@ -1,2 +1,2 @@
 process.env.NODE_ENV = 'test';
-process.env.NO_DEPRECATION = 'yourproject';
+process.env.NO_DEPRECATION = 'freewee';
