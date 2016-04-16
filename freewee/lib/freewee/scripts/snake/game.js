@@ -148,7 +148,7 @@ var SnakeGame = {
         }
              
         if(me.timeElapsed >= me.totalTime){
-            game.state.start('Game_Over');//Do what you need to do
+            game.state.start('SnakeGameOver');//Do what you need to do
         }
 
     },
