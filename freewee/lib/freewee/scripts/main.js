@@ -10,7 +10,7 @@ var players = {};
 var numPlayers = 0;
 
 var globalY = [0,0,0,0];
-var globalGamma=[0,0,0,0];
+var globalGamma = [0,0,0,0];
 var gotUpdate = false;
 
 /* Format of data:
@@ -19,7 +19,7 @@ var gotUpdate = false;
  *    {msg: msg}
  */
 sync.onJoin(function(data){
-  if (!players[data.username]){
+  if (!players[data.username]){ 
     numPlayers+=1;
     players[data.username] = numPlayers; // players["mary"] = 0;
     $('.users').append(data.username + "<br>");
@@ -84,10 +84,6 @@ $(function() { //equal to $(document).ready() {
     game.state.add('SumoGame', SumoGame);
     game.state.add('SumoGameOver', SumoGameOver);
 
-    
-    
-    game.state.start('Lobby');
-
     game.state.add('SnakeMenu', SnakeMenu);
     game.state.add('SnakeGame', SnakeGame);
     game.state.add('SnakeGameOver', SnakeGameOver);
@@ -96,5 +92,6 @@ $(function() { //equal to $(document).ready() {
     game.state.add('PlanetGame', PlanetGame);
     game.state.add('PlanetGameOver', PlanetGameOver);
     
+    game.state.start('Lobby');
   });
 });
