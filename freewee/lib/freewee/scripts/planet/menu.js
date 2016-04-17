@@ -12,7 +12,7 @@ var PlanetMenu = {
         game.load.spritesheet('meteorSS','/img/planet/meteorspritesheet.png',2381,1407);
         game.load.spritesheet('explosionSS','/img/planet/explosionspritesheet.png',1921,1850);
         game.load.spritesheet('healthSS','/img/planet/healthspritesheet.png',1166,107);
-        game.load.spritesheet('sumoWLSS','/img/planet/sumolosewinspritesheet.png',969,914);
+        game.load.spritesheet('sumoWLSS','/img/planet/sumochaodaspritesheet.png',978,941);
         
         game.load.audio('BPunch','/sound/planet/Batman_Punch.mp3');
         game.load.audio('RPunch','/sound/planet/Realistic_Punch.mp3');
