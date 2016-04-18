@@ -28,3 +28,16 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
+.scale-sumo{
+  width:55%;
+}
+
+.circle-border {
+  background-color: #c06;
+  border: 3px solid #000;
+  height:150px;
+  width:150px;
+  -webkit-border-radius:75px;
+  -moz-border-radius:75px;
+}
