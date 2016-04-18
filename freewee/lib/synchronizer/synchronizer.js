@@ -50,7 +50,7 @@ module.exports = function(io) {
         response.msg = "That room doesn't exist!"
       }
 
-      if (rooms[msg.id] >= 4)){
+      if (rooms[msg.id] >= 4){
         response.msg = "That room is full!"
       }
 
