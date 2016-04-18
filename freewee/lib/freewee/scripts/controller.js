@@ -24,8 +24,7 @@ sync.onJoin(function(data, err){
     }, 1000);
     
     $('.displayusername').text(sync.username);
-    $('.displaysumo').attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png"); // TODO
-    $(this).attr("src", src);
+    $('.displaysumo').attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png");
   } else {
     alert(err.msg)
   }
