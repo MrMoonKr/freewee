@@ -13,7 +13,7 @@ module.exports = function(io) {
     /* CREATE A ROOM */
     socket.on('synchronizer-create', function(id){
       socket.join(id);
-      console.log("Room ID: " + id + "created");
+      console.log("room ID : " + id + " created");
       rooms[id] = true;
       type = 'game-screen';
       _id = id;
@@ -24,17 +24,12 @@ module.exports = function(io) {
     /* ACCEPT NEW CONTROLLER */
     socket.on('synchronizer-join', function(msg){
       console.log("player trying to join");
-      // console.log(io.sockets.manager.rooms);
-      console.log("type: " + type);
       var response = {
         username: msg.username,
         id: msg.id,
         success: false,
         msg: "Unknown Error in Join"
       };
-
-      if (type !== 'game-screen') {console.log("is controller")}
-        if (rooms[msg.id]) {console.log("room exists")}
 
       if (type !== 'game-screen' && rooms[msg.id]){ // not a game-screen, and room already exists
         console.log("player joining room of id " + msg.id);
