@@ -28,7 +28,7 @@ sync.onJoin(function(data, err){
     }
     if ($('.displaysumo').attr("src") == "") {
       $('.displaysumo').each(function(index) {
-        $(this).attr("src", "/img/lobby/sumoPlayer" + sync..playerOrder + ".png"); // TODO
+        $(this).attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png"); // TODO
       });
     }
   } else {
