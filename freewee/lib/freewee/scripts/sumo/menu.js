@@ -28,7 +28,7 @@ var SumoMenu = {
 
     create: function () {
         bgmusic=game.add.audio('startMusic');
-        bgmusic.loopFull(1); // use loopFull(volume) to loop the sound
+        bgmusic.loopFull(0.5); // use loopFull(volume) to loop the sound
 
         
 

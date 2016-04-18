@@ -5,7 +5,7 @@ var PlanetMenu = {
         game.load.image('gameovermenu','/img/planet/bg.jpg');
         game.load.image('menu','/img/planet/menupage.jpg');
         game.load.image('bg','/img/planet/metro_skyline.png');
-        game.load.image('plametInstructions','/img/planet/gameInstructions33.png');
+        game.load.image('planetInstructions','/img/planet/gameInstructions33.png');
 
         //game.load.spritesheet('catSS','./img/catsprite.png',568,758);
         //game.load.spritesheet('catspr','./img/catsprite.png',586,758);
