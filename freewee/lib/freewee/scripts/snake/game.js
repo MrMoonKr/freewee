@@ -29,6 +29,7 @@ var SnakeGame = {
     create : function() {
 
         // get permission to use microphone
+        // need to move this to phone side
         navigator.getUserMedia = navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia;
@@ -154,6 +155,7 @@ var SnakeGame = {
     },
 
     // returns to var micOut the value of the microphone sound levels
+    // need to move this to phone side
     micStream: function(stream){
             
             audioContext = new AudioContext();
