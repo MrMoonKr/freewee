@@ -32,7 +32,7 @@ module.exports = function(io) {
         msg: "Unknown Error in Join"
       };
 
-      if (type !== 'game-screen' && rooms[msg.id]){ // not a game-screen, and room already exists
+      if (type !== 'game-screen' && rooms.hasOwnProperty(msg.id)){ // not a game-screen, and room already exists
         console.log("player joining room of id " + msg.id);
         socket.join(msg.id);
         rooms[msg.id] += 1;
@@ -46,7 +46,7 @@ module.exports = function(io) {
         return
       }
 
-      if (!rooms[msg.id]){
+      if (!rooms.hasOwnProperty(msg.id)){
         response.msg = "That room doesn't exist!"
       }
 
