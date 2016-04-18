@@ -40,7 +40,7 @@
   width:25%;
 }
 
-.circle-border {
+.circle{
   background-color: #c06;
   border: 3px solid #000;
   height:100px;
@@ -48,4 +48,12 @@
   border-radius:50px;
   position:relative;
   margin-left:40%;
+}
+
+.circle:hover {
+  background-color:#f9ff21;
+}
+
+.circle:active{
+  background-color:#62f464;
 }
