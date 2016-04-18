@@ -33,15 +33,15 @@ module.exports = function(io) {
       };
 
       if (type !== 'game-screen' && rooms.hasOwnProperty(msg.id)){ // not a game-screen, and room already exists
-        console.log("player joining room of id " + msg.id);
         socket.join(msg.id);
-        rooms[msg.id] += 1;
         console.log(msg.username + " joined room " + msg.id);
         type = 'controller';
         response.playerOrder = rooms[msg.id];
         response.success = true;
         response.msg = "Successfully joined room.";
 
+        rooms[msg.id] += 1;
+        
         io.to(msg.id).emit('synchronizer-join', response);
         return
       }

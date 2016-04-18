@@ -28,6 +28,7 @@
       this.id = Math.floor(Math.random()*10000); // generate random code      
     }
     this.username = "";
+    this.playerOrder = null;
     this.roomId = this.id;
     this.gameId = null;
     this.socket = options.socket;
@@ -60,6 +61,7 @@
     this.socket.on('synchronizer-join', function(data){
       var err;
       synchronizer.roomId = data.id; // override controller's generated ID
+      this.playerOrder = data.playerOrder; 
       if (!data.success){
         err = { msg: data.msg }
       }
