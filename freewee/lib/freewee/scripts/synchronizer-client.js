@@ -29,11 +29,13 @@
     }
     this.username = "";
     this.roomId = this.id;
+    this.gameId = null;
     this.socket = options.socket;
     this.prevOrientation = null;
     this.prevMotion = null;
     this.buttons = [];
     this.currentListeners = [];
+    this.microphoneOn = false;
 
     if (this.type == 'game-screen'){
       // tell server to create a room of this.id
@@ -67,6 +69,7 @@
 
   Synchronizer.prototype.startGame = function(gameId){
     if (this.type == 'game-screen'){
+      this.gameId = gameId;
       this.socket.emit('synchronizer-game', {
         roomId: _instance.roomId,
         gameId: gameId
@@ -82,6 +85,7 @@
      */
     this.socket.on('synchronizer-game', function(msg){
       var err;
+      this.gameId = gameId;
 
       // TODO: add and remove event listeners
       if (synchronizer.type === 'controller'){
@@ -114,12 +118,19 @@
   Synchronizer.prototype.send = function(eventListeners) {
     synchronizer = this;
 
+    // remove any listeners (exception of microphone)
     synchronizer.currentListeners.forEach(function(listener) {
       console.log("remove current listener...");
       window.removeEventListener(listener[0], listener[1]);
       // 
     });
     synchronizer.currentListeners = [];
+
+    // remove microphone if it's on and not needed for this game
+    if (synchronizer.microphoneOn && eventListeners[0] != "sound") {
+      // TODO: insert code that switches off microphone
+      synchronizer.micrphoneOn = false;
+    }
 
     eventListeners.forEach(function(eventListener) {
 
@@ -163,6 +174,7 @@
                   {
                     username: _instance.username,
                     roomId: _instance.roomId,
+                    gameId: _instance.gameId,
                     buttons: _instance.buttons,
                     orientation: orientation,
                     motion: _instance.prevMotion,
@@ -184,6 +196,7 @@
                   {
                     username: _instance.username,
                     roomId: _instance.roomId,
+                    gameId: _instance.gameId,
                     buttons: _instance.buttons,
                     orientation: _instance.prevOrientation,
                     motion: motion,
@@ -201,52 +214,59 @@
 
             break;
           }
-        case "":
+        case "sound":
+          // don't push anything to currentListeners; instead do this:
+          synchronizer.microphoneOn = true;
           break;
 
+        case "buttons":
+          var buttons = document.getElementsByClassName('synchronizer-button');
+
+          for(var i = 0; i < buttons.length; i++){
+            buttons[i].addEventListener('touchstart', function(e){
+              if (_instance.buttons.indexOf(this.id) < 0){ // if this button id is not in buttons
+                _instance.buttons.push(this.id); // append to class property `buttons`
+              }
+              _instance.socket.emit('synchronizer-data',
+                {
+                  username: _instance.username,
+                  roomId: _instance.roomId,
+                  gameId: _instance.gameId,
+                  buttons: _instance.buttons,
+                  orientation: _instance.prevOrientation,
+                  motion: _instance.prevMotion,
+                  timestamp: Date.now()
+                });
+            });
+
+            buttons[i].addEventListener('touchmove', function(e){
+              e.preventDefault()
+            });
+
+            buttons[i].addEventListener('touchend', function(e){
+              if (_instance.buttons.indexOf(this.id) > -1){
+                _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1)
+              }
+              _instance.socket.emit('synchronizer-data',
+                {
+                  username: _instance.username,
+                  roomId: _instance.roomId,
+                  gameId: _instance.gameId,
+                  buttons: _instance.buttons,
+                  orientation: _instance.prevOrientation,
+                  motion: _instance.prevMotion,
+                  timestamp: Date.now()
+                });
+            });
+          }
+
+          break;
       };
 
     });
   }
 
-    // // Add button listeners
-    // var buttons = document.getElementsByClassName('synchronizer-button');
 
-    // for(var i = 0; i < buttons.length; i++){
-    //   buttons[i].addEventListener('touchstart', function(e){
-    //     if (_instance.buttons.indexOf(this.id) < 0){ // if this button id is not in buttons
-    //       _instance.buttons.push(this.id); // append to class property `buttons`
-    //     }
-    //     _instance.socket.emit('synchronizer-data',
-    //       {
-    //         username: _instance.username,
-    //         roomId: _instance.roomId,
-    //         buttons: _instance.buttons,
-    //         orientation: _instance.prevOrientation,
-    //         motion: _instance.prevMotion,
-    //         timestamp: Date.now()
-    //       });
-    //   });
-
-    //   buttons[i].addEventListener('touchmove', function(e){
-    //     e.preventDefault()
-    //   });
-
-    //   buttons[i].addEventListener('touchend', function(e){
-    //     if (_instance.buttons.indexOf(this.id) > -1){
-    //       _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1)
-    //     }
-    //     _instance.socket.emit('synchronizer-data',
-    //       {
-    //         username: _instance.username,
-    //         roomId: _instance.roomId,
-    //         buttons: _instance.buttons,
-    //         orientation: _instance.prevOrientation,
-    //         motion: _instance.prevMotion,
-    //         timestamp: Date.now()
-    //       });
-    //   });
-    // }
 
 
 

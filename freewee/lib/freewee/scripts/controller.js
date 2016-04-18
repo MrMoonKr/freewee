@@ -7,13 +7,15 @@ var sync = synchronizer.init('controller', socket);
 var currentGame = 0;
 
 
-/*    var response = {
-        username: msg.username,
+/* Format of data:
+ *      username: msg.username,
         id: msg.id,
-        success: false,
-        msg: "Unknown Error in Join"
-      };
-      */
+        playerOrder: 1,
+        success: true,
+        msg: "Successfully joined room"
+ * Format of err:
+ *      msg: msg
+ */
 sync.onJoin(function(data, err){
   if (!err){
     fadeOut('join');
@@ -21,7 +23,9 @@ sync.onJoin(function(data, err){
       fadeIn('controller0')
     }, 1000);
     
-    $('.displayusername').text(sync.username)
+    $('.displayusername').text(sync.username);
+    $('.displaysumo').attr("src", "/img/lobby/sumoPlayer" + data.playerOrder + ".png"); // TODO
+     $(this).attr("src", src);
   } else {
     alert(err.msg)
   }

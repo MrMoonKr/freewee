@@ -14,11 +14,13 @@ var globalGamma = [0,0,0,0];
 var gotUpdate = false;
 
 /* Format of data:
- *    {gameId: gameId, success: true}
- * Format of err:
- *    {msg: msg}
+ *      username: msg.username,
+        id: msg.id,
+        playerOrder: 1,
+        success: true,
+        msg: "Successfully joined room"
  */
-sync.onJoin(function(data){
+sync.onJoin(function(data, err){
   if (!players[data.username]){ 
     numPlayers+=1;
     players[data.username] = numPlayers; // players["mary"] = 0;

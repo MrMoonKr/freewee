@@ -14,10 +14,10 @@ module.exports = function(io) {
     socket.on('synchronizer-create', function(id){
       socket.join(id);
       console.log("room ID : " + id + " created");
-      rooms[id] = true;
+      rooms[id] = 0;
       type = 'game-screen';
       _id = id;
-      console.log(rooms);
+      rooms[id] 
 
     });
 
@@ -27,6 +27,7 @@ module.exports = function(io) {
       var response = {
         username: msg.username,
         id: msg.id,
+        playerOrder: 0,
         success: false,
         msg: "Unknown Error in Join"
       };
@@ -34,10 +35,10 @@ module.exports = function(io) {
       if (type !== 'game-screen' && rooms[msg.id]){ // not a game-screen, and room already exists
         console.log("player joining room of id " + msg.id);
         socket.join(msg.id);
-        console.log("player joined room " + msg.id);
-        console.log("User " + msg.username + " joined room " + msg.id);
+        rooms[msg.id] += 1;
+        console.log(msg.username + " joined room " + msg.id);
         type = 'controller';
-
+        response.playerOrder = rooms[msg.id];
         response.success = true;
         response.msg = "Successfully joined room.";
 
