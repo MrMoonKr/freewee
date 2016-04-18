@@ -32,7 +32,7 @@ module.exports = function(io) {
         msg: "Unknown Error in Join"
       };
 
-      if (type !== 'game-screen' && rooms.hasOwnProperty(msg.id)){ // not a game-screen, and room already exists
+      if (type !== 'game-screen' && rooms[msg.id] < 4){ // not a game-screen, and room already exists
         socket.join(msg.id);
         console.log(msg.username + " joined room " + msg.id);
         type = 'controller';
@@ -41,13 +41,17 @@ module.exports = function(io) {
         response.msg = "Successfully joined room.";
 
         rooms[msg.id] += 1;
-        
+
         io.to(msg.id).emit('synchronizer-join', response);
         return
       }
 
       if (!rooms.hasOwnProperty(msg.id)){
         response.msg = "That room doesn't exist!"
+      }
+
+      if (rooms[msg.id] >= 4)){
+        response.msg = "That room is full!"
       }
 
       socket.emit('synchronizer-join', response);

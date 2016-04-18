@@ -61,7 +61,7 @@
     this.socket.on('synchronizer-join', function(data){
       var err;
       synchronizer.roomId = data.id; // override controller's generated ID
-      if (!synchronizer.playerOrder) {
+      if (synchronizer.playerOrder == null) {
         synchronizer.playerOrder = data.playerOrder; 
       }
       if (!data.success){

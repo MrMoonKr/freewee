@@ -23,8 +23,14 @@ sync.onJoin(function(data, err){
       fadeIn('controller0')
     }, 1000);
     
-    $('.displayusername').text(sync.username);
-    $('.displaysumo').attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png");
+    if ($('.displayusername').text()  == "") {
+      $('.displayusername').text(sync.username);
+    }
+    if ($('.displaysumo').attr("src") == "") {
+      $('.displaysumo').each(function(index) {
+        $(this).attr("src", "/img/lobby/sumoPlayer" + sync..playerOrder + ".png"); // TODO
+      });
+    }
   } else {
     alert(err.msg)
   }
