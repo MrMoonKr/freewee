@@ -10,6 +10,7 @@ var SumoMenu = {
         game.load.image('runtext','/img/sumo/RunSumoRun.png');
         game.load.image('track','/img/sumo/track.png');
         game.load.image('gameover', '/img/sumo/grassfield3.png');
+        game.load.image('sumoInstructions','/img/sumo/gameInstructions11.png');
 
 
         game.load.spritesheet('sumoWLSS','/img/sumo/sumolosewinspritesheet.png',969,914);      

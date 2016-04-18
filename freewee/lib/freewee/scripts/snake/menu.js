@@ -18,6 +18,8 @@ var SnakeMenu = {
         game.load.spritesheet('circle','/img/snake/circle.png',60,60);  
 
         game.load.image('menu','/img/snake/bg.jpg');
+        game.load.image('snakeInstructions','/img/snake/gameInstructions22.png');
+
 
         game.load.audio('hiss','/sound/snake/snake_hissing.mp3');
         game.load.audio('flute0','/sound/snake/flute_pitch1.mp3');
