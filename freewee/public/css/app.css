@@ -29,15 +29,23 @@
   padding-bottom: 30px;
 }
 
+#wrapper {
+
+}
+.container{
+  padding:10px;
+}
+
 .scale-sumo{
-  width:55%;
+  width:25%;
 }
 
 .circle-border {
   background-color: #c06;
   border: 3px solid #000;
-  height:150px;
-  width:150px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
+  height:100px;
+  width:100px;
+  border-radius:50px;
+  position:relative;
+  margin-left:40%;
 }
