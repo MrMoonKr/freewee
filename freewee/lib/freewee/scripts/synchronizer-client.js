@@ -89,7 +89,7 @@
      */
     this.socket.on('synchronizer-game', function(msg){
       var err;
-      this.gameId = gameId;
+      this.gameId = msg.gameId;
 
       // TODO: add and remove event listeners
       if (synchronizer.type === 'controller'){

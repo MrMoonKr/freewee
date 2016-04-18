@@ -38,12 +38,12 @@ var PlanetGame = {
         var bgtile = this.add.sprite(0,0,'bg');
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
-        //ading meteor 
+        //adding meteor 
         meteor=game.add.sprite(game.world.centerX,game.world.height*0.01,'meteorSS');
         meteor.frame=0;
-        meteor.anchor.set(0.5,0);
-        meteor.scale.setTo(0.45,0.4);
-        meteor.animations.add('crack',[0,1,2,3,4,5,6,7],5,true);
+        meteor.anchor.set(0.5,-0.5);
+        meteor.scale.setTo(2,1.95);
+        //meteor.animations.add('crack',[0,1,2,3,4,5,6,7],5,true);
 
         //adding text 
         textStyle = { font: '18px Arial', fill: '#0095DD' };
@@ -52,7 +52,7 @@ var PlanetGame = {
         //adding explosion animations 
         explode=game.add.sprite(game.world.centerX,game.world.centerY,'explosionSS');
         explode.anchor.set(0.5,0.5);
-        explode.scale.setTo(0.5,0.45);
+        explode.scale.setTo(1.5,1.45);
         explode.animations.add('boom',[0,1,2,3,4],4,true);
         explode.visible=false;
         

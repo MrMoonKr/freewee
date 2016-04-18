@@ -5,13 +5,13 @@ var PlanetMenu = {
         game.load.image('gameovermenu','/img/planet/bg.jpg');
         game.load.image('menu','/img/planet/menupage.jpg');
         game.load.image('bg','/img/planet/metro_skyline.png');
-        game.load.image('plametInstructions','/img/planet/gameInstructions33.png');
+        game.load.image('planetInstructions','/img/planet/gameInstructions33.png');
 
         //game.load.spritesheet('catSS','./img/catsprite.png',568,758);
         //game.load.spritesheet('catspr','./img/catsprite.png',586,758);
         game.load.spritesheet('sumoSS','/img/planet/sumospritesheet.png',704,912);
         game.load.spritesheet('meteorSS','/img/planet/meteorspritesheet.png',476,281);
-        game.load.spritesheet('explosionSS','/img/planet/explosionspritesheet.png',1921,1850);
+        game.load.spritesheet('explosionSS','/img/planet/explosionspritesheet.png',730,703);
         game.load.spritesheet('healthSS','/img/planet/healthspritesheet.png',1166,107);
         game.load.spritesheet('sumoWLSS','/img/planet/sumochaodaspritesheet.png',978,941);
         
