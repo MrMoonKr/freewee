@@ -57,3 +57,47 @@
 .circle:active{
   background-color:#62f464;
 }
+
+#wrapper-two { 
+  background: url(http://i.imgur.com/0Yk1Ilg.png) no-repeat center center fixed; 
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+.container-two {padding:7px;}
+.circle-center {
+  margin-left:45%;
+  
+  background-color: #c06;
+  border: 3px solid #000;
+  height:40px;
+  width:40px;
+  border-radius:20px;
+ 
+}
+.circle-one{
+  margin-left:28%;
+  background-color: #c06;
+  border: 3px solid #000;
+  height:40px;
+  width:40px;
+  border-radius:20px;
+}
+.circle-two {
+  margin-left:40%;
+  background-color: #c06;
+  border: 3px solid #000;
+  height:40px;
+  width:40px;
+  border-radius:20px;
+}
+.circle-three {
+  margin-left:6%;
+  background-color: #c06;
+  border: 3px solid #000;
+  height:40px;
+  width:40px;
+  border-radius:20px;
+}
