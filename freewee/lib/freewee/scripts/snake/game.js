@@ -131,7 +131,7 @@ var SnakeGame = {
         if(me.timeElapsed >= me.totalTime){
             game.state.start('SnakeGameOver');//Do what you need to do
         }
-        if (gotUpdate) {
+        if (gotUpdate || globalMic) {
             this.actionOnClick(globalButtons);
             gotUpdate = false;
         }
@@ -225,7 +225,7 @@ var SnakeGame = {
             playersSoundGroup[0][3].play("",0,0.2); //param - marker, position, volume
             globalMic = false;
 
-        } else { //means press wrong sequence 
+        } else if (buttons.indexOf(master.toString()) < 0) { //means press wrong sequence 
             points[0]--;
             pointTextGroup.children[0].setText('Points: '+points[0]);
             snakeGroup.children[0].y+=5;

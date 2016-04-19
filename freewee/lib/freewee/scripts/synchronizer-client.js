@@ -131,8 +131,8 @@
     });
     synchronizer.currentListeners = [];
 
-    // remove microphone if it's on and not needed for this game
-    if (synchronizer.currentMicrophoneOn && eventListeners[0] != "sound") {
+    // remove microphone if it's on
+    if (synchronizer.currentMicrophoneOn) {
       // TODO: insert code that switches off microphone
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       navigator.getUserMedia( {audio: false});
@@ -213,7 +213,6 @@
           }
         case "sound":
           // don't push anything to currentListeners; instead do this:
-          if (synchronizer.currentMicrophoneOn === false) {
             synchronizer.currentMicrophoneOn = true;
       
             var micStream = function(stream){

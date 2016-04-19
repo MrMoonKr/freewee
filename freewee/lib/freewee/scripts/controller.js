@@ -87,3 +87,9 @@ function fadeIn(id){
         .removeClass('animated fadeIn')      
         });
 }
+
+$(function() {
+    $('input,select').on('keypress', function(e) {
+        e.which !== 13 || $('[tabIndex=' + (+this.tabIndex + 1) + ']')[0].focus();
+    });
+});
