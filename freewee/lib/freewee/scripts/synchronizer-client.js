@@ -268,7 +268,6 @@
                 function(err) {
                 console.log("The following error occured: " + err.name)
             });
-          }
 
           break;
 
@@ -309,9 +308,10 @@
                 });
             });
           }
-
           break;
-      };
+        default:
+          // not supposed to be in here
+      }; // end switch case
 
     });
   }
