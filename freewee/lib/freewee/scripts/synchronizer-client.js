@@ -25,7 +25,7 @@
     _instance = this;
     this.type = options.type;
     if (this.type === "game-screen") {
-      this.id = Math.floor(Math.random()*10000); // generate random code      
+      this.id = Math.floor(Math.random()*9000) + 1000; // generate 4-num random code (1000 - 9999)      
     }
     this.username = "";
     this.playerOrder = null;
@@ -133,7 +133,10 @@
     // remove microphone if it's on and not needed for this game
     if (synchronizer.microphoneOn && eventListeners[0] != "sound") {
       // TODO: insert code that switches off microphone
-      synchronizer.micrphoneOn = false;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      navigator.getUserMedia( {audio: false});
+
+      synchronizer.microphoneOn = false;
     }
 
     eventListeners.forEach(function(eventListener) {
@@ -163,8 +166,6 @@
               };
 
               if( Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= 5) {
-                  console.log("_instance.prevOrientation.gamma: "+_instance.prevOrientation.gamma);
-                  console.log("orientation.gamma: "+orientation.gamma);
                 _instance.socket.emit('synchronizer-data',
                   {
                     username: _instance.username,
@@ -186,7 +187,7 @@
                 y: eventData.accelerationIncludingGravity.y.toFixed(3)
               };
 
-              if(Math.abs(motion.y - _instance.prevMotion.y) >= 0) {
+              if(Math.abs(motion.y - _instance.prevMotion.y) >= 3) {
 
                 _instance.socket.emit('synchronizer-data',
                   {
@@ -213,7 +214,52 @@
           }
         case "sound":
           // don't push anything to currentListeners; instead do this:
-          synchronizer.microphoneOn = true;
+          if (synchronizer.microphoneOn === false) {
+            synchronizer.microphoneOn = true;
+      
+            var micStream = function(stream){
+                    
+                    audioContext = new AudioContext();
+                    analyser = audioContext.createAnalyser();
+                      microphone = audioContext.createMediaStreamSource(stream);
+                      javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+                      analyser.smoothingTimeConstant = 0.8;
+                      analyser.fftSize = 1024;
+
+                      microphone.connect(analyser);
+                      analyser.connect(javascriptNode);
+                      javascriptNode.connect(audioContext.destination);
+
+                      //canvasContext = $("#canvas")[0].getContext("2d");
+
+                      javascriptNode.onaudioprocess = function() {
+                          var array = new Uint8Array(analyser.frequencyBinCount);
+                          analyser.getByteFrequencyData(array);
+                          var values = 0;
+
+                          var length = array.length;
+                          for (var i = 0; i < length; i++) {
+                            values += (array[i]);
+                          }
+
+                          micOut = values / length;
+                          if (micOut > 35) {
+                            socket.emit('synchronizer-data',)
+                          }
+
+                    }         
+            };
+
+            // get permission to use microphone
+            // need to move this to phone side
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            navigator.getUserMedia( {audio: true}, this.micStream,
+                function(err) {
+                console.log("The following error occured: " + err.name)
+            });
+          }
+
           break;
 
         case "buttons":

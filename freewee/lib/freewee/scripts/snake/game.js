@@ -7,8 +7,6 @@ var snakeGroup, basketGroup,sumoGroup,pointTextGroup,playersSoundGroup;
 var masterSeqGroup=[];
 var numPlayers=4;
 
-var micOut;
-
 var SnakeGame = {
 
     preload : function() {
@@ -28,19 +26,6 @@ var SnakeGame = {
 
     create : function() {
 
-        // get permission to use microphone
-        // need to move this to phone side
-        navigator.getUserMedia = navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
-        navigator.getUserMedia(
-            {audio: true  
-            }, 
-            this.micStream
-            ,
-            function(err) {
-            console.log("The following error occured: " + err.name)
-        });
         
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -142,11 +127,6 @@ var SnakeGame = {
     }, 
 
     update:function() {
-
-        // set the mic threshold for detecting a player blowing into the mic
-        if (micOut > 40){
-            console.log("BLOW DETECTED!");
-        }
              
         if(me.timeElapsed >= me.totalTime){
             game.state.start('SnakeGameOver');//Do what you need to do
@@ -154,38 +134,7 @@ var SnakeGame = {
 
     },
 
-    // returns to var micOut the value of the microphone sound levels
-    // need to move this to phone side
-    micStream: function(stream){
-            
-            audioContext = new AudioContext();
-            analyser = audioContext.createAnalyser();
-              microphone = audioContext.createMediaStreamSource(stream);
-              javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
 
-              analyser.smoothingTimeConstant = 0.8;
-              analyser.fftSize = 1024;
-
-              microphone.connect(analyser);
-              analyser.connect(javascriptNode);
-              javascriptNode.connect(audioContext.destination);
-
-              //canvasContext = $("#canvas")[0].getContext("2d");
-
-              javascriptNode.onaudioprocess = function() {
-                  var array = new Uint8Array(analyser.frequencyBinCount);
-                  analyser.getByteFrequencyData(array);
-                  var values = 0;
-
-                  var length = array.length;
-                  for (var i = 0; i < length; i++) {
-                    values += (array[i]);
-                  }
-
-                  micOut = values / length;
-
-            }         
-    },
 
     createTimer: function(){
         //me = this;
@@ -260,7 +209,7 @@ var SnakeGame = {
         sumoGroup.children[0].animations.play('blowing');
 
         //if what was pressed is at the same index of the sequence and mic is being blown into
-        if (sprite.id == master && micOut > 35) {
+        if (sprite.id == master && globalMic) {
             playersSoundGroup[0][master].play();
             sprite.tint = 0xffff00;//button to turn green to show correct 
             points[0]++;// increase points 

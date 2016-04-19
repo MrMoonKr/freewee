@@ -18,6 +18,7 @@ var sounds;
 
 var Y = [0,0,0,0];
 var lastY = [0,0,0,0];
+var lastGamma = [0,0,0,0];
 
 var SumoGame = {
 
@@ -122,19 +123,20 @@ var SumoGame = {
         collisionGroup.forEach(function(member){
             var i = member.name;
 
-            Y[i] = globalY[i]; 
 
-            if (globalGamma[i] > 0.1){
+            if (globalGamma[i] > 5){
                 member.body.velocity.x += 0.1;
             } 
-            else if (globalGamma[i] < -0.1){
+            else if (globalGamma[i] < -5){
                 member.body.velocity.x += -0.1;
             }
             else {
                 member.body.velocity.x += globalGamma[i];
             } 
 
-            // increase speed for sumos if gamma high enough
+            Y[i] = globalY[i]; 
+
+            // increase speed for sumos if accelY high enough
             if (Math.abs(Y[i] - lastY[i]) > 7){
                 sounds[i].play();
                 count[i]++; 

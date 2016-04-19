@@ -11,6 +11,7 @@ var numPlayers = 0;
 
 var globalY = [0,0,0,0];
 var globalGamma = [0,0,0,0];
+var globalMic = false;
 var gotUpdate = false;
 
 /* Format of data:
@@ -29,13 +30,26 @@ sync.onJoin(function(data, err){
   sync.receive(function(data){
     if (players[data.username]){
       data.id = players[data.username];
-
-      /* Sumo game */
-      globalGamma[data.id - 1] = data.orientation.gamma;
-      globalY[data.id - 1] = data.motion.y;
-      console.log(data.username);
-      console.log(data.orientation.gamma);
-      console.log(data.motion.y);
+      console.log("game id: " + data.gameId);
+      switch (data.gameId) {
+        case 1:
+          /* Sumo game */
+          globalGamma[data.id - 1] = data.orientation.gamma;
+          globalY[data.id - 1] = data.motion.y;
+          console.log(data.username);
+          console.log(data.orientation.gamma);
+          console.log(data.motion.y);      
+          break;
+        case 2:
+          /* Snake game */
+          SnakeGame.actionOnClick(data.buttons);
+          globalMic = data.microphone; // = true
+          console.log("Blow detected, socket received.")
+          break;
+        case 3:
+          /* Meteor game */
+          break;
+      }
     }
     gotUpdate = true;
   })
@@ -82,6 +96,8 @@ $(function() { //equal to $(document).ready() {
 
     game.state.add('Lobby', Lobby);
 
+    game.state.start('Lobby');
+
     game.state.add('SumoMenu', SumoMenu);
     game.state.add('SumoGame', SumoGame);
     game.state.add('SumoGameOver', SumoGameOver);
@@ -94,6 +110,5 @@ $(function() { //equal to $(document).ready() {
     game.state.add('PlanetGame', PlanetGame);
     game.state.add('PlanetGameOver', PlanetGameOver);
     
-    game.state.start('Lobby');
   });
 });
