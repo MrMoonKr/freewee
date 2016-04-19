@@ -1,6 +1,6 @@
 
 var bgtile;
-var meteor,explode,health,healthbarfull,    meteorLifeText;
+var meteor,explode,health,healthbarfull,healthbar,    meteorLifeText;
 var meteorHP,maxHP;
 var damageDone;
 var playBoom;
@@ -78,11 +78,14 @@ var PlanetGame = {
         }
 
         //adding health bar
-        healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
-        healthbarfull.scale.setTo(0.5);
-        health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
+        healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthbarSS');
+        //healthbarfull.scale.setTo(0.5);
+        /*health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         health.scale.setTo(0.5);
-        health.frame=2;
+        health.frame=2;*/
+
+        healthbar=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthbarSS');
+        healthbar.frame=1;
         maxHP=200;
         meteorHP=maxHP;
         damageDone = 0;
@@ -114,7 +117,9 @@ var PlanetGame = {
             member.visible=false;
             });
             healthbarfull.visible=false;
-            health.visible=false;
+            //health.visible=false;
+            healthbar.visible=false;
+
             timer.remove(loop);
             explode.visible=true;
             explode.animations.play('boom');
@@ -185,10 +190,12 @@ var PlanetGame = {
             damageDone--;
             meteorHP++;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
-            health.scale.setTo(0.5*meteorHP/maxHP,0.5);
+            //health.scale.setTo(0.5*meteorHP/maxHP,0.5);
+            healthbar.scale.setTo(0.5*meteorHP/maxHP,0.5);
 
             if (meteorHP>=maxHP/2){
-                health.frame=2; //change to dangerous HP (red)
+                //health.frame=2; //change to dangerous HP (red)
+                healthbar.frame = 1; // change to bright red
             }
             if (damageDone==-(maxHP/5)){
                 meteor.frame-=1; //take away the crack
@@ -204,12 +211,13 @@ var PlanetGame = {
         if (meteorHP>0){
             meteorHP-= count;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
-            damageDone = count;
-            health.scale.setTo(0.5*meteorHP/maxHP,0.5);
-
+            damageDone += count;
+            //health.scale.setTo(0.5*meteorHP/maxHP,0.5);
+            healthbar.scale.setTo(0.5*meteorHP/maxHP,0.5); 
 
             if (meteorHP<(maxHP/2)){
-                health.frame=1; //change to healthy HP (green)
+                //health.frame=1; //change to healthy HP (green)
+                healthbar.frame = 2; // change to dark red
             }
 
         }
