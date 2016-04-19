@@ -2,7 +2,9 @@ var sumo,runtext;
 var bgmusic;
 var SumoMenu = {
 
-    preload : function() {
+
+    // migrated to preload.js
+    /*preload : function() {
         // Loading images is required so that later on we can create sprites based on the them.
         // The first argument is how our image will be refered to, 
         // the second one is the path to our file.
@@ -24,7 +26,7 @@ var SumoMenu = {
 
         
     
-    },
+    },*/
 
     create: function () {
         bgmusic=game.add.audio('startMusic');
