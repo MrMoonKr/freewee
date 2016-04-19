@@ -143,13 +143,6 @@
         case "orientationAndMotion":
           if (window.DeviceOrientationEvent && window.DeviceMotionEvent) {
 
-            var options = {
-                  alphaThreshold: 5,
-                  betaThreshold: 5,
-                  gammaThreshold: 5,
-                  yThreshold: 0
-                };
-
             _instance.prevOrientation = {
               alpha: 0,
               beta: 0,
@@ -169,11 +162,9 @@
                 gamma: eventData.gamma
               };
 
-              if(Math.abs(orientation.alpha - _instance.prevOrientation.alpha) >= options.alphaThreshold ||
-                  Math.abs(orientation.beta - _instance.prevOrientation.beta) >= options.betaThreshold ||
-                  Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= options.gammaThreshold
-                  ) {
-
+              if( Math.abs(orientation.gamma - _instance.prevOrientation.gamma) >= 5) {
+                  console.log("_instance.prevOrientation.gamma: "+_instance.prevOrientation.gamma);
+                  console.log("orientation.gamma: "+orientation.gamma);
                 _instance.socket.emit('synchronizer-data',
                   {
                     username: _instance.username,
@@ -184,6 +175,7 @@
                     motion: _instance.prevMotion,
                     timestamp: Date.now()
                   });
+
                 _instance.prevOrientation = orientation;
               }
             }
@@ -194,7 +186,7 @@
                 y: eventData.accelerationIncludingGravity.y.toFixed(3)
               };
 
-              if(Math.abs(motion.y - _instance.prevMotion.y) >= options.yThreshold) {
+              if(Math.abs(motion.y - _instance.prevMotion.y) >= 0) {
 
                 _instance.socket.emit('synchronizer-data',
                   {
@@ -206,6 +198,7 @@
                     motion: motion,
                     timestamp: Date.now()
                   });
+
                 _instance.prevMotion = motion;
               }
             }

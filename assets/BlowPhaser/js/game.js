@@ -29,9 +29,7 @@ var Game = {
     create : function() {
 
         // get permission to use microphone
-        navigator.getUserMedia = navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
         navigator.getUserMedia(
             {audio: true  
             }, 

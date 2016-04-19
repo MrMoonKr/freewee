@@ -166,7 +166,7 @@ var SumoGame = {
                 member.reached=true;
                 cheeringSound.stop();
             }
-            if (winnerPositions.length==4){
+            if (winnerPositions.length==numPlayers){
                 console.log(winnerPositions);
                 game.state.start('SumoGameOver'); //change to game over state 
             }
