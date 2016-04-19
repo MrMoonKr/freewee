@@ -242,7 +242,7 @@
                           }
 
                           var micOut = values / length;
-                          if (micOut > 40) {
+                          if (micOut > 35) {
                             console.log("Blow detected, gunna send over manz...")
                             socket.emit('synchronizer-data',
                               {
@@ -255,7 +255,8 @@
                               });
                             _instance.microphone = true;
                           } else {
-                            _instance.microphone = false;
+
+                            setTimeOut(function(){_instance.microphone = false;}, 3000);
                           }
 
                     }         

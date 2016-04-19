@@ -3,7 +3,7 @@ var me;
 var master = 0;
 var points, xposition;  
 
-var loop,timer;
+var loop,timer,actionloop;
 var snakeGroup, basketGroup,sumoGroup,pointTextGroup,playersSoundGroup; 
 var masterSeqGroup=[];
 var numPlayers=4;
@@ -117,6 +117,7 @@ var SnakeGame = {
         //loop, to generate sequence 
         timer=game.time.events;
         loop=timer.loop(1000,this.startBlink,this); 
+        // actionloop=timer.loop(1000,this.actionOnClick,this);
     }, 
 
     update:function() {
