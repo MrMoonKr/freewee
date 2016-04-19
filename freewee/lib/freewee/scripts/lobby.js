@@ -4,6 +4,8 @@ var Lobby =  {
         // Loading images is required so that later on we can create sprites based on the them.
         // The first argument is how our image will be refered to, 
         // the second one is the path to our file.
+        game.load.image('header','/img/lobby/freewee.png');
+        
         game.load.image('game1','/img/lobby/sumo.png');
         game.load.image('game2','/img/lobby/snake.png');
         game.load.image('game3','/img/lobby/planet.png');
@@ -18,7 +20,8 @@ var Lobby =  {
         bgmusic.loopFull(0.5); // use loopFull(volume) to loop the sound
 
     
-
+        header= this.add.sprite(0,0,'header');
+        header.scale.setTo(game.world.width/header.width);
 
         
         //  The numbers given in parameters are the indexes of the frames, in this order: over, out, down
