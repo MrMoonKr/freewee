@@ -254,6 +254,7 @@
                                 timestamp: Date.now()
                               });
                             _instance.microphone = true;
+                            navigator.vibrate(500);
                           } else {
 
                             setTimeOut(function(){_instance.microphone = false;}, 3000);

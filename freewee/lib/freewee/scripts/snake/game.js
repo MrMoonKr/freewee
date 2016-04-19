@@ -125,7 +125,7 @@ var SnakeGame = {
         if(me.timeElapsed >= me.totalTime){
             game.state.start('SnakeGameOver');//Do what you need to do
         }
-        this.actionOnClick;
+        this.actionOnClick();
 
 
     },
