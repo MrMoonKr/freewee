@@ -124,17 +124,17 @@ var SumoGame = {
             var i = member.name;
 
 
-            if (globalGamma[i] > 30){
-                member.body.velocity.x += 0.1;
+            if (globalGamma[i] > 80){
+                member.body.velocity.x += 0.2;
             } 
-            else if (globalGamma[i] < -30){
-                member.body.velocity.x += -0.1;
+            else if (globalGamma[i] < -80){
+                member.body.velocity.x += -0.2;
             }
-            else if (globalGamma[i] < 10){
-                member.body.velocity.x += globalGamma[i]/50;
+            else if (globalGamma[i] > 10){
+                member.body.velocity.x += globalGamma[i]/800;
             } 
-            else if (globalGamma[i] > -10){
-                member.body.velocity.x += -globalGamma[i]/50;
+            else if (globalGamma[i] < -10){
+                member.body.velocity.x += -globalGamma[i]/800;
             }
             else {
                 member.body.velocity.x += 0;

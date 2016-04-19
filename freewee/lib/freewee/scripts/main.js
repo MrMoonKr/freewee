@@ -42,7 +42,7 @@ sync.onJoin(function(data, err){
           break;
         case 2:
           /* Snake game */
-          SnakeGame.actionOnClick(data.buttons);
+          // SnakeGame.actionOnClick(data.buttons);
           globalMic = data.microphone; // = true
           if (data.microphone) {
             console.log("Blow detected, socket received.")

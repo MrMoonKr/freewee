@@ -131,6 +131,10 @@ var SnakeGame = {
         if(me.timeElapsed >= me.totalTime){
             game.state.start('SnakeGameOver');//Do what you need to do
         }
+        if (gotUpdate) {
+            this.actionOnClick(globalButtons);
+            gotUpdate = false;
+        }
 
     },
 
