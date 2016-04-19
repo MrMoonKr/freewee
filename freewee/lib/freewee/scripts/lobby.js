@@ -42,19 +42,19 @@ var Lobby =  {
     startGame1: function () {
         // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
         bgmusic.stop();
-        this.state.start('SumoMenu');
+        this.state.start('SumoBoot');
         sync.startGame(1);
     },  
     startGame2: function () {
         // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
         bgmusic.stop();
-        this.state.start('SnakeMenu');
+        this.state.start('SnakeBoot');
         sync.startGame(2);
     },
     startGame3: function () {
         // call Synchronizer startGame() method to emit 'synchronizer-game' to server and emit to room
         bgmusic.stop();
-        this.state.start('PlanetMenu');
+        this.state.start('PlanetBoot');
         sync.startGame(3);
     }
 
