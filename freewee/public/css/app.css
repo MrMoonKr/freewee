@@ -58,6 +58,14 @@
   background-color:#62f464;
 }
 
+#wrapper-two { 
+  background: url(http://i.imgur.com/0Yk1Ilg.png) no-repeat center center fixed; 
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
 .container-two {padding:7px;}
 .circle-center {
   margin-left:45%;
