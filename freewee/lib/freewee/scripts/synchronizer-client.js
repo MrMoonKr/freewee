@@ -35,8 +35,9 @@
     this.prevOrientation = null;
     this.prevMotion = null;
     this.buttons = [];
+    this.microphone = false;
     this.currentListeners = [];
-    this.microphoneOn = false;
+    this.currentMicrophoneOn = false;
 
     if (this.type == 'game-screen'){
       // tell server to create a room of this.id
@@ -131,12 +132,12 @@
     synchronizer.currentListeners = [];
 
     // remove microphone if it's on and not needed for this game
-    if (synchronizer.microphoneOn && eventListeners[0] != "sound") {
+    if (synchronizer.currentMicrophoneOn && eventListeners[0] != "sound") {
       // TODO: insert code that switches off microphone
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       navigator.getUserMedia( {audio: false});
 
-      synchronizer.microphoneOn = false;
+      synchronizer.currentMicrophoneOn = false;
     }
 
     eventListeners.forEach(function(eventListener) {
@@ -171,7 +172,6 @@
                     username: _instance.username,
                     roomId: _instance.roomId,
                     gameId: _instance.gameId,
-                    buttons: _instance.buttons,
                     orientation: orientation,
                     motion: _instance.prevMotion,
                     timestamp: Date.now()
@@ -194,7 +194,6 @@
                     username: _instance.username,
                     roomId: _instance.roomId,
                     gameId: _instance.gameId,
-                    buttons: _instance.buttons,
                     orientation: _instance.prevOrientation,
                     motion: motion,
                     timestamp: Date.now()
@@ -214,8 +213,8 @@
           }
         case "sound":
           // don't push anything to currentListeners; instead do this:
-          if (synchronizer.microphoneOn === false) {
-            synchronizer.microphoneOn = true;
+          if (synchronizer.currentMicrophoneOn === false) {
+            synchronizer.currentMicrophoneOn = true;
       
             var micStream = function(stream){
                     
@@ -250,9 +249,13 @@
                                 username: _instance.username,
                                 roomId: _instance.roomId,
                                 gameId: _instance.gameId,
+                                buttons: _instance.buttons,
                                 microphone: true,
                                 timestamp: Date.now()
                               });
+                            _instance.microphone = true;
+                          } else {
+                            _instance.micrphone = false;
                           }
 
                     }         
@@ -275,7 +278,7 @@
           for(var i = 0; i < buttons.length; i++){
             buttons[i].addEventListener('touchstart', function(e){
               if (_instance.buttons.indexOf(this.id) < 0){ // if this button id is not in buttons
-                _instance.buttons.push(this.id); // append to class property `buttons`
+                _instance.buttons.push(this.id); // append to buttons[]
               }
               _instance.socket.emit('synchronizer-data',
                 {
@@ -283,8 +286,7 @@
                   roomId: _instance.roomId,
                   gameId: _instance.gameId,
                   buttons: _instance.buttons,
-                  orientation: _instance.prevOrientation,
-                  motion: _instance.prevMotion,
+                  microphone: _instance.microphone,
                   timestamp: Date.now()
                 });
             });
@@ -295,7 +297,7 @@
 
             buttons[i].addEventListener('touchend', function(e){
               if (_instance.buttons.indexOf(this.id) > -1){
-                _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1)
+                _instance.buttons.splice(_instance.buttons.indexOf(this.id), 1) // remove from buttons[]
               }
               _instance.socket.emit('synchronizer-data',
                 {
@@ -303,8 +305,6 @@
                   roomId: _instance.roomId,
                   gameId: _instance.gameId,
                   buttons: _instance.buttons,
-                  orientation: _instance.prevOrientation,
-                  motion: _instance.prevMotion,
                   timestamp: Date.now()
                 });
             });

@@ -51,7 +51,7 @@ var SnakeGameOver = {
 
     startGame: function () {
         // Change the state back to Game.
-        this.state.start('SnakeGame');
+        this.state.start('Lobby');
 
     }
 

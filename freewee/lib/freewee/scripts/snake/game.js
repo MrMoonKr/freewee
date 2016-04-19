@@ -202,14 +202,14 @@ var SnakeGame = {
     },
 
     //TO IMPLEMENT THE DEVICE INPUTS HERE 
-    actionOnClick:function (buttonId){ //once user clicks on button 
+    actionOnClick:function (buttons){ //once user clicks on button 
         
 
         //play sumo animation 
         sumoGroup.children[0].animations.play('blowing');
 
         //if what was pressed is at the same index of the sequence and mic is being blown into
-        if (buttonId == master && globalMic) {
+        if (buttons.indexOf(master.toString()) >= 0 && globalMic) {
             playersSoundGroup[0][master].play();
             points[0]++;// increase points 
             pointTextGroup.children[0].setText('Points: '+points[0]);
