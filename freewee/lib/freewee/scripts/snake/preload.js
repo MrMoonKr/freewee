@@ -24,9 +24,9 @@ var SnakePreload = {
 	create: function() {
 		var button = this.add.button(game.world.centerX, game.world.centerY, 'snakeInstructions', this.startMenu, this);
 		button.anchor.set(0.5,0.5);
-		button.scale.setTo(0.75,1);
+		button.scale.setTo(0.72,1);
 		game.time.events.add(1000,function(){
-            var text=game.add.text(game.world.centerX, game.world.centerY + 256,'Click to continue',{font:'25px Arial',fill:'#0095DD'});
+            var text=game.add.text(game.world.centerX - 125, game.world.centerY + 200,'Click to continue',{font:'25px Arial',fill:'#FFFFFF'});
             text.alpha=0;
             game.add.tween(text).to({alpha:1},1000,Phaser.Easing.Linear.None,true,0,1000,true);     
         });

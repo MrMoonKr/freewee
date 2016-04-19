@@ -15,10 +15,11 @@ var PlanetGameOver = {
             
             var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+200*i,450,'sumoWLSS');
             s.scale.setTo(0.2,0.2);
-            if (meteorHP<25){
+
+            if (meteorHP>0){
                 s.frame=i;
             } else {
-                s.frame=4+i;
+                s.frame = 4+i;
             }
             
                        
