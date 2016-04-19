@@ -1,4 +1,4 @@
-var s;
+var bgmusic;
 var PlanetMenu = {
 
     preload : function() {
@@ -26,7 +26,7 @@ var PlanetMenu = {
 
     create: function () {
         bgmusic=game.add.audio('startMusic');
-        bgmusic.loopFull(1); // use loopFull(volume) to loop the sound
+        bgmusic.loopFull(0.5); // use loopFull(volume) to loop the sound
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.add.button(0, 0, 'menu', this.startGame, this);

@@ -28,8 +28,10 @@ var PlanetGameOver = {
 
     startGame: function () {
 
+        bgmusic.stop();
+
         // Change the state back to Game.
-        this.state.start('PlanetGame');
+        this.state.start('Lobby');
 
     }
 
