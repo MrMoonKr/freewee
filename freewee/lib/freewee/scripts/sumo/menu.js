@@ -63,7 +63,7 @@ var SumoMenu = {
         game.add.tween(runtext).to({x:200},7000,Phaser.Easing.Linear.None,true);
     
         game.time.events.add(3000,function(){
-            var text=game.add.text(game.world.width*0.4,game.world.height*0.7,'Click to continue',{font:'25px Arial',fill:'#0095DD'});
+            var text=game.add.text(game.world.width*0.4,game.world.height*0.7,'Click to start!',{font:'25px Arial',fill:'#0095DD'});
             text.alpha=0;
             game.add.tween(text).to({alpha:1},1000,Phaser.Easing.Linear.None,true,0,1000,true);
                     
