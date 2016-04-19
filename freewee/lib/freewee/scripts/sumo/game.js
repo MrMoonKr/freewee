@@ -34,21 +34,7 @@ var SumoGame = {
         // game.scale.pageAlignHorizontally = true;
         // game.scale.pageAlignVertically = true;
 
-        game.stage.backgroundColor = '#D7E4BD'; //green background colour
-
-        //load the sumo and the track 
-        // game.load.spritesheet('sumoSS','/img/sumo/sumoRunSpriteSheet.png',773,914);
-        
-        // game.load.image('track','/img/sumo/track.png');
-        // game.load.audio('breathing','/sound/sumo/breathShort.mp3');
-        // game.load.audio('cheering','/sound/sumo/cheerSoundShort.mp3');
-        // game.load.audio('countdown','/sound/sumo/countdown.mp3');
-        // game.load.image('gameover', '/img/sumo/grassfield3.png');
-
-        // game.load.spritesheet('sumoWLSS','/img/sumo/sumolosewinspritesheet.png',969,914);
-        
-
-
+        game.stage.backgroundColor = '#D7E4BD'; //green background colour       
     },
 
     create : function() {
@@ -123,22 +109,22 @@ var SumoGame = {
         collisionGroup.forEach(function(member){
             var i = member.name;
 
-
             if (globalGamma[i] > 80){
-                member.body.velocity.x += 0.2;
+                member.body.velocity.x += 1.6;
             } 
             else if (globalGamma[i] < -80){
-                member.body.velocity.x += -0.2;
+                member.body.velocity.x += -1.6;
             }
+
             else if (globalGamma[i] > 10){
-                member.body.velocity.x += globalGamma[i]/800;
-            } 
+                member.body.velocity.x += globalGamma[i]/50;
+            }
             else if (globalGamma[i] < -10){
-                member.body.velocity.x += -globalGamma[i]/800;
+                member.body.velocity.x += (globalGamma[i]/50);
             }
             else {
                 member.body.velocity.x += 0;
-            } 
+            }  
 
             Y[i] = globalY[i]; 
 
