@@ -13,13 +13,14 @@ var PlanetGameOver = {
         //var text = game.add.text(350,348,points,{font:'bold 20px Arial',fill:'#0000000'});
         for (var i =0;i<numPlayers;i++){
             
-            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoWLSS');
+            var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+200*i,450,'sumoWLSS');
+            s.scale.setTo(0.2,0.2);
             if (meteorHP<25){
                 s.frame=i;
             } else {
                 s.frame=4+i;
             }
-            s.scale.setTo(0.2,0.2);
+            
                        
         }
     },

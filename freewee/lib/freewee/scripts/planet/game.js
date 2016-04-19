@@ -4,6 +4,7 @@ var meteor,explode,health,healthbarfull,    meteorLifeText;
 var meteorHP;
 var damageDone;
 var playBoom;
+var xposition;
 
 var numPlayers=4; 
 var BPunchSound,RPunchSound,SPunchSound,explosionSound;
@@ -57,7 +58,7 @@ var PlanetGame = {
         explode.visible=false;
         
         //adding cats 
-        var xposition={
+        xposition={
             1: 0.5,
             2: 0.38,
             3: 0.3,
