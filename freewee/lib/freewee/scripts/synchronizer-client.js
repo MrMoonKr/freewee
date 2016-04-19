@@ -73,7 +73,7 @@
 
   Synchronizer.prototype.startGame = function(gameId){
     if (this.type == 'game-screen'){
-      this.gameId = gameId;
+      _instance.gameId = gameId;
       this.socket.emit('synchronizer-game', {
         roomId: _instance.roomId,
         gameId: gameId
@@ -89,7 +89,7 @@
      */
     this.socket.on('synchronizer-game', function(msg){
       var err;
-      this.gameId = msg.gameId;
+      _instance.gameId = msg.gameId;
 
       // TODO: add and remove event listeners
       if (synchronizer.type === 'controller'){
@@ -219,10 +219,10 @@
       
             var micStream = function(stream){
                     
-                    audioContext = new AudioContext();
-                    analyser = audioContext.createAnalyser();
-                      microphone = audioContext.createMediaStreamSource(stream);
-                      javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+                    var audioContext = new AudioContext();
+                    var analyser = audioContext.createAnalyser();
+                    var microphone = audioContext.createMediaStreamSource(stream);
+                    var javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
 
                       analyser.smoothingTimeConstant = 0.8;
                       analyser.fftSize = 1024;
@@ -243,9 +243,16 @@
                             values += (array[i]);
                           }
 
-                          micOut = values / length;
+                          var micOut = values / length;
                           if (micOut > 35) {
-                            socket.emit('synchronizer-data',)
+                            socket.emit('synchronizer-data',
+                              {
+                                username: _instance.username,
+                                roomId: _instance.roomId,
+                                gameId: _instance.gameId,
+                                microphone: true,
+                                timestamp: Date.now()
+                              });
                           }
 
                     }         
@@ -254,7 +261,7 @@
             // get permission to use microphone
             // need to move this to phone side
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-            navigator.getUserMedia( {audio: true}, this.micStream,
+            navigator.getUserMedia( {audio: true}, micStream,
                 function(err) {
                 console.log("The following error occured: " + err.name)
             });

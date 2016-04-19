@@ -124,14 +124,20 @@ var SumoGame = {
             var i = member.name;
 
 
-            if (globalGamma[i] > 5){
+            if (globalGamma[i] > 30){
                 member.body.velocity.x += 0.1;
             } 
-            else if (globalGamma[i] < -5){
+            else if (globalGamma[i] < -30){
                 member.body.velocity.x += -0.1;
             }
+            else if (globalGamma[i] < 10){
+                member.body.velocity.x += globalGamma[i]/100;
+            } 
+            else if (globalGamma[i] > -10){
+                member.body.velocity.x += -globalGamma[i]/100;
+            }
             else {
-                member.body.velocity.x += globalGamma[i];
+                member.body.velocity.x += 0;
             } 
 
             Y[i] = globalY[i]; 

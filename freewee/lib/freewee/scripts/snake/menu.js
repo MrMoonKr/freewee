@@ -1,7 +1,9 @@
 
 var SnakeMenu = {
 
-    preload : function() {
+
+    // migrated preload function to preload.js
+    /*preload : function() {
         // Loading images is required so that later on we can create sprites based on the them.
         // The first argument is how our image will be refered to, 
         // the second one is the path to our file.
@@ -26,7 +28,7 @@ var SnakeMenu = {
         game.load.audio('flute1','/sound/snake/flute_pitch2.mp3');
         game.load.audio('flute2','/sound/snake/flute_pitch3.mp3');
         
-    },
+    },*/
 
     create: function () {
         game.physics.startSystem(Phaser.Physics.ARCADE);

@@ -202,16 +202,15 @@ var SnakeGame = {
     },
 
     //TO IMPLEMENT THE DEVICE INPUTS HERE 
-    actionOnClick:function (sprite){ //once user clicks on button 
+    actionOnClick:function (buttonId){ //once user clicks on button 
         
 
         //play sumo animation 
         sumoGroup.children[0].animations.play('blowing');
 
         //if what was pressed is at the same index of the sequence and mic is being blown into
-        if (sprite.id == master && globalMic) {
+        if (buttonId == master && globalMic) {
             playersSoundGroup[0][master].play();
-            sprite.tint = 0xffff00;//button to turn green to show correct 
             points[0]++;// increase points 
             pointTextGroup.children[0].setText('Points: '+points[0]);
             if (snakeGroup.children[0].y>game.world.height-50){
@@ -220,19 +219,14 @@ var SnakeGame = {
             }
             snakeGroup.children[0].animations.play('slithering');
             playersSoundGroup[0][3].play("",0,0.2); //param - marker, position, volume
+            globalMic = false;
 
         } else { //means press wrong sequence 
-            sprite.tint = 0xff0000; //red 
             points[0]--;
             pointTextGroup.children[0].setText('Points: '+points[0]);
             snakeGroup.children[0].y+=5;
             snakeGroup.children[0].animations.play('hurting');
         }
-        
-        // for button to fade back to original colour
-        game.time.events.add(500, function(){
-            sprite.tint= 0x99ffff; //blue
-        },this);
         
     }
 

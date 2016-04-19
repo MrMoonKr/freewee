@@ -47,7 +47,7 @@
   width:100px;
   border-radius:50px;
   position:relative;
-  margin-left:40%;
+  
 }
 
 .circle:hover {
@@ -59,14 +59,22 @@
 }
 
 #wrapper-two { 
-  background: url(http://i.imgur.com/0Yk1Ilg.png) no-repeat center center fixed; 
   -webkit-background-size: contain;
   -moz-background-size: contain;
   -o-background-size: contain;
   background-size: contain;
 }
 
-.container-two {padding:7px;}
+.container-two {padding-bottom:20px;}
+.circle-only {
+
+  background-color: #c06;
+  border: 3px solid #000;
+  height:40px;
+  width:40px;
+  border-radius:20px;
+ 
+}
 .circle-center {
   margin-left:45%;
   
@@ -86,7 +94,7 @@
   border-radius:20px;
 }
 .circle-two {
-  margin-left:40%;
+  margin-left:10%;
   background-color: #c06;
   border: 3px solid #000;
   height:40px;
@@ -94,7 +102,7 @@
   border-radius:20px;
 }
 .circle-three {
-  margin-left:6%;
+  margin-left:85%;
   background-color: #c06;
   border: 3px solid #000;
   height:40px;
