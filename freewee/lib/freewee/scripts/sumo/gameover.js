@@ -36,6 +36,7 @@ var SumoGameOver = {
     },
 
     startGame: function () {
+        bgmusic.stop();
 
         // Change the state back to Game.
         this.state.start('Lobby');

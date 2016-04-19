@@ -134,10 +134,10 @@
     // remove microphone if it's on
     if (synchronizer.currentMicrophoneOn) {
       // TODO: insert code that switches off microphone
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      navigator.getUserMedia( {audio: false});
+      // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      // navigator.getUserMedia( {audio: false}, null, null);
 
-      synchronizer.currentMicrophoneOn = false;
+      // synchronizer.currentMicrophoneOn = false;
     }
 
     eventListeners.forEach(function(eventListener) {
@@ -242,7 +242,7 @@
                           }
 
                           var micOut = values / length;
-                          if (micOut > 35) {
+                          if (micOut > 40) {
                             console.log("Blow detected, gunna send over manz...")
                             socket.emit('synchronizer-data',
                               {
@@ -255,7 +255,7 @@
                               });
                             _instance.microphone = true;
                           } else {
-                            _instance.micrphone = false;
+                            _instance.microphone = false;
                           }
 
                     }         
@@ -304,6 +304,7 @@
                   roomId: _instance.roomId,
                   gameId: _instance.gameId,
                   buttons: _instance.buttons,
+                  microphone: _instance.microphone,
                   timestamp: Date.now()
                 });
             });

@@ -1,3 +1,7 @@
+body{
+  overflow:hidden;
+}
+
 .container {
   max-width: 1024px;
   padding-top: 30px;
@@ -37,7 +41,11 @@
 }
 
 .scale-sumo{
-  width:25%;
+  height:auto;
+  width:auto;
+  max-width: 200px;
+  max-height: 200px;
+  
 }
 
 .circle{
@@ -75,15 +83,17 @@
   border-radius:20px;
  
 }
-.circle-center {
-  margin-left:45%;
-  
-  background-color: #c06;
-  border: 3px solid #000;
-  height:40px;
-  width:40px;
-  border-radius:20px;
- 
+.circle-only:active{
+  background-color:#62f464;
+}
+.circle-one:active{
+  background-color:#62f464;
+}
+.circle-two:active{
+  background-color:#62f464;
+}
+.circle-three:active{
+  background-color:#62f464;
 }
 .circle-one{
   margin-left:28%;

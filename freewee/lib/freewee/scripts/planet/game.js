@@ -1,7 +1,7 @@
 
 var bgtile;
 var meteor,explode,health,healthbarfull,    meteorLifeText;
-var meteorHP;
+var meteorHP,maxHP;
 var damageDone;
 var playBoom;
 var xposition;
@@ -83,13 +83,14 @@ var PlanetGame = {
         health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         health.scale.setTo(0.5);
         health.frame=2;
-        meteorHP=50;
+        maxHP=200;
+        meteorHP=maxHP;
         damageDone = 0;
 
         //creating timer
         me=this;
         me.startTime=new Date();
-        me.totalTime=5; //time of entire game
+        me.totalTime=20; //time of entire game
         me.timeElapsed=0;
         me.createTimer();
         me.gameTimer=game.time.events.loop(100,function(){
@@ -129,7 +130,10 @@ var PlanetGame = {
             }
 
         //decrease HP for every mouseclick. to be replaced with phone inputs. will get a count
-        game.input.onDown.add(this.decreaseHP);
+        if (globalButtonCount > 0) {
+            this.decreaseHP(globalButtonCount);
+            globalButtonCount = 0;
+        }
 
     },
 
@@ -176,17 +180,17 @@ var PlanetGame = {
     },
     increaseHP:function(){
         //recursive function increases HP of meteor 
-        if (meteorHP<50){
+        if (meteorHP<maxHP){
             //increasing HP 
             damageDone--;
             meteorHP++;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
-            health.scale.setTo(0.5*meteorHP/50,0.5);
+            health.scale.setTo(0.5*meteorHP/maxHP,0.5);
 
-            if (meteorHP>=25){
+            if (meteorHP>=maxHP/2){
                 health.frame=2; //change to dangerous HP (red)
             }
-            if (damageDone==-10){
+            if (damageDone==-(maxHP/5)){
                 meteor.frame-=1; //take away the crack
                 damageDone=0;
             }
@@ -194,23 +198,23 @@ var PlanetGame = {
         }
     },
 
-    decreaseHP:function(){
+    decreaseHP:function(count){
         //decreasing HP 
         catGroup.children[0].animations.play('lifting');
         if (meteorHP>0){
-            meteorHP--;
+            meteorHP-= count;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
-            damageDone++;
-            health.scale.setTo(0.5*meteorHP/50,0.5);
+            damageDone = count;
+            health.scale.setTo(0.5*meteorHP/maxHP,0.5);
 
 
-            if (meteorHP<25){
+            if (meteorHP<(maxHP/2)){
                 health.frame=1; //change to healthy HP (green)
             }
 
         }
         
-        if (damageDone==10){
+        if (damageDone==(maxHP/5)){
             meteor.frame+=1; //add crack 
             damageDone=0;
             SPunchSound.play();

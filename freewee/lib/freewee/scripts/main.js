@@ -11,7 +11,9 @@ var numPlayers = 0;
 
 var globalY = [0,0,0,0];
 var globalGamma = [0,0,0,0];
-var globalMic = false;
+var globalMic = [false, false, false, false];
+var globalButtons = [[], [], [], []];
+var globalButtonCount = 0;
 var gotUpdate = false;
 
 /* Format of data:
@@ -43,17 +45,19 @@ sync.onJoin(function(data, err){
         case 2:
           /* Snake game */
           // SnakeGame.actionOnClick(data.buttons);
-          globalMic = data.microphone; // = true
+          globalMic[data.id - 1] = data.microphone; // = true
           if (data.microphone) {
             console.log("Blow detected, socket received.")
           }
-          globalButtons = data.buttons; // ['1', '2'] etc.
+          globalButtons[data.id - 1] = data.buttons; // ['1', '2'] etc.
           if (data.buttons.length > 0) {
             console.log("Button detected, socket received.")
           }
           break;
         case 3:
           /* Meteor game */
+          globalButtonCount += data.buttons.length;
+          console.log("increased globalButtonCount by " + data.buttons.length)
           break;
       }
     }

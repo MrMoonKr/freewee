@@ -1,5 +1,6 @@
 var button0,button1,button2;
-var me,master;
+var me;
+var master = 0;
 var points, xposition;  
 
 var loop,timer;
@@ -35,15 +36,7 @@ var SnakeGame = {
         points=[0,0,0,0];
         playersSoundGroup=[];
 
-        //buttons for user to click. [to be removed for real game, will be replaced by inputs from phone]
-        //x y coord, name of asset, callback function when pressed, reference to this, frames for the over(hover), out(pointer moves out) and down(button pressed) events
-        button0 = game.add.button(80,50,'circle',this.actionOnClick,this,0,0,0);
-        button0.id=0;
-        button1 = game.add.button(80,120,'circle',this.actionOnClick,this,0,0,0);
-        button1.id=1;
-        button2 = game.add.button(80,190,'circle',this.actionOnClick,this,0,0,0);
-        button2.id=2;
-   
+
         //to determine where to put graphics
         xposition={
             1: 0.5,
@@ -131,10 +124,8 @@ var SnakeGame = {
         if(me.timeElapsed >= me.totalTime){
             game.state.start('SnakeGameOver');//Do what you need to do
         }
-        if (gotUpdate || globalMic) {
-            this.actionOnClick(globalButtons);
-            gotUpdate = false;
-        }
+        this.actionOnClick;
+
 
     },
 
@@ -206,31 +197,36 @@ var SnakeGame = {
     },
 
     //TO IMPLEMENT THE DEVICE INPUTS HERE 
-    actionOnClick:function (buttons){ //once user clicks on button 
-        
+    actionOnClick:function (){ //once user clicks on button 
+      for (var i=0;i<numPlayers;i++){
+            //play sumo animation 
+        sumoGroup.children[i].animations.play('blowing');
 
-        //play sumo animation 
-        sumoGroup.children[0].animations.play('blowing');
+        var tempButton = globalButtons[i];
+        var tempMic = globalMic[i];
 
         //if what was pressed is at the same index of the sequence and mic is being blown into
-        if (buttons.indexOf(master.toString()) >= 0 && globalMic) {
-            playersSoundGroup[0][master].play();
-            points[0]++;// increase points 
-            pointTextGroup.children[0].setText('Points: '+points[0]);
-            if (snakeGroup.children[0].y>game.world.height-50){
+        if (tempButton.indexOf(master.toString()) >= 0 && tempMic) {
+            playersSoundGroup[i][master].play();
+            points[i]++;// increase points 
+            pointTextGroup.children[i].setText('Points: '+points[i]);
+            if (snakeGroup.children[i].y>game.world.height-50){
                 //snake will move up if it has not reached its max height 
-                game.add.tween(snakeGroup.children[0]).to({y:snakeGroup.children[0].y-10},200,Phaser.Easing.Linear.None,true);
+                game.add.tween(snakeGroup.children[i]).to({y:snakeGroup.children[i].y-30},200,Phaser.Easing.Linear.None,true);
             }
-            snakeGroup.children[0].animations.play('slithering');
-            playersSoundGroup[0][3].play("",0,0.2); //param - marker, position, volume
-            globalMic = false;
+            snakeGroup.children[i].animations.play('slithering');
+            playersSoundGroup[i][3].play("",0,0.2); //param - marker, position, volume
+            tempMic = false;
 
-        } else if (buttons.indexOf(master.toString()) < 0) { //means press wrong sequence 
-            points[0]--;
-            pointTextGroup.children[0].setText('Points: '+points[0]);
-            snakeGroup.children[0].y+=5;
-            snakeGroup.children[0].animations.play('hurting');
+        } else if (tempButton.indexOf(master.toString()) < 0) { //means press wrong sequence 
+           // points[i]--;
+            // pointTextGroup.children[i].setText('Points: '+points[i]);
+            // snakeGroup.children[i].y+=5;
+            snakeGroup.children[i].animations.play('hurting');
         }
+      }
+
+        
         
     }
 

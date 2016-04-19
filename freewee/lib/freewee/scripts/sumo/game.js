@@ -158,7 +158,8 @@ var SumoGame = {
                 member.animations.stop('sumoMove',true);
                 member.animations.stop('sumoSlow',true);
                 member.reached=true;
-                cheeringSound.stop();
+                member.kill();
+                //cheeringSound.stop();
             }
             if (winnerPositions.length==numPlayers){
                 console.log(winnerPositions);
@@ -176,7 +177,7 @@ var SumoGame = {
         collisionGroup.forEach(function(member){
             var i = member.name;
             if (count[i]>1){
-                count[i]=count[i]-1;
+                count[i]=count[i]/2;
                 member.animations.add('sumoSlow',[i*4,i*4+1,i*4+2,i*4+3],count[i],true);
                 member.animations.play('sumoSlow');
                 member.body.velocity.y=speed[i]*count[i];
