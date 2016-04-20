@@ -53,11 +53,11 @@ sync.onStartGame(function(data, err){
       currentGame = data.gameId;
     }, 1000);
     if (data.gameId === 3) {
-      $('#head-crotch').css('display', 'none');
-      $('#legs').css('display', 'none');
+      $('#head-crotch').css('visibility', 'hidden');
+      $('#legs').css('visibility', 'hidden');
       $('#moobs').on( 'touchstart', function( event ) {
-        setTimeout(function() {fadeIn('head-crotch')}, 20000);
-        setTimeout(function() {fadeIn('legs')}, 20000);
+        setTimeout(function() {$('#head-crotch').css('visibility', 'visible');}, 20000);
+        setTimeout(function() $('#head-crotch').css('visibility', 'visible');, 40000);
         $( this ).off( event );
       });
     }
