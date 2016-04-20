@@ -49,23 +49,8 @@ body{
   
 }
 
-.circle{
-  background-color: #c06;
-  border: 3px solid #000;
-  height:100px;
-  width:100px;
-  border-radius:50px;
-  position:relative;
-  
-}
 
-.circle:hover {
-  background-color:#f9ff21;
-}
 
-.circle:active{
-  background-color:#62f464;
-}
 
 #wrapper-two { 
   -webkit-background-size: contain;
@@ -74,49 +59,18 @@ body{
   background-size: contain;
 }
 
-.container-two {padding-bottom:20px;}
-.circle-only {
 
-  background-color: #c06;
-  border: 3px solid #000;
-  height:40px;
-  width:40px;
-  border-radius:20px;
- 
+.circle {
+  position: relative;
+  background-color: rgba(220,20,60,0.5);
+  height:70px;
+  width:70px;
+  border-radius:35px;
 }
-.circle-only:active{
-  background-color:#62f464;
+.circle:active{
+  background-color: rgba(238,130,238,0.5);
 }
-.circle-one:active{
-  background-color:#62f464;
+.circle:hover {
+  background-color: rgba(255,215,0,0.5);
 }
-.circle-two:active{
-  background-color:#62f464;
-}
-.circle-three:active{
-  background-color:#62f464;
-}
-.circle-one{
-  margin-left:28%;
-  background-color: #c06;
-  border: 3px solid #000;
-  height:40px;
-  width:40px;
-  border-radius:20px;
-}
-.circle-two {
-  margin-left:10%;
-  background-color: #c06;
-  border: 3px solid #000;
-  height:40px;
-  width:40px;
-  border-radius:20px;
-}
-.circle-three {
-  margin-left:85%;
-  background-color: #c06;
-  border: 3px solid #000;
-  height:40px;
-  width:40px;
-  border-radius:20px;
-}
+

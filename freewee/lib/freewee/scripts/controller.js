@@ -31,8 +31,8 @@ sync.onJoin(function(data, err){
         $(this).attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png");
       });
     }
-    if ($('.displaysumobg').css('background') == null) {
-      $('.displaysumobg').css('background', 'url(/img/lobby/sumoPlayer' + sync.playerOrder + ".png)");
+    if ($('.displaysumobg').css('background-image') == null) {
+      $('.displaysumobg').css('background-image', 'url(/img/lobby/sumoPlayer' + sync.playerOrder + ".png)");
     }
   } else {
     alert(err.msg)
@@ -52,7 +52,15 @@ sync.onStartGame(function(data, err){
       fadeIn('controller' + data.gameId); // controller1, controller2 ...
       currentGame = data.gameId;
     }, 1000);
-    
+    if (data.gameId === 3) {
+      $('#head-crotch').css('display', 'none');
+      $('#legs').css('display', 'none');
+      $('#moobs').on( 'touchstart', function( event ) {
+        setTimeout(function() {fadeIn('head-crotch')}, 20000);
+        setTimeout(function() {fadeIn('legs')}, 20000);
+        $( this ).off( event );
+      });
+    }
   } else {
     alert(err.msg)
   }
@@ -87,9 +95,3 @@ function fadeIn(id){
         .removeClass('animated fadeIn')      
         });
 }
-
-$(function() {
-    $('input,select').on('keypress', function(e) {
-        e.which !== 13 || $('[tabIndex=' + (+this.tabIndex + 1) + ']')[0].focus();
-    });
-});

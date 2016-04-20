@@ -104,28 +104,28 @@ $(function() { //equal to $(document).ready() {
     // game.scale.maxHeight = gameHeight;
     // game.scale.setScreenSize(true);
 
-    game.state.add('Lobby', Lobby);
+game.state.add('Lobby', Lobby);
 
 
-    game.state.start('Lobby');
+game.state.start('Lobby');
 
-    game.state.add('SumoBoot', SumoBoot);
-    game.state.add('SumoPreload', SumoPreload);
-    game.state.add('SumoMenu', SumoMenu);
-    game.state.add('SumoGame', SumoGame);
-    game.state.add('SumoGameOver', SumoGameOver);
+game.state.add('SumoBoot', SumoBoot);
+game.state.add('SumoPreload', SumoPreload);
+game.state.add('SumoMenu', SumoMenu);
+game.state.add('SumoGame', SumoGame);
+game.state.add('SumoGameOver', SumoGameOver);
 
-    game.state.add('SnakeBoot', SnakeBoot);
-    game.state.add('SnakePreload', SnakePreload);
-    game.state.add('SnakeMenu', SnakeMenu);
-    game.state.add('SnakeGame', SnakeGame);
-    game.state.add('SnakeGameOver', SnakeGameOver);
+game.state.add('SnakeBoot', SnakeBoot);
+game.state.add('SnakePreload', SnakePreload);
+game.state.add('SnakeMenu', SnakeMenu);
+game.state.add('SnakeGame', SnakeGame);
+game.state.add('SnakeGameOver', SnakeGameOver);
 
-    game.state.add('PlanetBoot', PlanetBoot);
-    game.state.add('PlanetPreload', PlanetPreload);
-    game.state.add('PlanetMenu', PlanetMenu);
-    game.state.add('PlanetGame', PlanetGame);
-    game.state.add('PlanetGameOver', PlanetGameOver);
+game.state.add('PlanetBoot', PlanetBoot);
+game.state.add('PlanetPreload', PlanetPreload);
+game.state.add('PlanetMenu', PlanetMenu);
+game.state.add('PlanetGame', PlanetGame);
+game.state.add('PlanetGameOver', PlanetGameOver);
     
   });
 });

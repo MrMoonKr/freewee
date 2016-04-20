@@ -58,7 +58,7 @@
         </div>
         
         <div class="container">
-          <button class="synchronizer-button circle center-block"id="1"> </button>
+          <button class="synchronizer-button circle center-block" id="1"> </button>
         </div>
         
         <div class="container">
@@ -73,39 +73,48 @@
     </section>
 
     {{!-- PLANET GAME CONTROLLER --}}
-    <section id="controller3">
-      <h2 class="displayusername"></h2>
-      
-      <img src="/img/lobby/sumoPlayer3.png" class="img-responsive center-block displaysumo" />
-      <img class="displaysumobg" style="background: url(/img/lobby/sumoPlayer3.png)"/>
-      
-      
-      <div class="wrapper">
-        
-        <div class="container-fluid">
-          <button id = "c" class="synchronizer-button circle-only center-block"></button>
-        </div>
-        
-        <div class="row">
-          <button id = "c" class="synchronizer-button circle-two"></button>
-          <button id = "c" class="synchronizer-button circle-three"></button>
-        </div> 
-      
-        
-        <div class="row">
-          <button id = "c" class="synchronizer-button circle-only center-block"></button>  
-        </div>
-        
-        <div class="row">
-          <button id = "c" class="synchronizer-button circle-one"></button>
-          <button id = "c" class="synchronizer-button circle-one"></button>
-        </div>
-       
-        
-      </div>
+    <section id="controller3" style="display:none">
+          <h2 class="displayusername"></h2>
+          
+          <div id="bg" class="displaysumobg" style="
+              background-image: url(/img/lobby/sumoPlayer0.png);
+              background-size: 91%;
+              background-repeat: no-repeat;
+              background-position: center;
+              height: 88%;
+              position:absolute;
+              width: 96%;
+          "></div>      
+          
+            <div class="row head-crotch" style="padding: 27% 0 0 0;">
+              <button id="c" class="circle synchronizer-button center-block"></button>
+            </div>
+            
+            <div class="row" id="moobs" style="padding: 0px 0 0 0;">
+              <div class="col-xs-1 col-xs-offset-2">
+                <button id="c" class="circle synchronizer-button"></button>
+              </div>
+              <div class="col-xs-1 col-xs-offset-3">
+                <button id="c" class="circle synchronizer-button"></button>     
+              </div>
+            </div>
 
+            <div class="row" id="head-crotch" style="padding: 50px 0 0 0;">
+              <button id="c" class="circle synchronizer-button center-block"></button>  
+            </div>
+            
+            <div class="row" id="legs" style="padding: 0 0 0 0;">
+              <div class="col-xs-1 col-xs-offset-2">
+                <button id="c" class="circle synchronizer-button"></button>
+              </div>
+              <div class="col-xs-1 col-xs-offset-3">
+                <button id="c" class="circle synchronizer-button"></button>
+              </div>
+            </div>
+            
+            
 
-    </section>
+        </section>
     
 
   </div>
