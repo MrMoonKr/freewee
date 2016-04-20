@@ -1,7 +1,7 @@
 var bgmusic;
 var PlanetMenu = {
 
-    preload : function() {
+    /*preload : function() {
         game.load.image('gameovermenu','/img/planet/bg.jpg');
         game.load.image('menu','/img/planet/menupage.jpg');
         game.load.image('bg','/img/planet/metro_skyline.png');
@@ -13,6 +13,7 @@ var PlanetMenu = {
         game.load.spritesheet('meteorSS','/img/planet/meteorspritesheet.png',476,281);
         game.load.spritesheet('explosionSS','/img/planet/explosionspritesheet.png',730,703);
         game.load.spritesheet('healthSS','/img/planet/healthspritesheet.png',1166,107);
+        game.load.spritesheet('healthbarSS','/img/planet/healthbarspritesheet.png',583,54);
         game.load.spritesheet('sumoWLSS','/img/planet/sumochaodaspritesheet.png',978,941);
         
         game.load.audio('BPunch','/sound/planet/Batman_Punch.mp3');
@@ -22,7 +23,7 @@ var PlanetMenu = {
         game.load.audio('startMusic','/sound/planet/planetBGM.mp3');
 
         
-    },
+    },*/
 
     create: function () {
         bgmusic=game.add.audio('startMusic');

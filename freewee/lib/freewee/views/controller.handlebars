@@ -8,7 +8,13 @@
 <div class="container">
 
     {{!--  --}}
-    <section id="join" style="display:none">
+    <section id="join">
+      <div style="background:#19B5FE;position:fixed;top:0;bottom:0;left:0;width:10px"></div>
+      <div style="background:#19B5FE;position:fixed;top:0;bottom:0;right:0;width:10px"></div>
+      <div style="background:#19B5FE;position:fixed;left:0;right:0;height:10px;top:0"></div>
+      <div style="background:#19B5FE;position:fixed;left:0;right:0;height:10px;bottom:0"></div>
+      <img src="/img/lobby/freewee_phone.png" style="width:100%;height:auto"/>
+
       <h2 class="text-right"><em>Welcome!</em> <br>Check out this site on your computer to get your room code, and enter it below.</h2>
       {{!-- <div class="input-group"> --}}
         <input type="text" class="form-control input-lg text-right" id="username" placeholder="Username">
@@ -22,7 +28,7 @@
 
     {{!-- SCREEN WHILE IN LOBBY --}}
     <section id="controller0" style="display:none">
-      <h2 class="displayusername"></h2>
+      <h2 class="displayusername text-center bg-info"></h2>
       <img src="" class="img-responsive center-block displaysumo" />
       
     </section>
@@ -45,29 +51,25 @@
       {{!-- snake 3 buttons --}}
     <section id="controller2" style="display:none">
       
-    <div id="wrapper">
+      <div id="wrapper">
 
-      <div class="container">
-        <button class="synchronizer-button circle center-block" id="2">click me!</button>
+        <div class="container">
+          <button class="synchronizer-button circle center-block" id="2">click me!</button>
+        </div>
+        
+        <div class="container">
+          <button class="synchronizer-button circle center-block"id="1"> </button>
+        </div>
+        
+        <div class="container">
+          <button class="synchronizer-button circle center-block" id="0"></button>
+        </div>
+        
       </div>
-      
-      <div class="container">
-        <button class="synchronizer-button circle center-block"id="1"> </button>
-      </div>
-      
-      <div class="container">
-        <button class="synchronizer-button circle center-block" id="0"></button>
-      </div>
-      
-    </div>
 
-
-
-       
       <h2 class="displayusername"></h2>
       <div class="scale-sumo center-block"> <img src="" class="img-responsive center-block displaysumo" /> </div>
-       
-
+      
     </section>
 
     {{!-- PLANET GAME CONTROLLER --}}

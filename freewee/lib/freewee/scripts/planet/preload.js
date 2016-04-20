@@ -15,6 +15,7 @@ var PlanetPreload = {
         game.load.spritesheet('meteorSS','/img/planet/meteorspritesheet.png',476,281);
         game.load.spritesheet('explosionSS','/img/planet/explosionspritesheet.png',730,703);
         game.load.spritesheet('healthSS','/img/planet/healthspritesheet.png',1166,107);
+        game.load.spritesheet('healthbarSS','/img/planet/healthbarspritesheet.png',583,54);
         game.load.spritesheet('sumoWLSS','/img/planet/sumochaodaspritesheet.png',978,941);
         
         game.load.audio('BPunch','/sound/planet/Batman_Punch.mp3');
