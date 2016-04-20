@@ -17,10 +17,12 @@ var SumoGameOver = {
         //game.add.text(235, 350, "LAST SCORE", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center"});
         //game.add.text(350, 348, score.toString(), { font: "bold 20px sans-serif", fill: "#fff", align: "center" });
         //background image
-        game.add.tileSprite(0,0,game.world.width,game.world.height,'gameover');
+        //game.add.tileSprite(0,0,game.world.width,game.world.height,'gameover');
         
-        this.add.button(0, 0, 'gameover', this.startGame, this);
-
+        var butt=this.add.button(0, 0, 'gameover', this.startGame, this);
+        butt.height=game.world.height;
+        butt.width=game.world.width;
+        
         for (var i =0;i<numPlayers;i++){
             
             var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoWLSS');

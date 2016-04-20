@@ -13,7 +13,7 @@ var count,speed,placing;
 var breathingSound,cheeringSound,countDown;
 
 var timer,loop;
-
+var bg;
 var sounds;
 
 var Y = [0,0,0,0];
@@ -39,6 +39,8 @@ var SumoGame = {
 
     create : function() {
 
+        bg=this.add.tileSprite(0,0,game.world.width,game.world.height,'sumogamebg');
+
         //loading sounds
         cheeringSound = this.add.audio('cheering');
         countDown = this.add.audio('countdown');
@@ -54,7 +56,7 @@ var SumoGame = {
 
         //just to keep track of what coordinates to shift to, according to number of players
         trackposition={
-            1:0.5,
+            1:0.45,
             2:0.34,
             3:0.27,
             4:0.2 
@@ -101,6 +103,7 @@ var SumoGame = {
 
     update:function() {
 
+        bg.tilePosition.y-=2;
        //collision event listener 
        game.physics.arcade.collide(collisionGroup,collisionGroup,this.slowDown,null,this);
       
@@ -144,7 +147,7 @@ var SumoGame = {
             lastY[i] = Y[i];
 
 
-            if (member.y>=720 && !member.reached){
+            if (member.y>=1060 && !member.reached){
                 sounds[i].mute=true;
                 //cheeringSound.totalDuration=2;
                 cheeringSound.play("",0,1,false);

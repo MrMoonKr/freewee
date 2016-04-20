@@ -5,8 +5,9 @@ var SnakePreload = {
 		this.snakeInstructions.scale.setTo(game.world.width/this.snakeInstructions.width,1);
 
 		// load stuff here
-        game.load.image('menu','/img/snake/bg.jpg');
-
+        game.load.image('menu2','/img/snake/snake_bg.png');
+        game.load.image('gameover', '/img/sumo/grassfield3.png');
+        
         game.load.spritesheet('sumoWLSS','/img/snake/sumolosewinspritesheet.png',969,914);
         game.load.spritesheet('basketSS','/img/snake/basketspritesheet.png',990,578);
         game.load.spritesheet('snakeSS','/img/snake/snakespritesheet.png',521,1911);
@@ -15,6 +16,7 @@ var SnakePreload = {
         game.load.spritesheet('buttonSS','/img/snake/buttonspritesheet.png',146,146);
         game.load.spritesheet('circle','/img/snake/circle.png',60,60);  
 
+        game.load.audio('startMusic','/sound/snake/snakeBGM.mp3');
         game.load.audio('hiss','/sound/snake/snake_hissing.mp3');
         game.load.audio('flute0','/sound/snake/flute_pitch1.mp3');
         game.load.audio('flute1','/sound/snake/flute_pitch2.mp3');

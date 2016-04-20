@@ -5,6 +5,7 @@ var SumoPreload = {
 		this.sumoInstructions.scale.setTo(game.world.width/this.sumoInstructions.width,1);
 
 		// load stuff here
+        game.load.image('sumogamebg','/img/sumo/sumogamebg.png');
         game.load.image('menu', '/img/sumo/grassfield2.png');
         game.load.image('runtext','/img/sumo/RunSumoRun.png');
         game.load.image('track','/img/sumo/track.png');

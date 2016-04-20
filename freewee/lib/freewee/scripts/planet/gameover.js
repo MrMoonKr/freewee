@@ -9,7 +9,9 @@ var PlanetGameOver = {
     create : function() {
         
         // Create button to start game like in Menu.
-        this.add.button(0, 0, 'gameovermenu', this.startGame, this);
+        var butt=this.add.button(0, 0, 'gameovermenu', this.startGame, this);
+        butt.height=game.world.height;
+        butt.width=game.world.width;
         //var text = game.add.text(350,348,points,{font:'bold 20px Arial',fill:'#0000000'});
         for (var i =0;i<numPlayers;i++){
             
@@ -29,7 +31,7 @@ var PlanetGameOver = {
     startGame: function () {
 
         bgmusic.stop();
-
+        meteorHP = maxHP;
         // Change the state back to Game.
         this.state.start('Lobby');
 

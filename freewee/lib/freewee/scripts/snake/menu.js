@@ -1,41 +1,17 @@
 
 var SnakeMenu = {
 
-
-    // migrated preload function to preload.js
-    /*preload : function() {
-        // Loading images is required so that later on we can create sprites based on the them.
-        // The first argument is how our image will be refered to, 
-        // the second one is the path to our file.
-        //game.stage.backgroundColor = '#f2784b'; //green background colour
-
-        //game.load.image('menu', './img/grassfield.jpg');
-
-        game.load.spritesheet('sumoWLSS','/img/snake/sumolosewinspritesheet.png',969,914);
-        game.load.spritesheet('basketSS','/img/snake/basketspritesheet.png',990,578);
-        game.load.spritesheet('snakeSS','/img/snake/snakespritesheet.png',521,1911);
-        game.load.spritesheet('wordSS','/img/snake/menutextspritesheet2.png',798,1633);
-        game.load.spritesheet('sumoSS','/img/snake/sumoblowspritesheet.png',694,913);
-        game.load.spritesheet('buttonSS','/img/snake/buttonspritesheet.png',146,146);
-        game.load.spritesheet('circle','/img/snake/circle.png',60,60);  
-
-        game.load.image('menu','/img/snake/bg.jpg');
-        game.load.image('snakeInstructions','/img/snake/gameInstructions22.png');
-
-
-        game.load.audio('hiss','/sound/snake/snake_hissing.mp3');
-        game.load.audio('flute0','/sound/snake/flute_pitch1.mp3');
-        game.load.audio('flute1','/sound/snake/flute_pitch2.mp3');
-        game.load.audio('flute2','/sound/snake/flute_pitch3.mp3');
-        
-    },*/
-
     create: function () {
+
+        bgmusic=game.add.audio('startMusic');
+        bgmusic.loopFull(0.5); 
+
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         // background is the button . clicking on background will start game 
-        this.add.button(0, 0, 'menu', this.startGame, this);
-
+        var butt=this.add.button(0, 0, 'menu2', this.startGame, this);
+        butt.height=game.world.height;
+        butt.width=game.world.width;
         // words 'sumos can charm snakes too '
         var w = game.add.sprite(280,20,'wordSS');
         w.scale.setTo(0.4);
@@ -66,6 +42,7 @@ var SnakeMenu = {
         // console.log(screen.availWidth);
         // console.log(screen.availHeight);
         // Change the state to the actual game.
+        bgmusic.stop();
         this.state.start('SnakeGame');
 
     }

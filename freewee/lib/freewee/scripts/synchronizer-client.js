@@ -2,7 +2,7 @@
 
 (function(window, document){
   'use strict';
-
+  var track;
   var _instance;
 
   var synchronizer = {
@@ -136,6 +136,7 @@
       // TODO: insert code that switches off microphone
       // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       // navigator.getUserMedia( {audio: false}, null, null);
+      track.stop();
 
       // synchronizer.currentMicrophoneOn = false;
     }
@@ -216,7 +217,7 @@
             synchronizer.currentMicrophoneOn = true;
       
             var micStream = function(stream){
-                    
+                    track = stream.getTracks()[0];
                     var audioContext = new AudioContext();
                     var analyser = audioContext.createAnalyser();
                     var microphone = audioContext.createMediaStreamSource(stream);
@@ -254,17 +255,15 @@
                                 timestamp: Date.now()
                               });
                             _instance.microphone = true;
-                            navigator.vibrate(500);
+                            navigator.vibrate(150);
                           } else {
-
-                            setTimeOut(function(){_instance.microphone = false;}, 3000);
+                            setTimeout(function(){_instance.microphone = false;}, 3000);
                           }
 
                     }         
             };
 
             // get permission to use microphone
-            // need to move this to phone side
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia( {audio: true}, micStream,
                 function(err) {

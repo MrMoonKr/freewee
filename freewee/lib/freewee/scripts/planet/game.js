@@ -40,10 +40,10 @@ var PlanetGame = {
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
         //adding meteor 
-        meteor=game.add.sprite(game.world.centerX,game.world.height*0.01,'meteorSS');
+        meteor=game.add.sprite(game.world.centerX,(game.world.height*0.01)+10,'meteorSS');
         meteor.frame=0;
         meteor.anchor.set(0.5,-0.5);
-        meteor.scale.setTo(2,1.95);
+        meteor.scale.setTo(2.5,2.45);
         //meteor.animations.add('crack',[0,1,2,3,4,5,6,7],5,true);
 
         //adding text 
@@ -72,7 +72,7 @@ var PlanetGame = {
             var cat = catGroup.create(game.world.width*xposition[numPlayers]+200*i,game.world.height,'sumoSS');
             cat.frame=i*4;
             cat.anchor.set(0,1);
-            cat.scale.setTo(0.2);
+            cat.scale.setTo(0.4);
             cat.animations.add('lifting',[i*4,i*4+1,i*4+2,i*4+3],3,true);
 
         }
