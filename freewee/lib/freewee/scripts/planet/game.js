@@ -1,5 +1,4 @@
 
-var bgtile;
 var meteor,explode,health,healthbarfull,healthbar,    meteorLifeText;
 var meteorHP,maxHP;
 var damageDone;
@@ -35,20 +34,23 @@ var PlanetGame = {
         SPunchSound=this.add.audio('SPunch');
         explosionSound=this.add.audio('explodeSound');
 
+
+        globalButtonCount=0;
+
         //bgtile = this.add.tileSprite(0,0,game.world.width,game.world.height,'bg');
         var bgtile = this.add.sprite(0,0,'bg');
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
         //adding meteor 
-        meteor=game.add.sprite(game.world.centerX,(game.world.height*0.01)+10,'meteorSS');
+        meteor=game.add.sprite(game.world.centerX,game.world.centerY-900,'meteorSS');
         meteor.frame=0;
         meteor.anchor.set(0.5,-0.5);
-        meteor.scale.setTo(2.5,2.45);
+        meteor.scale.setTo(2.5,2.3);
         //meteor.animations.add('crack',[0,1,2,3,4,5,6,7],5,true);
 
         //adding text 
         textStyle = { font: '18px Arial', fill: '#0095DD' };
-        meteorLifeText=game.add.text(5,5,'Meteor HP: 50',textStyle);
+        meteorLifeText=game.add.text(5,5,'Meteor HP: -',textStyle);
 
         //adding explosion animations 
         explode=game.add.sprite(game.world.centerX,game.world.centerY,'explosionSS');
@@ -69,10 +71,10 @@ var PlanetGame = {
 
         catGroup = game.add.group();
         for (var i=0;i<numPlayers;i++){
-            var cat = catGroup.create(game.world.width*xposition[numPlayers]+200*i,game.world.height,'sumoSS');
+            var cat = catGroup.create(game.world.width*xposition[numPlayers]+280*i,game.world.height,'sumoSS');
             cat.frame=i*4;
             cat.anchor.set(0,1);
-            cat.scale.setTo(0.4);
+            cat.scale.setTo(0.3);
             cat.animations.add('lifting',[i*4,i*4+1,i*4+2,i*4+3],3,true);
 
         }
@@ -88,7 +90,7 @@ var PlanetGame = {
         healthbar.frame=1;
         healthbar.scale.setTo(1.6,1);
 
-        maxHP=200;
+        maxHP=200*numPlayers;
         meteorHP=maxHP;
         damageDone = 0;
 
@@ -209,9 +211,17 @@ var PlanetGame = {
 
     decreaseHP:function(count){
         //decreasing HP 
-        catGroup.children[0].animations.play('lifting');
+        for (var i = 0; i<numPlayers;i++){
+            catGroup.children[i].animations.play('lifting');
+        }
+        
         if (meteorHP>0){
-            meteorHP-= count;
+            if ((meteorHP - count) < 0){
+                meteorHP = 0;
+            }else {
+              meteorHP -= count;  
+            }
+
             meteorLifeText.setText("Meteor HP: "+meteorHP);
             damageDone += count;
             //health.scale.setTo(0.5*meteorHP/maxHP,0.5);

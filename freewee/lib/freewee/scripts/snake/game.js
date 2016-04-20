@@ -16,12 +16,6 @@ var SnakeGame = {
         game.scale.pageAlignVertically = true;
 
         game.stage.backgroundColor = '#eee'; //green background colour
-        // game.load.spritesheet('basketSS','./img/basketspritesheet.png',989,578);
-        // game.load.spritesheet('sumoSS','./img/sumoblowspritesheet.png',694,913);
-        // game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
-        // game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
-        // game.load.spritesheet('circle','./img/circle.png',60,60);  
-        // game.load.audio('hiss','./sound/snake_hissing.mp3');
         
     },
 
@@ -31,7 +25,9 @@ var SnakeGame = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         
-
+        var bgtile = this.add.sprite(0,0,'menu2');
+        bgtile.width=game.world.width;
+        bgtile.height=game.world.height;
         //to initialise to zero for every new game
         points=[0,0,0,0];
         playersSoundGroup=[];
