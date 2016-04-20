@@ -16,12 +16,6 @@ var SnakeGame = {
         game.scale.pageAlignVertically = true;
 
         game.stage.backgroundColor = '#eee'; //green background colour
-        // game.load.spritesheet('basketSS','./img/basketspritesheet.png',989,578);
-        // game.load.spritesheet('sumoSS','./img/sumoblowspritesheet.png',694,913);
-        // game.load.spritesheet('snakeSS','./img/snakespritesheet.png',521,1911);
-        // game.load.spritesheet('buttonSS','./img/buttonspritesheet.png',146,146);
-        // game.load.spritesheet('circle','./img/circle.png',60,60);  
-        // game.load.audio('hiss','./sound/snake_hissing.mp3');
         
     },
 

@@ -5,7 +5,7 @@ var PlanetPreload = {
 		this.planetInstructions.scale.setTo(game.world.width/this.planetInstructions.width,1);
 
 		// load stuff here
-		//game.load.image('gameovermenu','/img/planet/bg.jpg');
+		game.load.image('gameovermenu','/img/planet/bg.jpg');
         game.load.image('menu','/img/planet/menupage.jpg');
         game.load.image('bg','/img/planet/metro_skyline.png');
         game.load.image('gameover', '/img/sumo/grassfield3.png');
