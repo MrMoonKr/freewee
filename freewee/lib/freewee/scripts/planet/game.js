@@ -40,7 +40,7 @@ var PlanetGame = {
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
         //adding meteor 
-        meteor=game.add.sprite(game.world.centerX,game.world.height*0.01,'meteorSS');
+        meteor=game.add.sprite(game.world.centerX,(game.world.height*0.01)+10,'meteorSS');
         meteor.frame=0;
         meteor.anchor.set(0.5,-0.5);
         meteor.scale.setTo(2,1.95);

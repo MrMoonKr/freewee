@@ -29,7 +29,7 @@ var PlanetGameOver = {
     startGame: function () {
 
         bgmusic.stop();
-
+        meteorHP = maxHP;
         // Change the state back to Game.
         this.state.start('Lobby');
 
