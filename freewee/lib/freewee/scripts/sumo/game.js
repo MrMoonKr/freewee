@@ -56,7 +56,7 @@ var SumoGame = {
 
         //just to keep track of what coordinates to shift to, according to number of players
         trackposition={
-            1:0.5,
+            1:0.45,
             2:0.34,
             3:0.27,
             4:0.2 

@@ -2,7 +2,7 @@
 
 (function(window, document){
   'use strict';
-
+  var track;
   var _instance;
 
   var synchronizer = {
@@ -136,7 +136,7 @@
       // TODO: insert code that switches off microphone
       // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       // navigator.getUserMedia( {audio: false}, null, null);
-      micStream.stop();
+      track.stop();
 
       // synchronizer.currentMicrophoneOn = false;
     }
@@ -217,7 +217,7 @@
             synchronizer.currentMicrophoneOn = true;
       
             var micStream = function(stream){
-                    
+                    track = stream.getTracks()[0];
                     var audioContext = new AudioContext();
                     var analyser = audioContext.createAnalyser();
                     var microphone = audioContext.createMediaStreamSource(stream);
