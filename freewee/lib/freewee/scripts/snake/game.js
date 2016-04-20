@@ -6,7 +6,6 @@ var points, xposition;
 var loop,timer,actionloop;
 var snakeGroup, basketGroup,sumoGroup,pointTextGroup,playersSoundGroup; 
 var masterSeqGroup=[];
-var numPlayers=4;
 
 var SnakeGame = {
 
@@ -35,7 +34,7 @@ var SnakeGame = {
 
         //to determine where to put graphics
         xposition={
-            1: 0.5,
+            1: 0.4,
             2: 0.33,
             3: 0.2,
             4: 0.1
@@ -46,43 +45,43 @@ var SnakeGame = {
         sumoGroup=game.add.group();
         snakeGroup=game.add.group();
         basketGroup=game.add.group();
-        pointTextGroup=game.add.group();
+        // pointTextGroup=game.add.group();
         
         for (var i=0;i<numPlayers;i++){
 
             //adding sumo
-            var sumo = sumoGroup.create(game.world.width*xposition[numPlayers]+300*i,0,'sumoSS');
+            var sumo = sumoGroup.create(game.world.width*xposition[numPlayers]+350*i+80,0,'sumoSS');
             sumo.frame=i*4;
             sumo.anchor.set(0,0);
-            sumo.scale.setTo(0.3,0.3);
+            sumo.scale.setTo(0.4);
             sumo.animations.add('blowing',[i*4,i*4+1,i*4+2,i*4+3],4,true);
 
             //adding snakes 
-            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+300*i+50,game.world.height+300,'snakeSS');
+            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+350*i+120,game.world.height+500,'snakeSS');
             s.anchor.set(0,1);
-            s.scale.setTo(0.2);
+            s.scale.setTo(0.32);
             s.animations.add('slithering',[0,2,3,0,4,5],4,true);
             s.animations.add('hurting',[0,1],2);
            
             //adding basket 
-            var b = basketGroup.create(game.world.width*xposition[numPlayers]+300*i,game.world.height,'basketSS');
+            var b = basketGroup.create(game.world.width*xposition[numPlayers]+350*i+80,game.world.height,'basketSS');
             b.frame=i;
             b.anchor.set(0,1);
-            b.scale.setTo(0.2);
+            b.scale.setTo(0.32);
 
             //adding text for points 
-            var pointText=game.add.text(game.world.width*xposition[numPlayers]+300*i-50,5,'Points: 0',textStyle);
-            pointTextGroup.add(pointText);
+            // var pointText=game.add.text(game.world.width*xposition[numPlayers]+350*i-50,5,'Points: 0',textStyle);
+            // pointTextGroup.add(pointText);
 
-            //adding sequence generator 
+            // adding sequence generator 
             var temp=[];
-            var c = game.add.sprite(game.world.width*xposition[numPlayers]+300*i+100,100,'buttonSS');
+            var c = game.add.sprite(game.world.width*xposition[numPlayers]+350*i+200,100,'buttonSS');
             c.anchor.set(0.5,0.5);
             c.scale.setTo(0.3);
-            var c2= game.add.sprite(game.world.width*xposition[numPlayers]+300*i+100,160,'buttonSS');
+            var c2= game.add.sprite(game.world.width*xposition[numPlayers]+350*i+200,160,'buttonSS');
             c2.anchor.set(0.5,0.5);
             c2.scale.setTo(0.3);
-            var c3= game.add.sprite(game.world.width*xposition[numPlayers]+300*i+100,220,'buttonSS');
+            var c3= game.add.sprite(game.world.width*xposition[numPlayers]+350*i+200,220,'buttonSS');
             c3.anchor.set(0.5,0.5);
             c3.scale.setTo(0.3);
             temp=[c,c2,c3];
@@ -206,10 +205,10 @@ var SnakeGame = {
         if (tempButton.indexOf(master.toString()) >= 0 && tempMic) {
             playersSoundGroup[i][master].play();
             points[i]++;// increase points 
-            pointTextGroup.children[i].setText('Points: '+points[i]);
-            if (snakeGroup.children[i].y>game.world.height-50){
+            // pointTextGroup.children[i].setText('Points: '+points[i]);
+            if (snakeGroup.children[i].y>game.world.height-40){
                 //snake will move up if it has not reached its max height 
-                game.add.tween(snakeGroup.children[i]).to({y:snakeGroup.children[i].y-30},200,Phaser.Easing.Linear.None,true);
+                game.add.tween(snakeGroup.children[i]).to({y:snakeGroup.children[i].y-20},200,Phaser.Easing.Linear.None,true);
             }
             snakeGroup.children[i].animations.play('slithering');
             playersSoundGroup[i][3].play("",0,0.2); //param - marker, position, volume

@@ -13,13 +13,13 @@ var SnakeMenu = {
         butt.height=game.world.height;
         butt.width=game.world.width;
         // words 'sumos can charm snakes too '
-        var w = game.add.sprite(280,20,'wordSS');
-        w.scale.setTo(0.4);
+        var w = game.add.sprite(180,70,'wordSS');
+        w.scale.setTo(0.6);
         w.animations.add('blinking',[0,1,2,3,4,5],4,true);
         w.animations.play('blinking');
 
         //adding snake 
-        var s = game.add.sprite(game.world.width*0.6+80,game.world.height+300,'snakeSS');
+        var s = game.add.sprite(game.world.width*0.6+80,game.world.height+400,'snakeSS');
         s.anchor.set(0,1);
         s.scale.setTo(0.4);
         s.animations.add('slithering',[0,2,3,0,4,5],4,true);
@@ -32,7 +32,7 @@ var SnakeMenu = {
         b.scale.setTo(0.4);
 
         //tweening for snake 
-        game.add.tween(s).to({y:800},8000,Phaser.Easing.Linear.None,true);
+        game.add.tween(s).to({y:980},8000,Phaser.Easing.Linear.None,true);
         
         
     },

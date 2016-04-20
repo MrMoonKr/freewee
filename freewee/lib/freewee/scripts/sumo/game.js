@@ -58,8 +58,8 @@ var SumoGame = {
         trackposition={
             1:0.45,
             2:0.34,
-            3:0.27,
-            4:0.2 
+            3:0.3,
+            4:0.25 
         }
 
         //bottomost layer, group for all tracks  
@@ -138,7 +138,7 @@ var SumoGame = {
                 member.animations.add('sumoMove',[i*4,i*4+1,i*4+2,i*4+3],count[i],true); //animation added to the sprite
                 
                 member.animations.play('sumoMove'); // animation called 'sumoMove' is played 
-                member.body.velocity.y=speed[i]*count[i];
+                member.body.velocity.y=speed[i]*count[i]+4;
                 console.log('incrementing '+member.body.velocity.y);
            
             }

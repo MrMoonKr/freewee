@@ -31,7 +31,7 @@ sync.onJoin(function(data, err){
         $(this).attr("src", "/img/lobby/sumoPlayer" + sync.playerOrder + ".png");
       });
     }
-    if ($('.displaysumobg').css('background-image') == null) {
+    if ($('.displaysumobg').css('background-image') == "none") {
       $('.displaysumobg').css('background-image', 'url(/img/lobby/sumoPlayer' + sync.playerOrder + ".png)");
     }
   } else {

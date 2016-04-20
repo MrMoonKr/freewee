@@ -21,7 +21,7 @@ var SnakeGameOver = {
     
         //to display winning/losing sprites 
         for (var i =0;i<numPlayers;i++){
-            var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+200*i,450,'sumoWLSS');
+            var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+350*i,600,'sumoWLSS');
             
             //if the player index i has max points, show winner frame 
             //allows for multiple winners 
@@ -30,7 +30,7 @@ var SnakeGameOver = {
             } else { //means loser, display LOSER frame 
                 s.frame=i;
             }
-            s.scale.setTo(0.2,0.2);
+            s.scale.setTo(0.4);
                        
         }
         

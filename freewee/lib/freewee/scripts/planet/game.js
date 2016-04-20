@@ -4,8 +4,7 @@ var meteorHP,maxHP;
 var damageDone;
 var playBoom;
 var xposition;
-
-var numPlayers=4; 
+ 
 var BPunchSound,RPunchSound,SPunchSound,explosionSound;
 
 var PlanetGame = {
@@ -42,7 +41,7 @@ var PlanetGame = {
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
         //adding meteor 
-        meteor=game.add.sprite(game.world.centerX,game.world.centerY-900,'meteorSS');
+        meteor=game.add.sprite(game.world.centerX,game.world.centerY-730,'meteorSS');
         meteor.frame=0;
         meteor.anchor.set(0.5,-0.5);
         meteor.scale.setTo(2.5,2.3);
@@ -64,7 +63,7 @@ var PlanetGame = {
             1: 0.5,
             2: 0.38,
             3: 0.3,
-            4: 0.2
+            4: 0.25
         }
 
         
@@ -90,14 +89,14 @@ var PlanetGame = {
         healthbar.frame=1;
         healthbar.scale.setTo(1.6,1);
 
-        maxHP=200*numPlayers;
+        maxHP=5000*numPlayers;
         meteorHP=maxHP;
         damageDone = 0;
 
         //creating timer
         me=this;
         me.startTime=new Date();
-        me.totalTime=20; //time of entire game
+        me.totalTime=45; //time of entire game
         me.timeElapsed=0;
         me.createTimer();
         me.gameTimer=game.time.events.loop(100,function(){
@@ -191,8 +190,8 @@ var PlanetGame = {
         //recursive function increases HP of meteor 
         if (meteorHP<maxHP){
             //increasing HP 
-            damageDone--;
-            meteorHP++;
+            damageDone-=10;
+            meteorHP+=10;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
             //health.scale.setTo(0.5*meteorHP/maxHP,0.5);
             healthbar.scale.setTo(1.6*meteorHP/maxHP,1);
@@ -234,7 +233,7 @@ var PlanetGame = {
 
         }
         
-        if (damageDone==(maxHP/5)){
+        if (damageDone>=(maxHP/5)){
             meteor.frame+=1; //add crack 
             damageDone=0;
             SPunchSound.play();
