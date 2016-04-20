@@ -17,7 +17,7 @@ var SumoGameOver = {
         //game.add.text(235, 350, "LAST SCORE", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center"});
         //game.add.text(350, 348, score.toString(), { font: "bold 20px sans-serif", fill: "#fff", align: "center" });
         //background image
-        game.add.tileSprite(0,0,game.world.width,game.world.height,'gameover');
+        //game.add.tileSprite(0,0,game.world.width,game.world.height,'gameover');
         
         var butt=this.add.button(0, 0, 'gameover', this.startGame, this);
         butt.height=game.world.height;

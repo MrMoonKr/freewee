@@ -38,7 +38,7 @@ var PlanetMenu = {
             var cat = this.add.sprite(this.world.randomX, this.world.randomY, 'sumoSS');
             cat.scale.setTo(0.15);
             this.physics.enable(cat,Phaser.Physics.ARCADE);
-
+            cat.frame=i;
             cat.body.collideWorldBounds=true;
             cat.body.bounce.x=1;
             cat.body.bounce.y=1;

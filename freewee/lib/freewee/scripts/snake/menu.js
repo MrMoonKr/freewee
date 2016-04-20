@@ -34,7 +34,7 @@ var SnakeMenu = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         // background is the button . clicking on background will start game 
-        var butt=this.add.button(0, 0, 'menu', this.startGame, this);
+        var butt=this.add.button(0, 0, 'menu2', this.startGame, this);
         butt.height=game.world.height;
         butt.width=game.world.width;
         // words 'sumos can charm snakes too '

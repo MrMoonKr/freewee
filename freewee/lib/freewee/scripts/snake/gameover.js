@@ -11,7 +11,7 @@ var SnakeGameOver = {
     create : function() {
         
         // background is the button . clicking on background will restart game 
-        var butt=this.add.button(0, 0, 'menu', this.startGame, this);
+        var butt=this.add.button(0, 0, 'gameover', this.startGame, this);
         butt.height=game.world.height;
         butt.width=game.world.width;
         //for debugging 
