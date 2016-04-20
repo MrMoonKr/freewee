@@ -42,8 +42,9 @@ var SumoMenu = {
         
         // Add menu screen.
         // It will act as a button to start the game.
-        this.add.button(0, 0, 'menu', this.startGame, this);
-
+        var butt=this.add.button(0, 0, 'menu', this.startGame, this);
+        butt.height=game.world.height;
+        butt.width=game.world.width;
 
         //adding of sumo sprite 
         sumo = game.add.sprite(0,game.world.height*0.4,'sumoSS');

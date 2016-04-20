@@ -19,8 +19,10 @@ var SumoGameOver = {
         //background image
         game.add.tileSprite(0,0,game.world.width,game.world.height,'gameover');
         
-        this.add.button(0, 0, 'gameover', this.startGame, this);
-
+        var butt=this.add.button(0, 0, 'gameover', this.startGame, this);
+        butt.height=game.world.height;
+        butt.width=game.world.width;
+        
         for (var i =0;i<numPlayers;i++){
             
             var s = game.add.sprite(game.world.width*trackposition[numPlayers]+100+200*i,450,'sumoWLSS');
