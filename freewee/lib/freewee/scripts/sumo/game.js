@@ -13,7 +13,7 @@ var count,speed,placing;
 var breathingSound,cheeringSound,countDown;
 
 var timer,loop;
-
+var bg;
 var sounds;
 
 var Y = [0,0,0,0];
@@ -38,6 +38,8 @@ var SumoGame = {
     },
 
     create : function() {
+
+        bg=this.add.tileSprite(0,0,game.world.width,game.world.height,'sumogamebg');
 
         //loading sounds
         cheeringSound = this.add.audio('cheering');
@@ -101,6 +103,7 @@ var SumoGame = {
 
     update:function() {
 
+        bg.tilePosition.y+=2;
        //collision event listener 
        game.physics.arcade.collide(collisionGroup,collisionGroup,this.slowDown,null,this);
       
