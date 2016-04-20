@@ -79,13 +79,15 @@ var PlanetGame = {
 
         //adding health bar
         healthbarfull = game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthbarSS');
-        //healthbarfull.scale.setTo(0.5);
+        healthbarfull.scale.setTo(1.6,1);
         /*health=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthSS');
         health.scale.setTo(0.5);
         health.frame=2;*/
 
         healthbar=game.add.sprite(game.world.width*0.25,game.world.height*0.15,'healthbarSS');
         healthbar.frame=1;
+        healthbar.scale.setTo(1.6,1);
+
         maxHP=200;
         meteorHP=maxHP;
         damageDone = 0;
@@ -191,7 +193,7 @@ var PlanetGame = {
             meteorHP++;
             meteorLifeText.setText("Meteor HP: "+meteorHP);
             //health.scale.setTo(0.5*meteorHP/maxHP,0.5);
-            healthbar.scale.setTo(0.5*meteorHP/maxHP,0.5);
+            healthbar.scale.setTo(1.6*meteorHP/maxHP,1);
 
             if (meteorHP>=maxHP/2){
                 //health.frame=2; //change to dangerous HP (red)
@@ -213,7 +215,7 @@ var PlanetGame = {
             meteorLifeText.setText("Meteor HP: "+meteorHP);
             damageDone += count;
             //health.scale.setTo(0.5*meteorHP/maxHP,0.5);
-            healthbar.scale.setTo(0.5*meteorHP/maxHP,0.5); 
+            healthbar.scale.setTo(1.6*meteorHP/maxHP,1); 
 
             if (meteorHP<(maxHP/2)){
                 //health.frame=1; //change to healthy HP (green)
