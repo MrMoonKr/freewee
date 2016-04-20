@@ -25,7 +25,7 @@ var SumoGameOver = {
         
         for (var i =0;i<numPlayers;i++){
             
-            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+350*i,600,'sumoWLSS');
+            var s = game.add.sprite(game.world.width*trackposition[numPlayers]+350*i-70,600,'sumoWLSS');
           
             if (i==winnerPositions[0]){
                 s.frame=4+i;
@@ -36,7 +36,7 @@ var SumoGameOver = {
             }
             for (var j=0;j<numPlayers;j++){
                 if (winnerPositions[j]==i){
-                      var text=game.add.text(game.world.width*trackposition[numPlayers]+350*i+70,300,j+1,{font:'bold 100px Arial',fill:'#ffffff'});
+                      var text=game.add.text(game.world.width*trackposition[numPlayers]+350*i,300,j+1,{font:'bold 100px Arial',fill:'#000000'});
         
                 }
             }

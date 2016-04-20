@@ -57,7 +57,7 @@ var SnakeGame = {
             sumo.animations.add('blowing',[i*4,i*4+1,i*4+2,i*4+3],4,true);
 
             //adding snakes 
-            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+350*i+120,game.world.height+500,'snakeSS');
+            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+350*i+130,game.world.height+500,'snakeSS');
             s.anchor.set(0,1);
             s.scale.setTo(0.32);
             s.animations.add('slithering',[0,2,3,0,4,5],4,true);
@@ -102,7 +102,7 @@ var SnakeGame = {
         //creating timer
         me=this;
         me.startTime=new Date();
-        me.totalTime=20; //time of entire game
+        me.totalTime=45; //time of entire game
         me.timeElapsed=0;
         me.createTimer();
         me.gameTimer=game.time.events.loop(100,function(){

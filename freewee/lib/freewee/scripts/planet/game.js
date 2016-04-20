@@ -89,7 +89,7 @@ var PlanetGame = {
         healthbar.frame=1;
         healthbar.scale.setTo(1.6,1);
 
-        maxHP=5000*numPlayers;
+        maxHP=4000*numPlayers;
         meteorHP=maxHP;
         damageDone = 0;
 
