@@ -2,6 +2,10 @@
 var SnakeMenu = {
 
     create: function () {
+
+        bgmusic=game.add.audio('startMusic');
+        bgmusic.loopFull(0.5); 
+
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         // background is the button . clicking on background will start game 
@@ -38,6 +42,7 @@ var SnakeMenu = {
         // console.log(screen.availWidth);
         // console.log(screen.availHeight);
         // Change the state to the actual game.
+        bgmusic.stop();
         this.state.start('SnakeGame');
 
     }

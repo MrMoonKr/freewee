@@ -16,6 +16,7 @@ var SnakePreload = {
         game.load.spritesheet('buttonSS','/img/snake/buttonspritesheet.png',146,146);
         game.load.spritesheet('circle','/img/snake/circle.png',60,60);  
 
+        game.load.audio('startMusic','/sound/snake/snakeBGM.mp3');
         game.load.audio('hiss','/sound/snake/snake_hissing.mp3');
         game.load.audio('flute0','/sound/snake/flute_pitch1.mp3');
         game.load.audio('flute1','/sound/snake/flute_pitch2.mp3');
