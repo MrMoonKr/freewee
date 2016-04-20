@@ -57,7 +57,7 @@ sync.onStartGame(function(data, err){
       $('#legs').css('visibility', 'hidden');
       $('#moobs').on( 'touchstart', function( event ) {
         setTimeout(function() {$('#head-crotch').css('visibility', 'visible');}, 20000);
-        setTimeout(function() $('#head-crotch').css('visibility', 'visible');, 40000);
+        setTimeout(function() {$('#head-crotch').css('visibility', 'visible');}, 40000);
         $( this ).off( event );
       });
     }
