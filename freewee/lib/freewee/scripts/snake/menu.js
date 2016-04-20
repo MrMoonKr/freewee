@@ -4,7 +4,7 @@ var SnakeMenu = {
     create: function () {
 
         bgmusic=game.add.audio('startMusic');
-        bgmusic.loopFull(0.5); 
+        bgmusic.loopFull(0.7); 
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
 

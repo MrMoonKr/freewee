@@ -31,7 +31,9 @@ var SnakeGame = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         
-
+        var bgtile = this.add.sprite(0,0,'menu2');
+        bgtile.width=game.world.width;
+        bgtile.height=game.world.height;
         //to initialise to zero for every new game
         points=[0,0,0,0];
         playersSoundGroup=[];

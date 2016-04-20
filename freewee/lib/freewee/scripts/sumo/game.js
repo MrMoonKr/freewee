@@ -147,7 +147,7 @@ var SumoGame = {
             lastY[i] = Y[i];
 
 
-            if (member.y>=1060 && !member.reached){
+            if (member.y>=1045 && !member.reached){
                 sounds[i].mute=true;
                 //cheeringSound.totalDuration=2;
                 cheeringSound.play("",0,1,false);

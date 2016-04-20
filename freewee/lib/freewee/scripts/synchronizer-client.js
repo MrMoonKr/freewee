@@ -136,7 +136,10 @@
       // TODO: insert code that switches off microphone
       // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       // navigator.getUserMedia( {audio: false}, null, null);
-      track.stop();
+      if (track != undefined){
+        track.stop();
+      }
+      
 
       // synchronizer.currentMicrophoneOn = false;
     }
