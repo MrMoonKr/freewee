@@ -33,6 +33,10 @@ body{
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.button-row{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 #wrapper {
 
@@ -44,8 +48,8 @@ body{
 .scale-sumo{
   height:auto;
   width:auto;
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 70px;
+  max-height: 70px;
   
 }
 
@@ -74,3 +78,14 @@ body{
   background-color: rgba(255,215,0,0.5);
 }
 
+.circle-large {
+  height: 140px;
+  width: 140px;
+  border-radius: 70px;
+}
+
+
+
+.displayusername {
+  color: #808080;
+}

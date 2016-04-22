@@ -42,11 +42,12 @@
     "serve-favicon": "^2.3.0",
     "should": "^8.3.1",
     "socket.io": "^1.4.5",
+    "sticky-session": "^1.0.2",
     "yaml": "*"
   },
   "scripts": {
-    "old-start": "./bin/new_start.sh",
-    "start": "npm install supervisor -g && ./bin/heroku_start.sh",
+    "start": "./bin/new_start.sh",
+    "old-start": "npm install supervisor -g && ./bin/heroku_start.sh",
     "dev": "./bin/dev_start.sh",
     "test": "mocha --bail test/ test/acceptance/",
     "pretest-2": "jshint lib test",

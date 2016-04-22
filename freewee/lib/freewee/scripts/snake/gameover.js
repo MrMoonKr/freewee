@@ -23,6 +23,8 @@ var SnakeGameOver = {
         for (var i =0;i<numPlayers;i++){
             var s = game.add.sprite(game.world.width*xposition[numPlayers]+100+350*i,600,'sumoWLSS');
             var text = game.add.text(game.world.width*xposition[numPlayers]+150+350*i,300,points[i],{font:'bold 100px Arial',fill:'#0000000'});
+            playersSorted = Object.keys(players).sort(function(a,b){return players[a]-players[b]})
+            game.add.text(game.world.width*xposition[numPlayers]+150+350*i,180,playersSorted[i],{font:'bold 50px Arial',fill:'#0000000'});
         
             //if the player index i has max points, show winner frame 
             //allows for multiple winners 

@@ -26,6 +26,7 @@ var SumoGameOver = {
         for (var i =0;i<numPlayers;i++){
             
             var s = game.add.sprite(game.world.width*trackposition[numPlayers]+350*i-70,600,'sumoWLSS');
+            game.add.text(game.world.width*trackposition[numPlayers]+350*i,180,playersSorted[i],{font:'bold 50px Arial',fill:'#0000000'});
           
             if (i==winnerPositions[0]){
                 s.frame=4+i;

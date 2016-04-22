@@ -57,7 +57,7 @@ var SnakeGame = {
             sumo.animations.add('blowing',[i*4,i*4+1,i*4+2,i*4+3],4,true);
 
             //adding snakes 
-            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+350*i+130,game.world.height+500,'snakeSS');
+            var s = snakeGroup.create(game.world.width*xposition[numPlayers]+350*i+130,game.world.height+450,'snakeSS');
             s.anchor.set(0,1);
             s.scale.setTo(0.32);
             s.animations.add('slithering',[0,2,3,0,4,5],4,true);
