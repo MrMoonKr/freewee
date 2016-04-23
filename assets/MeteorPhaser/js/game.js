@@ -4,6 +4,7 @@ var meteor,explode,health,healthbarfull,    meteorLifeText;
 var meteorHP;
 var damageDone;
 var playBoom;
+var starloop;
 
 var numPlayers=4; 
 var BPunchSound,RPunchSound,SPunchSound,explosionSound;
@@ -38,6 +39,7 @@ var Game = {
         var bgtile = this.add.sprite(0,0,'bg');
         bgtile.width=game.world.width;
         bgtile.height=game.world.height;
+
         //ading meteor 
         meteor=game.add.sprite(game.world.centerX,game.world.height*0.01,'meteorSS');
         meteor.frame=0;
@@ -63,8 +65,9 @@ var Game = {
             3: 0.3,
             4: 0.2
         }
-
-        
+//loop, to generate sequence 
+        timer=this.time.events;
+        starloop=timer.loop(1000,this.star,this); 
 
         catGroup = game.add.group();
         for (var i=0;i<numPlayers;i++){
@@ -88,15 +91,14 @@ var Game = {
         //creating timer
         me=this;
         me.startTime=new Date();
-        me.totalTime=5; //time of entire game
+        me.totalTime=20; //time of entire game
         me.timeElapsed=0;
         me.createTimer();
         me.gameTimer=game.time.events.loop(100,function(){
             me.updateTimer();
         });
 
-        //loop, to generate sequence 
-        timer=this.time.events;
+        
         loop=timer.loop(1000,this.increaseHP,this); 
         playBoom = false;
 
@@ -130,6 +132,25 @@ var Game = {
         //decrease HP for every mouseclick. to be replaced with phone inputs. will get a count
         game.input.onDown.add(this.decreaseHP);
 
+    },
+
+    star:function(){
+        var graphics = game.add.graphics(0,0);
+        for (var i=0;i<10;i++){
+            // set a fill and line style
+            graphics.beginFill(0xffffff);
+            
+            var cir=graphics.drawCircle(game.world.randomX,game.world.randomY,100);
+            
+            cir.alpha=0;
+            game.add.tween(cir).to({alpha:1},1000,Phaser.Easing.Linear.None,true,0,1000,true);     
+            cir.kill();
+            //graphics.drawCircle(this.world.randomX, this.world.randomY,10);
+            
+
+        }
+        graphics.endFill();
+        
     },
 
     over: function(){
