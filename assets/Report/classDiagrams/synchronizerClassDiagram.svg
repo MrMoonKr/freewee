@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="10.6 34.1 660 457.5" enable-background="new 10.6 34.1 660 457.5" xml:space="preserve">
+<g id="graph0" transform="scale(1 1) rotate(0) translate(4 139)">
+	<title>G</title>
+	<g id="node1">
+		<title>n0</title>
+		<polygon fill="#F0F8FF" stroke="#000000" points="20.5,90.3 20.5,-87.7 313.9,-87.7 313.9,90.3 		"/>
+		<text transform="matrix(1 0 0 1 106.0023 -72.4799)" font-family="'Times-Roman'" font-size="14">«JavaScript»</text>
+		<text transform="matrix(1 0 0 1 28.452 -58.4799)" font-family="'Times-Roman'" font-size="14">freewee/lib/synchronizer/synchronizer.js</text>
+		<line fill="none" stroke="#000000" x1="20.5" y1="-51.7" x2="313.9" y2="-51.7"/>
+		<text transform="matrix(1 0 0 1 28.452 -36.4799)" enable-background="new    "><tspan x="0" y="0" font-family="'Times-Roman'" font-size="14">+rooms : object</tspan><tspan x="0" y="16.8" font-family="'Times-Roman'" font-size="14">-type : variable</tspan><tspan x="0" y="33.6" font-family="'Times-Roman'" font-size="14">-_id : variable</tspan><tspan x="0" y="50.4" font-family="'Times-Roman'" font-size="14">-socket.on(&apos;synchronizer-create&apos;, function(id)</tspan><tspan x="0" y="67.2" font-family="'Times-Roman'" font-size="14">-socket.on(&apos;synchronizer-join&apos;, function(msg)</tspan><tspan x="0" y="84" font-family="'Times-Roman'" font-size="14">-socket.on(&apos;synchronizer-game&apos;, function(msg)</tspan><tspan x="0" y="100.8" font-family="'Times-Roman'" font-size="14">-socket.on(&apos;synchronizer-data&apos;, function(data)</tspan><tspan x="0" y="117.6" font-family="'Times-Roman'" font-size="14">-socket.on(&apos;disconnect&apos;, function()</tspan></text>
+	</g>
+	<g id="edge1">
+		<title>n0-&gt;n3</title>
+		<path stroke="#000000" d="M314-37"/>
+	</g>
+	<g id="node2">
+		<title>n1</title>
+		<polygon fill="#F0F8FF" stroke="#000000" points="332.2,330.4 332.2,-87.6 652.3,-87.6 652.3,330.4 		"/>
+		<text transform="matrix(1 0 0 1 456.0793 -72.4411)" font-family="'Times-Roman'" font-size="14">«JavaScript»</text>
+		<text transform="matrix(1 0 0 1 340.1828 -58.4411)" font-family="'Times-Roman'" font-size="14">freewee/lib/synchronizer/scripts/synchronizer-client.js</text>
+		<line fill="none" stroke="#000000" x1="332.2" y1="-51.6" x2="652.3" y2="-51.6"/>
+		<text transform="matrix(1 0 0 1 340.183 -36.441)" enable-background="new    "><tspan x="0" y="0" font-family="'Times-Roman'" font-size="14">+_instance : object</tspan><tspan x="0" y="16.8" font-family="'Times-Roman'" font-size="14">+synchronizer : variable</tspan><tspan x="0" y="33.6" font-family="'Times-Roman'" font-size="14">-type : String</tspan><tspan x="0" y="50.4" font-family="'Times-Roman'" font-size="14">-username : String</tspan><tspan x="0" y="67.2" font-family="'Times-Roman'" font-size="14">-playerOrder : int</tspan><tspan x="0" y="84" font-family="'Times-Roman'" font-size="14">-roomId : int</tspan><tspan x="0" y="100.8" font-family="'Times-Roman'" font-size="14">-gameId :</tspan><tspan x="54" y="100.8" font-family="'Times-Roman'" font-size="14"> </tspan><tspan x="56.7" y="100.8" font-family="'Times-Roman'" font-size="14">int</tspan><tspan x="0" y="117.6" font-family="'Times-Roman'" font-size="14">-socket : socket</tspan><tspan x="0" y="134.4" font-family="'Times-Roman'" font-size="14">-prevOrientation : Object</tspan><tspan x="0" y="151.2" font-family="'Times-Roman'" font-size="14">-prevMotion : Object</tspan><tspan x="0" y="168" font-family="'Times-Roman'" font-size="14">-butttons : array</tspan><tspan x="0" y="184.8" font-family="'Times-Roman'" font-size="14">-microphone : boolean</tspan><tspan x="0" y="201.6" font-family="'Times-Roman'" font-size="14">-currentListeners : array</tspan><tspan x="0" y="218.4" font-family="'Times-Roman'" font-size="14">-currentMicrophoneOn : boolean</tspan><tspan x="0" y="252" font-family="'Times-Roman'" font-size="14">+&lt;&lt;constructor&gt;&gt; Synchronizer(options)</tspan><tspan x="0" y="268.8" font-family="'Times-Roman'" font-size="14">-join(username, id)</tspan><tspan x="0" y="285.6" font-family="'Times-Roman'" font-size="14">-onJoin(callback)</tspan><tspan x="0" y="302.4" font-family="'Times-Roman'" font-size="14">-startGame</tspan><tspan x="62.2" y="302.4" font-family="'Times-Roman'" font-size="14">(</tspan><tspan x="66.6" y="302.4" font-family="'Times-Roman'" font-size="14">gameId)</tspan><tspan x="0" y="319.2" font-family="'Times-Roman'" font-size="14">-onStartGame(callback)</tspan><tspan x="0" y="336" font-family="'Times-Roman'" font-size="14">-send(eventListeners)</tspan><tspan x="0" y="352.8" font-family="'Times-Roman'" font-size="14">-receive(callback)</tspan></text>
+	</g>
+	<line fill="none" stroke="#000000" x1="332.2" y1="198.4" x2="652.3" y2="198.4"/>
+</g>
+<g id="node3">
+	<title>n3</title>
+	<polygon fill="#8DEEEE" stroke="#000000" points="104.3,274.8 104.3,238.8 245.9,238.8 245.9,274.8 	"/>
+	<text transform="matrix(1 0 0 1 112.3097 253.9908)" font-family="'Times-Roman'" font-size="14">«JavaScript Function»</text>
+	<text transform="matrix(1 0 0 1 117.6998 267.9909)" font-family="'Times-Roman'" font-size="14">+module.exports(io)</text>
+</g>
+<path fill="none" stroke="#000000" d="M103,248h1.1"/>
+<polyline stroke="#000000" points="167,234 173,238 179,234 173,230 167,234 "/>
+</svg>
