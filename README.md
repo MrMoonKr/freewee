@@ -2,10 +2,16 @@
                                                                                                                
 Freewee is a multiplayer, realtime HTML5 web app built with Node.js, Socket.io, and Phaser.
 
-[Game Concept](## Game Concept)
-[Game Components](## Game Components)
+[Game Concept](#game-concept)
+[Game Components](#game-components)
+[System Requirements](#system-requirements)
+[System Design](#system-design)
+[Code Structure](#code-structure)
+[System Testing](#system-testing)
+[Concurrency](#concurrency)
+[Bibliography](#bibliography)
 
-## Game Concept
+# Game Concept
 Our group wanted to create a **simple** and **easy to learn** game that will **bring family and friends together in a fun setting**. The game aims to elicit fun and laughter through silly and ridiculous actions which can help players build memorable moments with family and friends. Unlike many online games, this game encourages players to be physically close to each other, to promote bonding.
 
 We drew inspiration from *Nintendo Wii* games and the *Google Star Wars Demo* (where we brandish our phones like lightsabers) to create Freewee in hopes that our game will become an *easily accessible and widely relevant party game for people of all ages*. 
@@ -14,7 +20,7 @@ We drew inspiration from *Nintendo Wii* games and the *Google Star Wars Demo* (w
 
 The main concept is that players will use their phones as controllers and have an additional laptop or PC to function as the game screen. Players can play with one another by joining the same room. For this type of concept where the game would need to be **displayed not just on phones**, but on a computer screen as well, we chose to create a **web-based HTML5 game application**. An added bonus of a web platform is an ever lower barrier to introducing your friends and family to Freewee --- you don't even have to install anything, just go to the [URL](http://freewee.herokuapp.com)!
 
-## Game Components
+# Game Components
 ### Game Lobby
 ![Welcome page](http://i.imgur.com/r0tGHLs.png "Welcome page")
 *Welcome Page*
