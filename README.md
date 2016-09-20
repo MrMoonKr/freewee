@@ -3,20 +3,17 @@
 Freewee is a multiplayer, realtime HTML5 web app built with Node.js, Socket.io, and Phaser.
 
 > [Game Concept](#game-concept)
+>[Game Components](#game-components)
 
-[Game Components](#game-components)
+>[System Requirements](#system-requirements)
 
-[System Requirements](#system-requirements)
+>[System Design](#system-design)
+>[Code Structure](#code-structure)
 
-[System Design](#system-design)
+>[System Testing](#system-testing)
+>[Concurrency](#concurrency)
 
-[Code Structure](#code-structure)
-
-[System Testing](#system-testing)
-
-[Concurrency](#concurrency)
-
-[Bibliography](#bibliography)
+>[Bibliography](#bibliography)
 
 # Game Concept
 Our group wanted to create a **simple** and **easy to learn** game that will **bring family and friends together in a fun setting**. The game aims to elicit fun and laughter through silly and ridiculous actions which can help players build memorable moments with family and friends. Unlike many online games, this game encourages players to be physically close to each other, to promote bonding.
