@@ -1,4 +1,4 @@
-#Making Freewee
+# Making Freewee
                                                                                                                
 Freewee is a multiplayer, realtime HTML5 web app built with Node.js, Socket.io, and Phaser.
 > ### Table of Contents
@@ -84,7 +84,7 @@ As we are targeting a general public, the user requirements are varied as well. 
  4. User wants a game that is aesthetically appealing.
  5. User wants a game that loads fast.   
 
-##Functional and Non-Functional Requirements
+## Functional and Non-Functional Requirements
 Use cases distill the essence of requirements as sets of action-response transactions between the user and the system.
 
 A functional requirement is one on the functionality of the system, while a non-functional requirement is one on the performance of the system.
@@ -98,9 +98,9 @@ I/O Operations: Game needs to be able to support heavy I/O operations based on g
 Logic & Computation: Game logic should be logical, modularized and simple to implement. | Cost: Game should cost little or nothing.
 - | Technology: Type of technology required should be the minimum. We considered a phone to be something one should own in order to play.
 
-##Use Cases and Use Case Diagrams
+## Use Cases and Use Case Diagrams
 
-###1. Join Game
+### 1. Join Game
 
 -|UC01 - Join Game
 :-----:|----
@@ -119,7 +119,7 @@ Logic & Computation: Game logic should be logical, modularized and simple to imp
 
 
 
-###2. Main Menu
+### 2. Main Menu
 -|UC02 - Main Menu
 :-----:|----
 **Name** | Main Menu
@@ -135,7 +135,7 @@ Logic & Computation: Game logic should be logical, modularized and simple to imp
 
 ![Main Menu](https://github.com/christabella/freewee/blob/master/assets/Report/useCaseDiagram/Main%20Page.png?raw=true "Main Menu")
 
-###3. Game Start - General
+### 3. Game Start - General
 -|UC03 - Game Start - General
 :-----:|----
 **Name** | Game Start
@@ -151,7 +151,7 @@ Logic & Computation: Game logic should be logical, modularized and simple to imp
 
 ![Game Start](https://github.com/christabella/freewee/blob/master/assets/Report/useCaseDiagram/Game%20Start.png?raw=true "Game Start")
 
-###4. Increase Running Speed - Run Sumo Run!
+### 4. Increase Running Speed - Run Sumo Run!
 -|UC04 - Increase Running Speed - Run Sumo Run!
 :-----:|----
 **Name** | Increase Running Speed
